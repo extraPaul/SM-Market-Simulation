@@ -6,7 +6,7 @@ import simulationModelling.SequelActivity;
 
 //
 // The Simulation model Class
-public class ModelName extends AOSimulationModel
+public class SMMarket extends AOSimulationModel
 {
 	// Constants available from Constants class
 	/* Parameter */
@@ -34,7 +34,7 @@ public class ModelName extends AOSimulationModel
 
 
 	// Constructor
-	public ModelName(double t0time, double tftime, /*define other args,*/ Seeds sd)
+	public SMMarket(double t0time, double tftime, /*define other args,*/ Seeds sd)
 	{
 		// Initialise parameters here
 		

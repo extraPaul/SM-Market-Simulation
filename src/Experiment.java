@@ -13,7 +13,7 @@ class Experiment
        int i, NUMRUNS = 30; 
        double startTime=0.0, endTime=660.0;
        Seeds[] sds = new Seeds[NUMRUNS];
-       ModelName mname;  // Simulation object
+       SMMarket mname;  // Simulation object
 
        // Lets get a set of uncorrelated seeds
        RandomSeedGenerator rsg = new RandomSeedGenerator();
@@ -24,7 +24,7 @@ class Experiment
        System.out.println(" Case 1");
        for(i=0 ; i < NUMRUNS ; i++)
        {
-          mname = new ModelName(startTime,endTime,sds[i]);
+          mname = new SMMarket(startTime,endTime,sds[i]);
           mname.runSimulation();
           // See examples for hints on collecting output
           // and developping code for analysis

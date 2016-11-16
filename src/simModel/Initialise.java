@@ -4,10 +4,10 @@ import simulationModelling.ScheduledAction;
 
 class Initialise extends ScheduledAction
 {
-	ModelName model;
+	SMMarket model;
 	
 	// Constructor
-	protected Initialise(ModelName model) { this.model = model; }
+	protected Initialise(SMMarket model) { this.model = model; }
 
 	double [] ts = { 0.0, -1.0 }; // -1.0 ends scheduling
 	int tsix = 0;  // set index to first entry.
