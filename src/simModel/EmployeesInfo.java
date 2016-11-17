@@ -1,7 +1,5 @@
 package simModel;
 
-import java.util.ArrayList;
-
 public class EmployeesInfo {
 
 	// Attributes
@@ -12,12 +10,31 @@ public class EmployeesInfo {
 	protected int halfHourNumServed;
 	protected int halfHourNumDissatisfied;
 	
-	// TODO: check this?
-	// are the schedule and halfHourSchedule passed in? 
-	// or is the parameter passed in and the schedule and halfHourSchedule derived?
+	// Constructor
 	public EmployeesInfo(int[][] schedule) {
+		
 		this.schedule = schedule;
-		this.halfHourSchedule = halfHourSchedule;
+		this.numEmpCleaning = 0;
+		this.halfHourNumServed = 0;
+		this.halfHourNumDissatisfied = 0;
+		
+		// derive halfHourSchedule from schedule
+		this.halfHourSchedule = new int[18];
+		
+		for (int i = 0; i < schedule.length; i++) {
+			int startTime = schedule[i][0];
+			int durationOfShift = schedule[i][1];
+			
+			halfHourSchedule[startTime/30]++;
+			
+			int tempCounter = 1;
+			while (durationOfShift > 0) {
+				halfHourSchedule[(startTime/30) + tempCounter]++;
+				tempCounter++;
+				durationOfShift -= 30;
+			}
+		}
+		
 	}
 	
 	// Required methods to manipulate the objects
