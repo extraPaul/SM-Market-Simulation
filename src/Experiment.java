@@ -1,6 +1,6 @@
 // File: Experiment.java
-// DescRIption:
-// Testing!
+// Description:
+
 import simModel.*;
 import cern.jet.random.engine.*;
 
