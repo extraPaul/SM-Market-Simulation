@@ -19,12 +19,17 @@ class Experiment
        RandomSeedGenerator rsg = new RandomSeedGenerator();
        for(i=0 ; i<NUMRUNS ; i++) sds[i] = new Seeds(rsg);
        
+       //TODO: make a legit schedule
+       //schedule param
+       int[][] schedule = new int[2][2];
+       
+       
        // Loop for NUMRUN simulation runs for each case
        // Case 1
        System.out.println(" Case 1");
        for(i=0 ; i < NUMRUNS ; i++)
        {
-    	  smMarket = new SMMarket(startTime,endTime,sds[i]);
+    	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i]);
     	  smMarket.runSimulation();
           // See examples for hints on collecting output
           // and developping code for analysis
