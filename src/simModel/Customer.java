@@ -1,6 +1,10 @@
 package simModel;
 
-public class Customer {
+/**
+ * @author Saman
+ *
+ */
+class Customer {
 	// Time a customer enters the store
 	double startWaitTime;
 	// M = Meat & Fish; D = Deli; MD = Both counters
