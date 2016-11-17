@@ -14,23 +14,20 @@ public class SMMarket extends AOSimulationModel
 	/* Parameter */
     
 	//TODO:
-	// R.EmployeesInfo.schedule
-	// 2D Array storing start time and duration of shifts
+	// rEmployeesInfo.schedule holds a 2D Array storing start time and duration of shifts
+	EmployeesInfo rEmployeesInfo;
 
 	/*-------------Entity Data Structures-------------------*/
 	/* Group and Queue Entities */
 	// Define the reference variables to the various 
 	// entities with scope Set and Unary
-	// Objects can be created here or in the Initialise Action
+	// Objects can be created here or in the Initialize Action
 	
 	protected Counter rgCounterMNF = new Counter(); // Meat and Fish Counter 
 	protected Counter rgCounterDELI = new Counter(); // Deli Counter 
 	protected ArrayList<Customer> qCustomerLineMNF = new ArrayList<Customer>(); // Meat and Fish Line
 	protected ArrayList<Customer> qCustomerLineDELI = new ArrayList<Customer>(); // Deli Line
 	
-	// TODO: initialize EmployeesInfo
-	// Decide on what to pass in!
-	// protected EmployeesInfo rEmployeesInfo = new EmployeesInfo();
 	
 	/* Input Variables */
 	// Define any Independent Input Variables here
@@ -48,9 +45,11 @@ public class SMMarket extends AOSimulationModel
 
 
 	// Constructor
-	public SMMarket(double t0time, double tftime, /*define other args,*/ Seeds sd)
+	public SMMarket(double t0time, double tftime, int[][] schedule, /*define other args,*/ Seeds sd)
 	{
-		// Initialise parameters here
+		// Initialize parameters here
+		// Initialize EmployeesInfo with the input parameter schedule
+		rEmployeesInfo = new EmployeesInfo(schedule);
 		
 		// Create RVP object with given seed
 		rvp = new RVPs(this,sd);

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class EmployeesInfo {
 
 	// Attributes
-	protected ArrayList<int[]> schedule;
+	protected int[][] schedule;
 	protected int[] halfHourSchedule;
 	
 	protected int numEmpCleaning;
@@ -15,7 +15,7 @@ public class EmployeesInfo {
 	// TODO: check this?
 	// are the schedule and halfHourSchedule passed in? 
 	// or is the parameter passed in and the schedule and halfHourSchedule derived?
-	public EmployeesInfo(ArrayList<int[]> schedule, int[] halfHourSchedule) {
+	public EmployeesInfo(int[][] schedule) {
 		this.schedule = schedule;
 		this.halfHourSchedule = halfHourSchedule;
 	}
