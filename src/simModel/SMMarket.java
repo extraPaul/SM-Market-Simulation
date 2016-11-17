@@ -1,5 +1,7 @@
 package simModel;
 
+import java.util.ArrayList;
+
 import simulationModelling.AOSimulationModel;
 import simulationModelling.Behaviour;
 import simulationModelling.SequelActivity;
@@ -10,7 +12,9 @@ public class SMMarket extends AOSimulationModel
 {
 	// Constants available from Constants class
 	/* Parameter */
-        // Define the parameters
+    
+	// R.EmployeesInfo.schedule
+	// 2D Array storing start time and duration of shifts
 
 	/*-------------Entity Data Structures-------------------*/
 	/* Group and Queue Entities */
@@ -18,8 +22,12 @@ public class SMMarket extends AOSimulationModel
 	// entities with scope Set and Unary
 	// Objects can be created here or in the Initialise Action
 
+	//protected Counter rgCounter = new Counter(); // Counter group
+	//protected ArrayList<Customer> qCustLine = new ArrayList<Customer>(); // Line
+	
+	
 	/* Input Variables */
-	// Define any Independent Input Varaibles here
+	// Define any Independent Input Variables here
 	
 	// References to RVP and DVP objects
 	protected RVPs rvp;  // Reference to rvp object - object created in constructor
