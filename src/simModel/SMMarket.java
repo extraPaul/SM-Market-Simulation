@@ -13,6 +13,7 @@ public class SMMarket extends AOSimulationModel
 	// Constants available from Constants class
 	/* Parameter */
     
+	//TODO:
 	// R.EmployeesInfo.schedule
 	// 2D Array storing start time and duration of shifts
 
@@ -21,10 +22,15 @@ public class SMMarket extends AOSimulationModel
 	// Define the reference variables to the various 
 	// entities with scope Set and Unary
 	// Objects can be created here or in the Initialise Action
-
-	//protected Counter rgCounter = new Counter(); // Counter group
-	//protected ArrayList<Customer> qCustLine = new ArrayList<Customer>(); // Line
 	
+	protected Counter rgCounterMNF = new Counter(); // Meat and Fish Counter 
+	protected Counter rgCounterDELI = new Counter(); // Deli Counter 
+	protected ArrayList<Customer> qCustomerLineMNF = new ArrayList<Customer>(); // Meat and Fish Line
+	protected ArrayList<Customer> qCustomerLineDELI = new ArrayList<Customer>(); // Deli Line
+	
+	// TODO: initialize EmployeesInfo
+	// Decide on what to pass in!
+	// protected EmployeesInfo rEmployeesInfo = new EmployeesInfo();
 	
 	/* Input Variables */
 	// Define any Independent Input Variables here
