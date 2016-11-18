@@ -14,5 +14,12 @@ class Output
     // If seperate methods required to process Trajectory or Sample
     // Sequences - add them here
 
-    // SSOVs
+	/* SSOVs */
+	protected int numServed;
+	protected int numDissatisfied;
+	protected double[] halfHourPercentDissatisfied = new double[18];
+	
+	/* DSOVs */
+	protected double overallPercentDissatisfied;
+	
 }
