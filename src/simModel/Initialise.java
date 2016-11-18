@@ -18,7 +18,7 @@ class Initialise extends ScheduledAction
 
 	protected void actionEvent() 
 	{
-		// System Initialisation
+		// System Initialization
 		model.rgCounterMNF.list.clear();   // empties the list
 		model.rgCounterDELI.list.clear();   // empties the list
 		model.qCustomerLineMNF.clear();   // empties the line
@@ -28,8 +28,6 @@ class Initialise extends ScheduledAction
 		model.output.numServed = 0;
 		model.output.numDissatisfied = 0;
 		
-		
 	}
-	
 
 }

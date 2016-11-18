@@ -54,15 +54,19 @@ public class SMMarket extends AOSimulationModel
 		// Create RVP object with given seed
 		rvp = new RVPs(this,sd);
 		
-		// rgCounter and qCustLine objects created in Initalise Action
+		// rgCounter and qCustLine objects created in Initialize Action
 		
-		// Initialise the simulation model
+		// Initialize the simulation model
 		initAOSimulModel(t0time,tftime);   
 
-		     // Schedule the first arrivals and employee scheduling
+		// Schedule the first arrivals and employee scheduling
 		Initialise init = new Initialise(this);
 		scheduleAction(init);  // Should always be first one scheduled.
-		// Schedule other scheduled actions and acitvities here
+		// Schedule other scheduled actions and activities here
+		//StaffChange staffChangeAction = new StaffChange(this);
+		//scheduleAction(staffChangeAction); // change in employees
+		Arrivals arrival = new Arrivals(this);
+		scheduleAction(arrival); // customer
 	}
 
 	/************  Implementation of Data Modules***********/	
