@@ -18,12 +18,12 @@ public class StaffRearrange extends ScheduledAction {
 	protected void actionEvent() {
 		// TODO Auto-generated method stub
 		if(model.getClock() == 0){
-			int numEmp = model.rEmployeesInfo.halfHourSchedule[0] - 3;
+			int numEmp = model.rEmployeesInfo.uTotalEmployees[0] - 3;
 			model.rEmployeesInfo.numEmpCleaning += 3;
 			model.rgCounterDELI.uNumEmp = numEmp/2;
 			model.rgCounterMNF.uNumEmp = numEmp - numEmp/2;
 		} else {
-			int numExtraEmp = model.rEmployeesInfo.halfHourSchedule[(int)(model.getClock()/30)] - model.rEmployeesInfo.halfHourSchedule[(int)(model.getClock()/30) - 1];
+			int numExtraEmp = model.rEmployeesInfo.uTotalEmployees[(int)(model.getClock()/30)] - model.rEmployeesInfo.uTotalEmployees[(int)(model.getClock()/30) - 1];
 			if(numExtraEmp > 0 || Math.abs(numExtraEmp) <= model.rgCounterMNF.uNumEmp){
 				model.rgCounterMNF.uNumEmp += numExtraEmp;
 			} else if(numExtraEmp < 0){
