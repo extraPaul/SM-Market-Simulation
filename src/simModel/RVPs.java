@@ -1,7 +1,10 @@
 package simModel;
 
 import cern.jet.random.Exponential;
+import cern.jet.random.Uniform;
 import cern.jet.random.engine.MersenneTwister;
+import dataModelling.TriangularVariate;
+import SMMarket.Customer;
 
 class RVPs 
 {
@@ -19,6 +22,7 @@ class RVPs
 		// Set up distribution functions
 		interArrDist = new Exponential(1.0/WMEAN1,  
 				                       new MersenneTwister(sd.seed1));
+		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.seed1));
 	}
 	
 	/* Random Variate Procedure for Arrivals */
@@ -32,6 +36,28 @@ class RVPs
 	    // Note that interarrival time is added to current
 	    // clock value to get the next arrival time.
 	    return(nxtInterArr+model.getClock());
+	}
+	
+	
+	private double mnfSrvTm(){
+		double srvTm = 0;
+		
+	}
+	
+	private final double STDMIN = 1.7;
+	private final double STDAVG = 5;
+	private final double STDMAX = 8.05;
+	private TriangularVariate deliSrvTm;
+	public double uSrvTime(Customer.Type type){
+		double srvTm = 0;
+		if(type == Customer.Type.MNF){
+			srvTm = mnfSrvTm();
+		}else if(type == Customer.Type.Deli){
+			srvTm = deliSrvTm.next();
+		}else{
+			System.out.println("rvpuSrvTm - invalid type "+type);		
+		}
+		return(srvTm);
 	}
 
 }
