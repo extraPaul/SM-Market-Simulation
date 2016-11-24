@@ -4,16 +4,18 @@ import cern.jet.random.engine.RandomSeedGenerator;
 
 public class Seeds 
 {
-	int seed1;   // comment 1
-	int seed2;   // comment 2
-	int seed3;   // comment 3
-	int seed4;   // comment 4
+	int interArrivSd;   // comment 1
+	int deliSd;   // comment 2
+	int mChooserSd;   // comment 3
+	int mDist1;   // comment 4
+	int mDist2;
 
 	public Seeds(RandomSeedGenerator rsg)
 	{
-		seed1=rsg.nextSeed();
-		seed2=rsg.nextSeed();
-		seed3=rsg.nextSeed();
-		seed4=rsg.nextSeed();
+		interArrivSd=rsg.nextSeed();
+		deliSd=rsg.nextSeed();
+		mChooserSd=rsg.nextSeed();
+		mDist1=rsg.nextSeed();
+		mDist2=rsg.nextSeed();
 	}
 }
