@@ -43,7 +43,7 @@ public class SMMarket extends AOSimulationModel
 
 
 	// Constructor
-	public SMMarket(double t0time, double tftime, int[][] schedule, /*define other args,*/ Seeds sd)
+	public SMMarket(double t0time, double tftime, ArrayList<ArrayList<Integer>> schedule, /*define other args,*/ Seeds sd)
 	{
 		// Initialize parameters here
 		// Initialize EmployeesInfo with the input parameter schedule

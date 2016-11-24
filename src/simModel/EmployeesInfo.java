@@ -1,9 +1,11 @@
 package simModel;
 
+import java.util.ArrayList;
+
 public class EmployeesInfo {
 
 	// Attributes
-	protected int[][] schedule;
+	protected ArrayList<ArrayList<Integer>> schedule;
 	protected int[] uTotalEmployees;
 	
 	protected int numEmpCleaning;
@@ -11,7 +13,7 @@ public class EmployeesInfo {
 	protected int halfHourNumDissatisfied;
 	
 	// Constructor
-	public EmployeesInfo(int[][] schedule) {
+	public EmployeesInfo(ArrayList<ArrayList<Integer>> schedule) {
 		
 		this.schedule = schedule;
 		this.numEmpCleaning = 0;

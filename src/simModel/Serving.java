@@ -15,10 +15,13 @@ public class Serving extends ConditionalActivity{
 	
 	protected static boolean precondition(SMMarket simModel) {
 		//TODO: implement this
+		boolean ready = false;
+		if (simModel.udp.counterReadyToServe() != Constants.NONE) {
+			ready = true;
+		}
 		
+		return ready;
 		
-		
-		return true;
 	}
 	
 	@Override

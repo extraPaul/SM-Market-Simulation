@@ -36,9 +36,9 @@ class UDPs
 						this.model.rEmployeesInfo.uTotalEmployees[i] = 2;
 				}
 				
-				for (int i = 0; i < this.model.rEmployeesInfo.schedule.length; i++) {
-					int startTime = this.model.rEmployeesInfo.schedule[i][0];
-					int durationOfShift = this.model.rEmployeesInfo.schedule[i][1];
+				for (int i = 0; i < this.model.rEmployeesInfo.schedule.size(); i++) {
+					int startTime = this.model.rEmployeesInfo.schedule.get(i).get(0);
+					int durationOfShift = this.model.rEmployeesInfo.schedule.get(i).get(1);
 					
 					this.model.rEmployeesInfo.uTotalEmployees[startTime/30]++;
 					
@@ -54,10 +54,16 @@ class UDPs
 	// Counter MNF or Deli is ready to serve a customer
 	protected int counterReadyToServe(){
 		
+		int counterId = Constants.NONE;
 		
+		if ( (model.rgCounters.get(Constants.MNF).getN() < model.rgCounters.get(Constants.MNF).uNumEmp) && (model.qCustomerLines.get(Constants.MNF).size() != 0) ) {
+			counterId = Constants.MNF;
+		} else if ((model.rgCounters.get(Constants.DELI).getN() < model.rgCounters.get(Constants.DELI).uNumEmp) && (model.qCustomerLines.get(Constants.DELI).size() != 0) ) {
+			counterId = Constants.DELI;
+		}
 		
+		return counterId;
 		
 	}
-	
 	
 }

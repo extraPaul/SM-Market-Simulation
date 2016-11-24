@@ -25,6 +25,18 @@ class Arrivals extends ScheduledAction {
 		Customer icCustomer = new Customer();
 		icCustomer.uType = model.rvp.uCustomerType();
 		icCustomer.startWaitTime = model.getClock();
-		model.qCustomerLines.get(Constants.DELI).add(icCustomer);
+		icCustomer.dissatisfactionThreshold = model.rvp.uDissatisfactionTime(icCustomer.uType);
+		
+		// Add the arrived customer to the appropriate line
+		if (icCustomer.uType == Customer.Type.M) {
+			model.qCustomerLines.get(Constants.MNF).add(icCustomer);
+		}
+		else if (icCustomer.uType == Customer.Type.D) {
+			model.qCustomerLines.get(Constants.DELI).add(icCustomer);
+		}
+		else if (icCustomer.uType == Customer.Type.MD) {
+			//model.qCustomerLines.get(Constants.DELI).add(icCustomer);
+		}
+		
 	}
 }
