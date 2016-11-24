@@ -19,10 +19,10 @@ class Initialise extends ScheduledAction
 	protected void actionEvent() 
 	{
 		// System Initialization
-		model.rgCounterMNF.list.clear();   // empties the list
-		model.rgCounterDELI.list.clear();   // empties the list
-		model.qCustomerLineMNF.clear();   // empties the line
-		model.qCustomerLineDELI.clear();   // empties the line
+		model.rgCounters.get(Constants.MNF).list.clear();   // empties the list
+		model.rgCounters.get(Constants.DELI).list.clear();   // empties the list
+		model.qCustomerLines.get(Constants.MNF).clear();   // empties the line
+		model.qCustomerLines.get(Constants.DELI).clear();   // empties the line
 		
 		// Initialize the output variables
 		model.output.numServed = 0;

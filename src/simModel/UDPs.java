@@ -50,4 +50,14 @@ class UDPs
 					}
 				}
 	}
+
+	// Counter MNF or Deli is ready to serve a customer
+	protected int counterReadyToServe(){
+		
+		
+		
+		
+	}
+	
+	
 }

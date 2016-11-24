@@ -20,16 +20,16 @@ public class StaffRearrange extends ScheduledAction {
 		if(model.getClock() == 0){
 			int numEmp = model.rEmployeesInfo.uTotalEmployees[0] - 3;
 			model.rEmployeesInfo.numEmpCleaning += 3;
-			model.rgCounterDELI.uNumEmp = numEmp/2;
-			model.rgCounterMNF.uNumEmp = numEmp - numEmp/2;
+			model.rgCounters.get(Constants.DELI).uNumEmp = numEmp/2;
+			model.rgCounters.get(Constants.MNF).uNumEmp = numEmp - numEmp/2;
 		} else {
 			int numExtraEmp = model.rEmployeesInfo.uTotalEmployees[(int)(model.getClock()/30)] - model.rEmployeesInfo.uTotalEmployees[(int)(model.getClock()/30) - 1];
-			if(numExtraEmp > 0 || Math.abs(numExtraEmp) <= model.rgCounterMNF.uNumEmp){
-				model.rgCounterMNF.uNumEmp += numExtraEmp;
+			if(numExtraEmp > 0 || Math.abs(numExtraEmp) <= model.rgCounters.get(Constants.MNF).uNumEmp){
+				model.rgCounters.get(Constants.MNF).uNumEmp += numExtraEmp;
 			} else if(numExtraEmp < 0){
 				//numExtraEmp is negative
-				model.rgCounterDELI.uNumEmp += numExtraEmp + model.rgCounterMNF.uNumEmp;
-				model.rgCounterMNF.uNumEmp = 0;
+				model.rgCounters.get(Constants.DELI).uNumEmp += numExtraEmp + model.rgCounters.get(Constants.MNF).uNumEmp;
+				model.rgCounters.get(Constants.MNF).uNumEmp = 0;
 			}
 		}
 		
@@ -40,45 +40,45 @@ public class StaffRearrange extends ScheduledAction {
 		if(model.getClock() == 120){
 			//put prep employees back to counters
 			model.rEmployeesInfo.numEmpCleaning = 0;
-			model.rgCounterMNF.uNumEmp++;
-			model.rgCounterDELI.uNumEmp += 2;
+			model.rgCounters.get(Constants.MNF).uNumEmp++;
+			model.rgCounters.get(Constants.DELI).uNumEmp += 2;
 		}
 		
 		if(model.getClock() == 270){
 			//put remove employee from counter for restocking.
-			if(model.rgCounterDELI.uNumEmp > 0)
-				model.rgCounterDELI.uNumEmp--;
+			if(model.rgCounters.get(Constants.DELI).uNumEmp > 0)
+				model.rgCounters.get(Constants.DELI).uNumEmp--;
 			else
-				model.rgCounterMNF.uNumEmp--;
+				model.rgCounters.get(Constants.MNF).uNumEmp--;
 			model.rEmployeesInfo.incrementNumEmpCleaning();
 		}
 		
 		if(model.getClock() == 450){
 			//put prep employee back to counter
 			model.rEmployeesInfo.numEmpCleaning = 0;
-			model.rgCounterMNF.uNumEmp++;
+			model.rgCounters.get(Constants.MNF).uNumEmp++;
 		}
 		
 		boolean swtch = true;
 		double mnfRatio, deliRatio, ratioDiff, testDiff;
 		while(swtch){
-			mnfRatio = (double)model.rgCounterMNF.uNumEmp/(double)model.qCustomerLineMNF.size();
-			deliRatio = (double)model.rgCounterDELI.uNumEmp/(double)model.qCustomerLineDELI.size();
+			mnfRatio = (double)model.rgCounters.get(Constants.MNF).uNumEmp/(double)model.qCustomerLines.get(Constants.MNF).size();
+			deliRatio = (double)model.rgCounters.get(Constants.DELI).uNumEmp/(double)model.qCustomerLines.get(Constants.DELI).size();
 			ratioDiff = Math.abs(mnfRatio - deliRatio);
 			if(mnfRatio > deliRatio){
-				testDiff = Math.abs(((double)(model.rgCounterMNF.uNumEmp-1)/(double)model.qCustomerLineMNF.size()) - ((double)(model.rgCounterDELI.uNumEmp+1)/(double)model.qCustomerLineDELI.size()));
+				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
 				
 				if(testDiff < ratioDiff){
-					model.rgCounterMNF.uNumEmp--;
-					model.rgCounterDELI.uNumEmp++;
+					model.rgCounters.get(Constants.MNF).uNumEmp--;
+					model.rgCounters.get(Constants.DELI).uNumEmp++;
 				} else
 					swtch = false;
 			} else {
-				testDiff = Math.abs(((double)(model.rgCounterMNF.uNumEmp+1)/(double)model.qCustomerLineMNF.size()) - ((double)(model.rgCounterDELI.uNumEmp-1)/(double)model.qCustomerLineDELI.size()));
+				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
 				
 				if(testDiff < ratioDiff){
-					model.rgCounterMNF.uNumEmp++;
-					model.rgCounterDELI.uNumEmp--;
+					model.rgCounters.get(Constants.MNF).uNumEmp++;
+					model.rgCounters.get(Constants.DELI).uNumEmp--;
 				} else
 					swtch = false;
 			}
