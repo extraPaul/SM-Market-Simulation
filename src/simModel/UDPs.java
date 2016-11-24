@@ -54,10 +54,16 @@ class UDPs
 	// Counter MNF or Deli is ready to serve a customer
 	protected int counterReadyToServe(){
 		
+		int counterId = Constants.NONE;
 		
+		if ( (model.rgCounters.get(Constants.MNF).getN() < model.rgCounters.get(Constants.MNF).uNumEmp) && (model.qCustomerLines.get(Constants.MNF).size() != 0) ) {
+			counterId = Constants.MNF;
+		} else if ((model.rgCounters.get(Constants.DELI).getN() < model.rgCounters.get(Constants.DELI).uNumEmp) && (model.qCustomerLines.get(Constants.DELI).size() != 0) ) {
+			counterId = Constants.DELI;
+		}
 		
+		return counterId;
 		
 	}
-	
 	
 }
