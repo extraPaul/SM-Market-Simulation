@@ -4,8 +4,9 @@ import simulationModelling.ConditionalActivity;
 
 public class Serving extends ConditionalActivity{
 
-	private Customer icCustomer;
 	SMMarket model;
+	private Customer icCustomer;
+	int id; //identifier for RG.Counters and Q.CustomerLines
 	
 	// Constructor
 	public Serving(SMMarket model) {
@@ -14,6 +15,9 @@ public class Serving extends ConditionalActivity{
 	
 	protected static boolean precondition(SMMarket simModel) {
 		//TODO: implement this
+		
+		
+		
 		return true;
 	}
 	

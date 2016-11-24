@@ -60,8 +60,6 @@ public class SMMarket extends AOSimulationModel
 		qCustomerLines.set(Constants.MNF, new ArrayList<Customer>()); // Meat and Fish Line
 		qCustomerLines.set(Constants.DELI, new ArrayList<Customer>()); // Deli Line
 		
-		// rgCounter and qCustLine objects created in Initialize Action
-		
 		// Initialize the simulation model
 		initAOSimulModel(t0time,tftime);   
 

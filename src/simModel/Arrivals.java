@@ -25,6 +25,6 @@ class Arrivals extends ScheduledAction {
 		Customer icCustomer = new Customer();
 		icCustomer.uType = model.rvp.uCustomerType();
 		icCustomer.startWaitTime = model.getClock();
-		model.qCustomerLineDELI.add(icCustomer);
+		model.qCustomerLines.get(Constants.DELI).add(icCustomer);
 	}
 }

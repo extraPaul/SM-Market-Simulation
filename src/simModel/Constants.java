@@ -7,7 +7,7 @@ class Constants
 	// Example: protected final static double realConstant = 8.0;
 	
 	public static final int MNF = 0;
-	public static final int DELI = 0;
-	
+	public static final int DELI = 1;
+	public static final int NONE = -1;
 
 }
