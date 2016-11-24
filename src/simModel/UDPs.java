@@ -36,9 +36,9 @@ class UDPs
 						this.model.rEmployeesInfo.uTotalEmployees[i] = 2;
 				}
 				
-				for (int i = 0; i < this.model.rEmployeesInfo.schedule.length; i++) {
-					int startTime = this.model.rEmployeesInfo.schedule[i][0];
-					int durationOfShift = this.model.rEmployeesInfo.schedule[i][1];
+				for (int i = 0; i < this.model.rEmployeesInfo.schedule.size(); i++) {
+					int startTime = this.model.rEmployeesInfo.schedule.get(i).get(0);
+					int durationOfShift = this.model.rEmployeesInfo.schedule.get(i).get(1);
 					
 					this.model.rEmployeesInfo.uTotalEmployees[startTime/30]++;
 					
