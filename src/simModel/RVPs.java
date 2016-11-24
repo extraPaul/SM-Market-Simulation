@@ -4,7 +4,7 @@ import cern.jet.random.Exponential;
 import cern.jet.random.Uniform;
 import cern.jet.random.engine.MersenneTwister;
 import dataModelling.TriangularVariate;
-import SMMarket.Customer;
+import simModel.Customer;
 
 class RVPs 
 {
@@ -42,17 +42,21 @@ class RVPs
 	private double mnfSrvTm(){
 		double srvTm = 0;
 		
+		
+		
+		return srvTm;
 	}
 	
+	/* Needs to be expanded for MD type */
 	private final double STDMIN = 1.7;
 	private final double STDAVG = 5;
 	private final double STDMAX = 8.05;
 	private TriangularVariate deliSrvTm;
 	public double uSrvTime(Customer.Type type){
 		double srvTm = 0;
-		if(type == Customer.Type.MNF){
+		if(type == Customer.Type.M){
 			srvTm = mnfSrvTm();
-		}else if(type == Customer.Type.Deli){
+		}else if(type == Customer.Type.D){
 			srvTm = deliSrvTm.next();
 		}else{
 			System.out.println("rvpuSrvTm - invalid type "+type);		
