@@ -32,10 +32,10 @@ class Arrivals extends ScheduledAction {
 			model.qCustomerLines.get(Constants.MNF).add(icCustomer);
 		}
 		else if (icCustomer.uType == Customer.Type.D) {
-			model.qCustomerLines.get(Constants.MNF).add(icCustomer);
+			model.qCustomerLines.get(Constants.DELI).add(icCustomer);
 		}
 		else if (icCustomer.uType == Customer.Type.MD) {
-			
+			//model.qCustomerLines.get(Constants.DELI).add(icCustomer);
 		}
 		
 	}

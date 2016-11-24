@@ -2,6 +2,7 @@ package simModel;
 
 import cern.jet.random.Exponential;
 import cern.jet.random.Uniform;
+import cern.jet.random.Normal;
 import cern.jet.random.engine.MersenneTwister;
 import dataModelling.TriangularVariate;
 import simModel.Customer;
@@ -20,9 +21,11 @@ class RVPs
 	{ 
 		this.model = model; 
 		// Set up distribution functions
-		interArrDist = new Exponential(1.0/WMEAN1,  
-				                       new MersenneTwister(sd.seed1));
-		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.seed1));
+		interArrDist = new Exponential(1.0/WMEAN1, new MersenneTwister(sd.interArrivSd));
+		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.deliSd));
+		mChooser = new Uniform(0,1,new MersenneTwister(sd.mChooserSd));
+		mDist1 = new Normal(STM1MEAN, STM1DEV, new MersenneTwister(sd.mDist1));
+		mDist2 = new Normal(STM2MEAN, STM2DEV, new MersenneTwister(sd.mDist2));
 	}
 	
 	/* Random Variate Procedure for Arrivals */
@@ -38,12 +41,21 @@ class RVPs
 	    return(nxtInterArr+model.getClock());
 	}
 	
-	
+	private Uniform mChooser;
+	private final double PROBM1 = 0.804; // Prob of choosing from dist 1 of MNF
+	private final double STM1MEAN = 3.462874653; // Mean of dist 1
+	private final double STM1DEV = 1.090941686; // Std. Deviation of dist 1
+	private final double STM2MEAN = 7.445772096; // Mean of dist 2
+	private final double STM2DEV = 0.622866405; // Std. Deviation of dist 2
+	private Normal mDist1;
+	private Normal mDist2;
 	private double mnfSrvTm(){
 		double srvTm = 0;
-		
-		
-		
+		if(mChooser.nextBoolean()){
+			srvTm = mDist1.nextDouble();
+		}else{
+			srvTm = mDist2.nextDouble();
+		}
 		return srvTm;
 	}
 	

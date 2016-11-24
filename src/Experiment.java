@@ -1,6 +1,8 @@
 // File: Experiment.java
 // Description:
 
+import java.util.ArrayList;
+
 import simModel.*;
 import cern.jet.random.engine.*;
 
@@ -21,7 +23,7 @@ class Experiment
        
        //TODO: make a legit schedule
        //schedule param
-       int[][] schedule = new int[2][2];
+       ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>(2);
        
        
        // Loop for NUMRUN simulation runs for each case

@@ -23,11 +23,9 @@ public class SMMarket extends AOSimulationModel
 	// entities with scope Set and Unary
 	// Objects can be created here or in the Initialize Action
 	
-	protected Counter rgCounterMNF = new Counter(); // Meat and Fish Counter 
-	protected Counter rgCounterDELI = new Counter(); // Deli Counter 
-	protected ArrayList<Customer> qCustomerLineMNF = new ArrayList<Customer>(); // Meat and Fish Line
-	protected ArrayList<Customer> qCustomerLineDELI = new ArrayList<Customer>(); // Deli Line
-	
+	// Array lists containing the two counters
+	ArrayList<Counter> rgCounters = new ArrayList<Counter>(2);
+	ArrayList<ArrayList<Customer>> qCustomerLines = new ArrayList<ArrayList<Customer>>(2);
 	
 	/* Input Variables */
 	// Define any Independent Input Variables here
@@ -45,7 +43,7 @@ public class SMMarket extends AOSimulationModel
 
 
 	// Constructor
-	public SMMarket(double t0time, double tftime, int[][] schedule, /*define other args,*/ Seeds sd)
+	public SMMarket(double t0time, double tftime, ArrayList<ArrayList<Integer>> schedule, /*define other args,*/ Seeds sd)
 	{
 		// Initialize parameters here
 		// Initialize EmployeesInfo with the input parameter schedule
@@ -54,7 +52,13 @@ public class SMMarket extends AOSimulationModel
 		// Create RVP object with given seed
 		rvp = new RVPs(this,sd);
 		
-		// rgCounter and qCustLine objects created in Initialize Action
+		// Initialize Counters
+		rgCounters.set(Constants.MNF, new Counter()); // Meat and Fish counter
+		rgCounters.set(Constants.DELI, new Counter()); // Deli counter
+		
+		// Initialize Customer Lines
+		qCustomerLines.set(Constants.MNF, new ArrayList<Customer>()); // Meat and Fish Line
+		qCustomerLines.set(Constants.DELI, new ArrayList<Customer>()); // Deli Line
 		
 		// Initialize the simulation model
 		initAOSimulModel(t0time,tftime);   
