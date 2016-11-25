@@ -35,57 +35,57 @@ class Experiment
         	  smMarket.runSimulation();
               // See examples for hints on collecting output
               // and developping code for analysis
-        	  
-        	  double max = 0;
-        	  int maxIndex = 0;
-        	  for(int j = 0; j < 18; j++){
-        		  if(smMarket.getHalfHourPercentDissatisfied(j) > max){
-        			  max = smMarket.getHalfHourPercentDissatisfied(j);
-        			  maxIndex = j;
-        		  }
-        	  }
-        	  
-        	  int empStartTime = maxIndex*30;
-        	  int empShiftLength = 30;
-        	  double index = 1, midle = maxIndex;
-        	  while(empShiftLength <= 6*60){
-        		  if(midle - index > 0 && empStartTime >= 0){
-        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > smMarket.getHalfHourPercentDissatisfied((int)(midle-index))){
-        				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
-        					  empShiftLength += 30;
-        					  midle += 0.5;
-        					  index += 0.5;
-        				  }
-        				  else
-        					  break;
-        			  } else {
-        				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle-index)) > 0.1){
-        					  empShiftLength += 30;
-        					  empStartTime -= 30;
-        					  if(midle - index - 1 > 0)
-        						  midle -= 0.5;
-        					  else
-        						  midle += 0.5;
-        					  index += 0.5;
-        					  
-        				  } else
-        					  break;
-        			  }
-        		  } else {
-        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
-        				  empShiftLength += 30;
-        				  midle += 0.5;
+    	   }
+    	  double max = 0;
+    	  int maxIndex = 0;
+    	  for(int j = 0; j < 18; j++){
+    		  if(smMarket.getHalfHourPercentDissatisfied(j) > max){
+    			  max = smMarket.getHalfHourPercentDissatisfied(j);
+    			  maxIndex = j;
+    		  }
+    	  }
+    	  
+    	  int empStartTime = maxIndex*30;
+    	  int empShiftLength = 30;
+    	  double index = 1, midle = maxIndex;
+    	  while(empShiftLength <= 6*60){
+    		  if(midle - index > 0 && empStartTime >= 0){
+    			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > smMarket.getHalfHourPercentDissatisfied((int)(midle-index))){
+    				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
+    					  empShiftLength += 30;
+    					  midle += 0.5;
     					  index += 0.5;
-        			  }
+    				  }
     				  else
     					  break;
-        		  }
-        	  }
-           }
+    			  } else {
+    				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle-index)) > 0.1){
+    					  empShiftLength += 30;
+    					  empStartTime -= 30;
+    					  if(midle - index - 1 > 0)
+    						  midle -= 0.5;
+    					  else
+    						  midle += 0.5;
+    					  index += 0.5;
+    					  
+    				  } else
+    					  break;
+    			  }
+    		  } else {
+    			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
+    				  empShiftLength += 30;
+    				  midle += 0.5;
+					  index += 0.5;
+    			  }
+				  else
+					  break;
+    		  }
+    	  }
     	   
-    	   
-    	   //TEST
-    	   System.out.println("\nONE LOOP ENDED \n\n");
+    	   schedule.get(0).add(empStartTime);
+    	   schedule.get(1).add(empShiftLength);
+    	  //TEST
+    	  System.out.println("\nONE LOOP ENDED \n\n");
     	   
        }while(smMarket.getOverallPercentDissatisfied() > 0.1);
        
