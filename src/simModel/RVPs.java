@@ -35,7 +35,7 @@ class RVPs
 	//MEAN num of minutes between customer arrival for each 30 min block of day
 	
 	// TODO: added more values to mean to make length of array 18
-	private final double[] MEAN = {3,1.2,1,1,0.6,0.286,0.25,0.333,0.429,0.75,0.857,0.857,0.75,0.667,0.6, 0.6, 0.6};
+	private final double[] MEAN = {3,1.2,1,1,0.6,0.286,0.25,0.333,0.429,0.75,0.857,0.857,0.75,0.667,0.6, 0.6, 0.6, 0.6};
 	protected double duC()  // for getting next value of duC
 	{
 	    double nxtInterArr;
