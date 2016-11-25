@@ -66,4 +66,23 @@ class UDPs
 		
 	}
 	
+	/**
+	 * Add the arrived customer to the appropriate line
+	 * @author Saman
+	 */
+	protected void addArrivedCustomerToLine(Customer icCustomer) {
+		if (icCustomer.uType == Customer.Type.M)
+			model.qCustomerLines.get(Constants.MNF).add(icCustomer);
+		else if (icCustomer.uType == Customer.Type.D)
+			model.qCustomerLines.get(Constants.DELI).add(icCustomer);
+		else if (icCustomer.uType == Customer.Type.MD) {
+			// Send the customer of type MD, to the shortest line
+			int mnfLineLength = model.qCustomerLines.get(Constants.MNF).size();
+			int deliLineLength = model.qCustomerLines.get(Constants.DELI).size();
+			if (mnfLineLength <= deliLineLength)
+				model.qCustomerLines.get(Constants.MNF).add(icCustomer);
+			else
+				model.qCustomerLines.get(Constants.DELI).add(icCustomer);
+		}
+	}
 }
