@@ -5,16 +5,16 @@ import simulationModelling.ScheduledAction;
 public class StaffRearrange extends ScheduledAction {
 
 	SMMarket model;
-	private double[] staffRearangeTimeSeq = {0,30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480,510,540,-1};
-	private int sctIx = 0;
+	DVPs dvp;
 	
-	public StaffRearrange(SMMarket model) {this.model = model;}
+	public StaffRearrange(SMMarket model) {
+		this.model = model;
+		this.dvp = new DVPs(model);
+	}
 	
 	@Override
 	protected double timeSequence() {
-		double nxtTime = staffRearangeTimeSeq[sctIx];
-		sctIx++;
-		return(nxtTime);
+		return dvp.RuTotalEmployees();
 	}
 
 	@Override

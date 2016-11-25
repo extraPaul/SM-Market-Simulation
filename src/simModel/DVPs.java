@@ -6,6 +6,8 @@ class DVPs
 	
 	// Constructor
 	protected DVPs(SMMarket model) { this.model = model; }
+	private double[] staffRearangeTimeSeq = {0,30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480,510,540,-1};
+	private int sctIx = 0;
 
 	// Translate deterministic value procedures into methods
         /* -------------------------------------------------
@@ -22,10 +24,10 @@ class DVPs
 	}
 	------------------------------------------------------------*/
 	
-	protected int RuTotalEmployees(){
-		//devide curent time by 18, because there are 18 slots.
-		int index = (int)(model.getClock()/18);
-		return model.rEmployeesInfo.uTotalEmployees[index];
+	protected double RuTotalEmployees(){
+		double nxtTime = staffRearangeTimeSeq[sctIx];
+		sctIx++;
+		return(nxtTime);
 	}
 	
 }
