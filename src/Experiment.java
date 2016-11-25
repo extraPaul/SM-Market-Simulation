@@ -53,10 +53,33 @@ class Experiment
         	  
         	  int empStartTime = minIndex*30;
         	  int empShiftLength = 30;
-        	  for(int j = 0; j < 12; j++){
-        		  
+        	  double index = 1, midle = minIndex;
+        	  while(empShiftLength <= 6*60){
+        		  if(midle - index > 0 && empStartTime >= 0){
+        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) < smMarket.getHalfHourPercentDissatisfied((int)(midle-index))){
+        				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
+        					  empShiftLength += 30;
+        					  midle += 0.5;
+        					  index += 0.5;
+        				  }
+        				  else
+        					  break;
+        			  } else {
+        				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle-index)) > 0.1){
+        					  empShiftLength += 30;
+        					  empStartTime -= 30;
+        					  midle -= 0.5;
+        					  index += 0.5;
+        				  } else
+        					  break;
+        			  }
+        		  } else {
+        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1)
+    					  empShiftLength += 30;
+    				  else
+    					  break;
+        		  }
         	  }
-        	  
            }
        }while(smMarket.getOverallPercentDissatisfied() > 0.1);
        
