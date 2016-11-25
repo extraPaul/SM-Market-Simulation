@@ -72,8 +72,11 @@ class Experiment
         					  break;
         			  }
         		  } else {
-        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1)
-    					  empShiftLength += 30;
+        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
+        				  empShiftLength += 30;
+        				  midle += 0.5;
+    					  index += 0.5;
+        			  }
     				  else
     					  break;
         		  }
