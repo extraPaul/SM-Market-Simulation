@@ -41,17 +41,18 @@ public class SMMarket extends AOSimulationModel
 		// Initialize parameters here
 		// Initialize EmployeesInfo with the input parameter schedule
 		rEmployeesInfo = new EmployeesInfo(schedule, this);
+		udp.initializeUTotalEmp();
 		
 		// Create RVP object with given seed
 		rvp = new RVPs(this,sd);
 		
 		// Initialize Counters
-		rgCounters.set(Constants.MNF, new Counter()); // Meat and Fish counter
-		rgCounters.set(Constants.DELI, new Counter()); // Deli counter
+		rgCounters.add(Constants.MNF, new Counter()); // Meat and Fish counter
+		rgCounters.add(Constants.DELI, new Counter()); // Deli counter
 		
 		// Initialize Customer Lines
-		qCustomerLines.set(Constants.MNF, new ArrayList<Customer>()); // Meat and Fish line
-		qCustomerLines.set(Constants.DELI, new ArrayList<Customer>()); // Deli line
+		qCustomerLines.add(Constants.MNF, new ArrayList<Customer>()); // Meat and Fish line
+		qCustomerLines.add(Constants.DELI, new ArrayList<Customer>()); // Deli line
 		
 		// Initialize the simulation model
 		initAOSimulModel(t0time,tftime);   
