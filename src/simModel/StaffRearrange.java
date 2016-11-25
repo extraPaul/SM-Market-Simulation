@@ -59,30 +59,7 @@ public class StaffRearrange extends ScheduledAction {
 			model.rgCounters.get(Constants.MNF).uNumEmp++;
 		}
 		
-		boolean swtch = true;
-		double mnfRatio, deliRatio, ratioDiff, testDiff;
-		while(swtch){
-			mnfRatio = (double)model.rgCounters.get(Constants.MNF).uNumEmp/(double)model.qCustomerLines.get(Constants.MNF).size();
-			deliRatio = (double)model.rgCounters.get(Constants.DELI).uNumEmp/(double)model.qCustomerLines.get(Constants.DELI).size();
-			ratioDiff = Math.abs(mnfRatio - deliRatio);
-			if(mnfRatio > deliRatio){
-				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
-				
-				if(testDiff < ratioDiff){
-					model.rgCounters.get(Constants.MNF).uNumEmp--;
-					model.rgCounters.get(Constants.DELI).uNumEmp++;
-				} else
-					swtch = false;
-			} else {
-				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
-				
-				if(testDiff < ratioDiff){
-					model.rgCounters.get(Constants.MNF).uNumEmp++;
-					model.rgCounters.get(Constants.DELI).uNumEmp--;
-				} else
-					swtch = false;
-			}
-		}
-		
+		// Rebalance the employees between two counters, based on the length of the lines
+		rebalanceEmployees();
 	}
 }
