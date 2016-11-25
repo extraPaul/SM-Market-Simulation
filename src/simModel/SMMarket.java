@@ -55,10 +55,13 @@ public class SMMarket extends AOSimulationModel
 		
 		// Initialize the simulation model
 		initAOSimulModel(t0time,tftime);   
-
+		
 		// Schedule the first arrivals and employee scheduling
 		Initialise init = new Initialise(this);
 		scheduleAction(init);  // Should always be first one scheduled.
+		// Schedule staff rearrange
+		StaffRearrange staffRearrange = new StaffRearrange(this);
+		scheduleAction(staffRearrange);
 		// Start arrivals
 		Arrivals arrival = new Arrivals(this);
 		scheduleAction(arrival);
@@ -78,6 +81,7 @@ public class SMMarket extends AOSimulationModel
 	 */
 	protected void testPreconditions(Behaviour behObj)
 	{
+		// reschedule scheduled actions
 		reschedule (behObj);
 		// Check preconditions of Conditional Activities
 
@@ -91,14 +95,13 @@ public class SMMarket extends AOSimulationModel
 	
 	public void eventOccured()
 	{
-		//this.showSBL();
+		this.showSBL();
 		// Can add other debug code to monitor the status of the system
 		// See examples for suggestions on setup logging
-
+		
 		// Setup an updateTrjSequences() method in the Output class
 		// and call here if you have Trajectory Sets
 		// updateTrjSequences() 
-		
 		
 	}
 
@@ -107,6 +110,7 @@ public class SMMarket extends AOSimulationModel
 	{
 		seqAct.startingEvent();
 		scheduleActivity(seqAct);
+		
 	}	
 
 }
