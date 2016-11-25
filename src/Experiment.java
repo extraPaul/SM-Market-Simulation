@@ -35,7 +35,13 @@ class Experiment
         	  smMarket.runSimulation();
               // See examples for hints on collecting output
               // and developping code for analysis
+        	  System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
+        	  System.out.println("Halfhour dissatisfaction: ");
+        	  for(int j = 0; j < 17; j++)
+        		  System.out.print(smMarket.getHalfHourPercentDissatisfied(j) + "; ");
+        	  System.out.println(smMarket.getHalfHourPercentDissatisfied(17));
     	   }
+    	   
     	  double max = 0;
     	  int maxIndex = 0;
     	  for(int j = 0; j < 18; j++){
@@ -82,8 +88,10 @@ class Experiment
     		  }
     	  }
     	   
-    	   schedule.get(0).add(empStartTime);
-    	   schedule.get(1).add(empShiftLength);
+    	  ArrayList<Integer> newShift = new ArrayList<Integer>();
+    	  newShift.add(empStartTime);
+    	  newShift.add(empShiftLength);
+    	  schedule.add(newShift);
     	  //TEST
     	  System.out.println("\nONE LOOP ENDED \n\n");
     	   
