@@ -21,7 +21,7 @@ class RVPs
 	{ 
 		this.model = model; 
 		// Set up distribution functions
-		interArrDist = new Exponential(1.0/WMEAN1, new MersenneTwister(sd.interArrivSd));
+		interArrDist = new Exponential(0, new MersenneTwister(sd.interArrivSd));
 		typeRandGen = new MersenneTwister(sd.type);
 		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.deliSd));
 		mChooser = new Uniform(0,1,new MersenneTwister(sd.mChooserSd));
@@ -31,12 +31,12 @@ class RVPs
 	
 	/* Random Variate Procedure for Arrivals */
 	private Exponential interArrDist;  // Exponential distribution for interarrival times
-	private final double WMEAN1=10.0;
-	protected double duInput()  // for getting next value of duInput
+	private final double[] MEAN = {3,1.2,1,1,0.6,0.285714286,0.25,0.333333333,0.428571429,0.75,0.857142857,0.857142857,0.75,0.666666667,0.6};
+	protected double duC()  // for getting next value of duC
 	{
 	    double nxtInterArr;
-
-        nxtInterArr = interArrDist.nextDouble();
+	    int timeBucket = (int)model.getClock() % 30;
+        nxtInterArr = interArrDist.nextDouble(1.0/MEAN[timeBucket]);
 	    // Note that interarrival time is added to current
 	    // clock value to get the next arrival time.
 	    return(nxtInterArr+model.getClock());
