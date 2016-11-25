@@ -97,12 +97,12 @@ public class SMMarket extends AOSimulationModel
 	public void eventOccured()
 	{
 		this.showSBL();
-		// Can add other debug code to monitor the status of the system
-		// See examples for suggestions on setup logging
-		
-		// Setup an updateTrjSequences() method in the Output class
-		// and call here if you have Trajectory Sets
-		// updateTrjSequences() 
+		System.out.println("Clock: "+getClock()+
+                ", CustomerLineMNF.n: "+qCustomerLines.get(Constants.MNF).size()+
+                ", CustomerLineDEli.n: "+qCustomerLines.get(Constants.DELI).size()+
+                ", CounterMNF.n: "+rgCounters.get(Constants.MNF).getN()+ ", CounterMNF numEmp: " + rgCounters.get(Constants.MNF).uNumEmp +
+                ", CounterDELI.n: "+rgCounters.get(Constants.DELI).getN() + ", CounterDELI numEmp: " + rgCounters.get(Constants.DELI).uNumEmp);
+		System.out.println();
 		
 	}
 

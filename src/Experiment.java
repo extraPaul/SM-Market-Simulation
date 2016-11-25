@@ -13,7 +13,7 @@ class Experiment
    public static void main(String[] args)
    {
        int i, NUMRUNS = 30; 
-       double startTime=0.0, endTime=660.0;
+       double startTime=0.0, endTime=540.0;
        Seeds[] sds = new Seeds[NUMRUNS];
        SMMarket smMarket = null;  // Simulation object
 
@@ -82,6 +82,11 @@ class Experiment
         		  }
         	  }
            }
+    	   
+    	   
+    	   //TEST
+    	   System.out.println("\nONE LOOP ENDED \n\n");
+    	   
        }while(smMarket.getOverallPercentDissatisfied() > 0.1);
        
    }

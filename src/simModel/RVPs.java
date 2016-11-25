@@ -33,11 +33,14 @@ class RVPs
 	/* Random Variate Procedure for Arrivals */
 	private Exponential interArrDist;  // Exponential distribution for interarrival times
 	//MEAN num of minutes between customer arrival for each 30 min block of day
-	private final double[] MEAN = {3,1.2,1,1,0.6,0.286,0.25,0.333,0.429,0.75,0.857,0.857,0.75,0.667,0.6};
+	
+	// TODO: added more values to mean to make length of array 18
+	private final double[] MEAN = {3,1.2,1,1,0.6,0.286,0.25,0.333,0.429,0.75,0.857,0.857,0.75,0.667,0.6, 0.6, 0.6};
 	protected double duC()  // for getting next value of duC
 	{
 	    double nxtInterArr;
-	    int timeBucket = (int)model.getClock() % 30;
+	    // changed from %30 to /30 to ensure that index does not surpass 18
+	    int timeBucket = (int)model.getClock() / 30;
         nxtInterArr = interArrDist.nextDouble(1.0/MEAN[timeBucket]);
 	    // Note that interarrival time is added to current
 	    // clock value to get the next arrival time.
