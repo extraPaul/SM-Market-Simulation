@@ -36,27 +36,21 @@ class Experiment
               // See examples for hints on collecting output
               // and developping code for analysis
         	  
-        	  double min = 100;
-        	  int minIndex = -1;
-        	  try{
-	        	  for(int j = 0; j < 18; j++){
-	        		  if(smMarket.getHalfHourPercentDissatisfied(j) < min){
-	        			  min = smMarket.getHalfHourPercentDissatisfied(j);
-	        			  minIndex = j;
-	        		  }
-	        	  }
-	        	  if(minIndex < 0)
-	        		  throw new Exception();
-        	  } catch(Exception e){
-        		  System.out.println("Could not find minimum.");
+        	  double max = 0;
+        	  int maxIndex = 0;
+        	  for(int j = 0; j < 18; j++){
+        		  if(smMarket.getHalfHourPercentDissatisfied(j) > max){
+        			  max = smMarket.getHalfHourPercentDissatisfied(j);
+        			  maxIndex = j;
+        		  }
         	  }
         	  
-        	  int empStartTime = minIndex*30;
+        	  int empStartTime = maxIndex*30;
         	  int empShiftLength = 30;
-        	  double index = 1, midle = minIndex;
+        	  double index = 1, midle = maxIndex;
         	  while(empShiftLength <= 6*60){
         		  if(midle - index > 0 && empStartTime >= 0){
-        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) < smMarket.getHalfHourPercentDissatisfied((int)(midle-index))){
+        			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > smMarket.getHalfHourPercentDissatisfied((int)(midle-index))){
         				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
         					  empShiftLength += 30;
         					  midle += 0.5;
