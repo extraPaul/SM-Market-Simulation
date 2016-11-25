@@ -103,18 +103,17 @@ class RVPs
 	private final double STDAVG = 5;
 	private final double STDMAX = 8.05;
 	private TriangularVariate deliSrvTm;
-	public double uSrvTime(Customer.Type type){
+	public double uSrvTime(int type){
 		double srvTm = 0;
-		if(type == Customer.Type.M){
+		if(type == Constants.MNF){
 			srvTm = mnfSrvTm();
-		}else if(type == Customer.Type.D){
+		}else if(type == Constants.DELI){
 			srvTm = deliSrvTm.next();
 		}else{
 			System.out.println("rvpuSrvTm - invalid type "+type);		
 		}
 		return(srvTm);
 	}
-	
 	
 	public double uDissatisfactionTime(Customer.Type type) {
 		if(type == Customer.Type.D){

@@ -28,7 +28,7 @@ public class Serving extends ConditionalActivity{
 	protected double duration() {
 		
 		// returns serving time
-		return model.rvp.uSrvTime(icCustomer.uType);
+		return model.rvp.uSrvTime(id);
 		
 	}
 
