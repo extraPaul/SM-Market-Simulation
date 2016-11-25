@@ -38,7 +38,8 @@ public class Serving extends ConditionalActivity{
 		// get counter identifier
 		id = model.udp.counterReadyToServe();
 		// get the first customer in the queue
-		icCustomer = model.qCustomerLines.get(id).get(0);
+		icCustomer = model.qCustomerLines.get(id).remove(0);
+		
 		// increment the number of customers at this counter
 		model.rgCounters.get(id).insertList(icCustomer);
 		
@@ -51,7 +52,7 @@ public class Serving extends ConditionalActivity{
 	protected void terminatingEvent() {
 		
 		// remove customer from line
-		if (model.qCustomerLines.get(id).remove(icCustomer)){
+		if (model.rgCounters.get(id).removeList(icCustomer)){
 			
 			// check if customer needs to enter another line
 			if (!icCustomer.canLeave) {
