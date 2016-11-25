@@ -18,23 +18,12 @@ class Output
 		overallPercentDissatisfied = 0;
 	}
 	
-    // Use OutputSequence class to define Trajectory and Sample Sequences
-    // Trajectory Sequences
-
-    // Sample Sequences
-
-    // DSOVs available in the OutputSequence objects
-    // If separate methods required to process Trajectory or Sample
-    // Sequences - add them here
-	
-	
 	/* Helper methods */
 	protected void calculateOverallPercentageDissatisfied() {
 		overallPercentDissatisfied = numDissatisfied/numServed;
 	}
 	
 	protected double getOverallPercentageDissatisfied() {
-		
 		calculateOverallPercentageDissatisfied();
 		return overallPercentDissatisfied;
 	}

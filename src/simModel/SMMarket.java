@@ -10,19 +10,12 @@ import simulationModelling.SequelActivity;
 // The Simulation model Class
 public class SMMarket extends AOSimulationModel
 {
-	// Constants available from Constants class
 	/* Parameter */
     
-	//TODO:
 	// rEmployeesInfo.schedule holds a 2D Array storing start time and duration of shifts
 	EmployeesInfo rEmployeesInfo;
 
 	/*-------------Entity Data Structures-------------------*/
-	/* Group and Queue Entities */
-	// Define the reference variables to the various 
-	// entities with scope Set and Unary
-	// Objects can be created here or in the Initialize Action
-	
 	// Array lists containing the two counters
 	ArrayList<Counter> rgCounters = new ArrayList<Counter>(2);
 	ArrayList<ArrayList<Customer>> qCustomerLines = new ArrayList<ArrayList<Customer>>(2);
