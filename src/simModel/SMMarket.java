@@ -66,11 +66,9 @@ public class SMMarket extends AOSimulationModel
 		// Schedule the first arrivals and employee scheduling
 		Initialise init = new Initialise(this);
 		scheduleAction(init);  // Should always be first one scheduled.
-		// Schedule other scheduled actions and activities here
-		//StaffChange staffChangeAction = new StaffChange(this);
-		//scheduleAction(staffChangeAction); // change in employees
+		// Start arrivals
 		Arrivals arrival = new Arrivals(this);
-		scheduleAction(arrival); // customer
+		scheduleAction(arrival);
 	}
 	
 	public double getOverallPercentDissatisfied(){
@@ -91,6 +89,11 @@ public class SMMarket extends AOSimulationModel
 		// Check preconditions of Conditional Activities
 
 		// Check preconditions of Interruptions in Extended Activities
+		if (Serving.precondition(this) == true) {
+			Serving act = new Serving(this);
+			act.startingEvent();
+			scheduleActivity(act);
+		}
 	}
 	
 	public void eventOccured()
@@ -102,6 +105,8 @@ public class SMMarket extends AOSimulationModel
 		// Setup an updateTrjSequences() method in the Output class
 		// and call here if you have Trajectory Sets
 		// updateTrjSequences() 
+		
+		
 	}
 
 	// Standard Procedure to start Sequel Activities with no parameters
