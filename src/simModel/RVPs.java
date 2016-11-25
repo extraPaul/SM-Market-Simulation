@@ -23,11 +23,11 @@ class RVPs
 		// Set up distribution functions
 		interArrDist = new Exponential(0, new MersenneTwister(sd.interArrivSd));
 		
-		randGen = new MersenneTwister(sd.type);
-		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.deliSd));
-		mChooser = new Uniform(0,1,new MersenneTwister(sd.mChooserSd));
-		mDist1 = new Normal(STM1MEAN, STM1DEV, new MersenneTwister(sd.mDist1));
-		mDist2 = new Normal(STM2MEAN, STM2DEV, new MersenneTwister(sd.mDist2));
+		randGen = new MersenneTwister(sd.type); //Init the general purpose RNG
+		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.deliSd)); // Build RNG distribution for deli srv time
+		mChooser = new Uniform(0,1,new MersenneTwister(sd.mChooserSd)); // Init the choose for which of the multimodal distributions to go from
+		mDist1 = new Normal(STM1MEAN, STM1DEV, new MersenneTwister(sd.mDist1)); // lower meat distribution
+		mDist2 = new Normal(STM2MEAN, STM2DEV, new MersenneTwister(sd.mDist2)); // upper meat distribution
 	}
 	
 	/* Random Variate Procedure for Arrivals */
@@ -38,16 +38,13 @@ class RVPs
 	protected double duC()  // for getting next value of duC
 	{
 	    double nxtInterArr;
-	    // changed from %30 to /30 to ensure that index does not surpass 18
-	    int timeBucket = (int)model.getClock() / 30;
+	    int timeBucket = (int)model.getClock() / 30; // Dividde time into one fo the discrete buckets
         nxtInterArr = interArrDist.nextDouble(1.0/MEAN[timeBucket]);
-	    // Note that interarrival time is added to current
-	    // clock value to get the next arrival time.
 	    return(nxtInterArr+model.getClock());
 	}
 	
-	private final double[] PROPD = {0,0.30,0.58,0.46,0.33,0.22,0};
-	private final double[] PROPM = {0.50,0.35,0.21,0.27,0.33,0.39,0.50};
+	private final double[] PROPD = {0,0.30,0.58,0.46,0.33,0.22,0}; // Probability of deli customer based on time block
+	private final double[] PROPM = {0.50,0.35,0.21,0.27,0.33,0.39,0.50}; // Probability of a meat customer based on time block
 	//PROPMD is not needed as it will be inferred
 	MersenneTwister randGen;
 	/*
@@ -56,7 +53,7 @@ class RVPs
 	public Customer.Type uCustomerType()
 	{
 		double now = model.getClock();
-		// Determine which customer bucket
+		// Determine which time block we're in
 		int timeBucket;
 		if(now < 120){
 			timeBucket = 0;
@@ -111,7 +108,8 @@ class RVPs
 	private final double STDMAX = 8.05;
 	private TriangularVariate deliSrvTm;
 	/*
-	 * Manager method to assign service time for a customer
+	 * Manager method to assign service time for a customer.
+	 * Will call submethods as needed based on type
 	 */
 	public double uSrvTime(int type){
 		double srvTm = 0;
