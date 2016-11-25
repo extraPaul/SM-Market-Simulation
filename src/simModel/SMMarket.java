@@ -102,6 +102,7 @@ public class SMMarket extends AOSimulationModel
                 ", CustomerLineDEli.n: "+qCustomerLines.get(Constants.DELI).size()+
                 ", CounterMNF.n: "+rgCounters.get(Constants.MNF).getN()+ ", CounterMNF numEmp: " + rgCounters.get(Constants.MNF).uNumEmp +
                 ", CounterDELI.n: "+rgCounters.get(Constants.DELI).getN() + ", CounterDELI numEmp: " + rgCounters.get(Constants.DELI).uNumEmp);
+		System.out.println("Number of cleaning emp: " + rEmployeesInfo.numEmpCleaning);
 		System.out.println();
 		
 	}

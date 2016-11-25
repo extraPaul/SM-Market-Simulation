@@ -11,7 +11,7 @@ class UDPs
 		// derive halfHourSchedule from schedule
 				
 		for(int i = 0; i < this.model.rEmployeesInfo.uTotalEmployees.length; i++){
-			if(5 <= i && i <= 12)
+			if(i <= 12)
 				this.model.rEmployeesInfo.uTotalEmployees[i] = 4;
 			else
 				this.model.rEmployeesInfo.uTotalEmployees[i] = 2;
