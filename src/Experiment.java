@@ -36,7 +36,7 @@ class Experiment
               // See examples for hints on collecting output
               // and developping code for analysis
         	  System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
-        	  System.out.println("Halfhour dissatisfaction: ");
+        	  System.out.print("Halfhour dissatisfaction: ");
         	  for(int j = 0; j < 17; j++)
         		  System.out.print(smMarket.getHalfHourPercentDissatisfied(j) + "; ");
         	  System.out.println(smMarket.getHalfHourPercentDissatisfied(17));
