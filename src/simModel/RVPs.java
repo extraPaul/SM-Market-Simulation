@@ -6,7 +6,6 @@ import cern.jet.random.Normal;
 import cern.jet.random.engine.MersenneTwister;
 import dataModelling.TriangularVariate;
 import simModel.Customer;
-import simModel.Customer.Type;
 
 class RVPs 
 {
@@ -49,9 +48,13 @@ class RVPs
 	private final double[] PROPM = {0.50,0.35,0.21,0.27,0.33,0.39,0.50};
 	//PROPMD is not needed as it will be inferred
 	MersenneTwister randGen;
+	/*
+	 * Gives customer type based upon the time of day
+	 */
 	public Customer.Type uCustomerType()
 	{
 		double now = model.getClock();
+		// Determine which customer bucket
 		int timeBucket;
 		if(now < 120){
 			timeBucket = 0;
@@ -80,7 +83,7 @@ class RVPs
 		}
 	}
 	
-	private Uniform mChooser;
+	private Uniform mChooser; // Uniform distribution for choosing which standard dist to pick from
 	private final double PROBM1 = 0.804; // Prob of choosing from dist 1 of MNF
 	private final double STM1MEAN = 3.463; // Mean of dist 1
 	private final double STM1DEV = 1.091; // Std. Deviation of dist 1
@@ -88,6 +91,9 @@ class RVPs
 	private final double STM2DEV = 0.623; // Std. Deviation of dist 2
 	private Normal mDist1;
 	private Normal mDist2;
+	/*
+	 * Provide a service time for a customer at the Meat counter
+	 */
 	private double mnfSrvTm(){
 		double srvTm = 0;
 		if(mChooser.nextDouble() <= PROBM1){
@@ -98,11 +104,13 @@ class RVPs
 		return srvTm;
 	}
 	
-	/* Needs to be expanded for MD type */
 	private final double STDMIN = 1.7;
 	private final double STDAVG = 5;
 	private final double STDMAX = 8.05;
 	private TriangularVariate deliSrvTm;
+	/*
+	 * Manager method to assign service time for a customer
+	 */
 	public double uSrvTime(int type){
 		double srvTm = 0;
 		if(type == Constants.MNF){
@@ -115,6 +123,10 @@ class RVPs
 		return(srvTm);
 	}
 	
+	/*
+	 * This method will give the particular time threshold 
+	 * for a customer before getting displeased
+	 */
 	public double uDissatisfactionTime(Customer.Type type) {
 		if(type == Customer.Type.D){
 			return 10 + (5.0*randGen.nextDouble());
