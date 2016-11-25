@@ -51,7 +51,8 @@ class UDPs
 				}
 	}
 
-	// Counter MNF or Deli is ready to serve a customer
+	// Check if MNF or Deli counter is ready to serve a customer
+	// if both are busy, return NONE constant
 	protected int counterReadyToServe(){
 		
 		int counterId = Constants.NONE;
@@ -84,5 +85,18 @@ class UDPs
 			else
 				model.qCustomerLines.get(Constants.DELI).add(icCustomer);
 		}
+	}
+	
+	/*
+	 * Updates the output with numServed and numDissatisfied 
+	 */
+	protected void updateOutput(Customer icCustomer) {
+		//check if the customer was dissatisfied by comparing their wait time with their dissatisfaction threshold
+		if ( (model.getClock() - icCustomer.startWaitTime) > icCustomer.dissatisfactionThreshold) {
+			model.output.numDissatisfied++;
+		}
+				
+		// increment the number of customers served
+		model.output.numServed++;
 	}
 }
