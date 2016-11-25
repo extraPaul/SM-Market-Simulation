@@ -80,10 +80,10 @@ class RVPs
 	
 	private Uniform mChooser;
 	private final double PROBM1 = 0.804; // Prob of choosing from dist 1 of MNF
-	private final double STM1MEAN = 3.462874653; // Mean of dist 1
-	private final double STM1DEV = 1.090941686; // Std. Deviation of dist 1
-	private final double STM2MEAN = 7.445772096; // Mean of dist 2
-	private final double STM2DEV = 0.622866405; // Std. Deviation of dist 2
+	private final double STM1MEAN = 3.463; // Mean of dist 1
+	private final double STM1DEV = 1.091; // Std. Deviation of dist 1
+	private final double STM2MEAN = 7.446; // Mean of dist 2
+	private final double STM2DEV = 0.623; // Std. Deviation of dist 2
 	private Normal mDist1;
 	private Normal mDist2;
 	private double mnfSrvTm(){
