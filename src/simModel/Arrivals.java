@@ -27,7 +27,18 @@ class Arrivals extends ScheduledAction {
 		icCustomer.startWaitTime = model.getClock();
 		icCustomer.dissatisfactionThreshold = model.rvp.uDissatisfactionTime(icCustomer.uType);
 		
-		// Add the arrived customer to the appropriate line
-		model.udp.addArrivedCustomerToLine(icCustomer);
+		if (icCustomer.uType == Customer.Type.MD)
+			icCustomer.canLeave = false;
+		
+		// If the store is full (more than 30 customers in lines), the arrived customer will just leave. Else, he will stand in line.
+		int totalNumCustomersInStore = model.qCustomerLines.get(Constants.MNF).size() + model.qCustomerLines.get(Constants.DELI).size();
+		if (totalNumCustomersInStore > 30) {
+			// Leave as a dissatisfied customer
+			
+		}
+		else {
+			// Add the arrived customer to the appropriate line
+			model.udp.addArrivedCustomerToLine(icCustomer);
+		}
 	}
 }
