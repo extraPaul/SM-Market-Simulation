@@ -13,14 +13,14 @@ public class EmployeesInfo {
 	protected int halfHourNumDissatisfied;
 	
 	// Constructor
-	public EmployeesInfo(ArrayList<ArrayList<Integer>> schedule) {
+	public EmployeesInfo(ArrayList<ArrayList<Integer>> schedule, SMMarket model) {
 		
 		this.schedule = schedule;
 		this.numEmpCleaning = 0;
 		this.halfHourNumServed = 0;
 		this.halfHourNumDissatisfied = 0;
 		
-		
+		model.udp.initializeUTotalEmp();
 		
 	}
 	

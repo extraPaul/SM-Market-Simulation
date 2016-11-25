@@ -47,7 +47,7 @@ public class SMMarket extends AOSimulationModel
 	{
 		// Initialize parameters here
 		// Initialize EmployeesInfo with the input parameter schedule
-		rEmployeesInfo = new EmployeesInfo(schedule);
+		rEmployeesInfo = new EmployeesInfo(schedule, this);
 		
 		// Create RVP object with given seed
 		rvp = new RVPs(this,sd);
@@ -71,6 +71,18 @@ public class SMMarket extends AOSimulationModel
 		//scheduleAction(staffChangeAction); // change in employees
 		Arrivals arrival = new Arrivals(this);
 		scheduleAction(arrival); // customer
+	}
+	
+	public double getOverallPercentDissatisfied(){
+		return output.overallPercentDissatisfied;
+	}
+	
+	public double getHalfHourPercentDissatisfied(int i){
+		return output.halfHourPercentDissatisfied[i];
+	}
+	
+	public int getScheduleTime(int i){
+		return 0;
 	}
 
 	/************  Implementation of Data Modules***********/	

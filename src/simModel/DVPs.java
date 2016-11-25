@@ -21,4 +21,18 @@ class DVPs
 	   return(nextTime);
 	}
 	------------------------------------------------------------*/
+	
+	protected double RuTotalEmployees(){
+		if(model.getClock() < 540){
+			if(model.getClock()%30 == 0)
+				return model.getClock() + 30.0;
+			else
+				return -1; //error
+		}
+		
+		//else stop scheduling
+		return -1;
+		
+	}
+	
 }
