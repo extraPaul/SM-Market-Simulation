@@ -6,6 +6,7 @@ import cern.jet.random.Normal;
 import cern.jet.random.engine.MersenneTwister;
 import dataModelling.TriangularVariate;
 import simModel.Customer;
+import simModel.Customer.Type;
 
 class RVPs 
 {
@@ -22,7 +23,8 @@ class RVPs
 		this.model = model; 
 		// Set up distribution functions
 		interArrDist = new Exponential(0, new MersenneTwister(sd.interArrivSd));
-		typeRandGen = new MersenneTwister(sd.type);
+		
+		randGen = new MersenneTwister(sd.type);
 		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.deliSd));
 		mChooser = new Uniform(0,1,new MersenneTwister(sd.mChooserSd));
 		mDist1 = new Normal(STM1MEAN, STM1DEV, new MersenneTwister(sd.mDist1));
@@ -46,7 +48,7 @@ class RVPs
 	private final double[] PROPD = {0,0.30,0.58,0.46,0.33,0.22,0};
 	private final double[] PROPM = {0.50,0.35,0.21,0.27,0.33,0.39,0.50};
 	//PROPMD is not needed as it will be inferred
-	MersenneTwister typeRandGen;
+	MersenneTwister randGen;
 	public Customer.Type uCustomerType()
 	{
 		double now = model.getClock();
@@ -67,7 +69,7 @@ class RVPs
 			timeBucket = 6;
 		}
 		
-		double randNum = typeRandGen.nextDouble();
+		double randNum = randGen.nextDouble();
 		
 		if(randNum < PROPD[timeBucket]){
 			return Customer.Type.D;
@@ -111,6 +113,17 @@ class RVPs
 			System.out.println("rvpuSrvTm - invalid type "+type);		
 		}
 		return(srvTm);
+	}
+	
+	
+	public double uDissatisfactionTime(Customer.Type type) {
+		if(type == Customer.Type.D){
+			return 10 + (5.0*randGen.nextDouble());
+		}else if(type == Customer.Type.M){
+			return 20 + (5.0*randGen.nextDouble());
+		}else{
+			return 40;
+		}
 	}
 
 }
