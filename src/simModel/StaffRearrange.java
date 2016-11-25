@@ -60,6 +60,6 @@ public class StaffRearrange extends ScheduledAction {
 		}
 		
 		// Rebalance the employees between two counters, based on the length of the lines
-		rebalanceEmployees();
+		model.udp.rebalanceEmployees();
 	}
 }
