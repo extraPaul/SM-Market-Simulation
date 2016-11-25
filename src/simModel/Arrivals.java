@@ -34,7 +34,8 @@ class Arrivals extends ScheduledAction {
 		int totalNumCustomersInStore = model.qCustomerLines.get(Constants.MNF).size() + model.qCustomerLines.get(Constants.DELI).size();
 		if (totalNumCustomersInStore > 30) {
 			// Leave as a dissatisfied customer
-			
+			model.output.numDissatisfied++;
+			model.rEmployeesInfo.halfHourNumDissatisfied++;
 		}
 		else {
 			// Add the arrived customer to the appropriate line
