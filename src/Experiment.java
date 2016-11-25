@@ -68,8 +68,12 @@ class Experiment
         				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle-index)) > 0.1){
         					  empShiftLength += 30;
         					  empStartTime -= 30;
-        					  midle -= 0.5;
+        					  if(midle - index - 1 > 0)
+        						  midle -= 0.5;
+        					  else
+        						  midle += 0.5;
         					  index += 0.5;
+        					  
         				  } else
         					  break;
         			  }

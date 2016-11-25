@@ -80,10 +80,6 @@ public class SMMarket extends AOSimulationModel
 	public double getHalfHourPercentDissatisfied(int i){
 		return output.halfHourPercentDissatisfied[i];
 	}
-	
-	public int getScheduleTime(int i){
-		return 0;
-	}
 
 	/************  Implementation of Data Modules***********/	
 	/*
