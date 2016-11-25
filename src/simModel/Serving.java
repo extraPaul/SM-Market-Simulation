@@ -40,14 +40,8 @@ public class Serving extends ConditionalActivity{
 		// get the first customer in the queue
 		icCustomer = model.qCustomerLines.get(id).get(0);
 
-		//check if the customer was dissatisfied by comparing their wait time with their dissatisfaction threshold
-		if ( (model.getClock() - icCustomer.startWaitTime) > icCustomer.dissatisfactionThreshold) {
-			model.output.numDissatisfied++;
-		}
-		
-		// increment the number of customers served
-		model.output.numServed++;
-		
+		// update the output variables
+		model.udp.updateOutput(icCustomer);
 		
 	}
 
