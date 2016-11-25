@@ -5,18 +5,20 @@ import simulationModelling.ScheduledAction;
 public class StaffRearrange extends ScheduledAction {
 
 	SMMarket model;
+	private double[] staffRearangeTimeSeq = {0,30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480,510,540,-1};
+	private int sctIx = 0;
 	
 	public StaffRearrange(SMMarket model) {this.model = model;}
 	
 	@Override
 	protected double timeSequence() {
-		// TODO Auto-generated method stub
-		return 0;
+		double nxtTime = staffRearangeTimeSeq[sctIx];
+		sctIx++;
+		return(nxtTime);
 	}
 
 	@Override
 	protected void actionEvent() {
-		// TODO Auto-generated method stub
 		if(model.getClock() == 0){
 			int numEmp = model.rEmployeesInfo.uTotalEmployees[0] - 3;
 			model.rEmployeesInfo.numEmpCleaning += 3;

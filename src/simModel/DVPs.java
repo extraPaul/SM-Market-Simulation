@@ -22,17 +22,10 @@ class DVPs
 	}
 	------------------------------------------------------------*/
 	
-	protected double RuTotalEmployees(){
-		if(model.getClock() < 540){
-			if(model.getClock()%30 == 0)
-				return model.getClock() + 30.0;
-			else
-				return -1; //error
-		}
-		
-		//else stop scheduling
-		return -1;
-		
+	protected int RuTotalEmployees(){
+		//devide curent time by 18, because there are 18 slots.
+		int index = (int)(model.getClock()/18);
+		return model.rEmployeesInfo.uTotalEmployees[index];
 	}
 	
 }
