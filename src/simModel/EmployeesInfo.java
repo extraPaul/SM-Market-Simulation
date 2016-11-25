@@ -38,5 +38,10 @@ public class EmployeesInfo {
 		halfHourNumDissatisfied ++;
 	}
 	
+	protected void resetHalfHourStats() {
+		halfHourNumServed = 0;
+		halfHourNumDissatisfied = 0;
+	}
+	
 	
 }

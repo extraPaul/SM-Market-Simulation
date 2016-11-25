@@ -94,9 +94,21 @@ class UDPs
 		//check if the customer was dissatisfied by comparing their wait time with their dissatisfaction threshold
 		if ( (model.getClock() - icCustomer.startWaitTime) > icCustomer.dissatisfactionThreshold) {
 			model.output.numDissatisfied++;
+			model.rEmployeesInfo.halfHourNumDissatisfied++;
 		}
 				
 		// increment the number of customers served
 		model.output.numServed++;
+		model.rEmployeesInfo.halfHourNumServed++;
+	}
+	
+	protected void updateOutputOnHalfHour() {
+		
+		// updates the halfHourPercentDissatisfied array
+		model.output.halfHourPercentDissatisfied[(int) (model.getClock()/30)] = (model.rEmployeesInfo.halfHourNumDissatisfied / model.rEmployeesInfo.halfHourNumServed);
+		
+		// reset the halfHourNumServed and halfHourNumDissatisfied values
+		model.rEmployeesInfo.resetHalfHourStats();
+		
 	}
 }
