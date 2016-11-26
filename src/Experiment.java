@@ -68,8 +68,8 @@ class Experiment
     	  double index = 1, midle = maxIndex;
     	  while(empShiftLength <= 6*60){
     		  if(midle - index > 0 && empStartTime >= 0){
-    			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > smMarket.getHalfHourPercentDissatisfied((int)(midle-index))){
-    				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
+    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
+    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1){
     					  empShiftLength += 30;
     					  midle += 0.5;
     					  index += 0.5;
@@ -77,7 +77,7 @@ class Experiment
     				  else
     					  break;
     			  } else {
-    				  if(smMarket.getHalfHourPercentDissatisfied((int)(midle-index)) > 0.1){
+    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > 0.1){
     					  empShiftLength += 30;
     					  empStartTime -= 30;
     					  if(midle - index - 1 > 0)
@@ -90,7 +90,7 @@ class Experiment
     					  break;
     			  }
     		  } else {
-    			  if(smMarket.getHalfHourPercentDissatisfied((int)(midle+index)) > 0.1){
+    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1){
     				  empShiftLength += 30;
     				  midle += 0.5;
 					  index += 0.5;
