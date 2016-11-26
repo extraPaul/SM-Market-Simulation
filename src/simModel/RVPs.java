@@ -37,13 +37,11 @@ class RVPs
 	private final double[] MEAN = {3,1.2,1,1,0.6,0.286,0.25,0.333,0.429,0.75,0.857,0.857,0.75,0.667,0.6, 0.5, 0, 0};
 	protected double duC()  // for getting next value of duC
 	{
-	    double nxtInterArr;
-	    int timeBucket = (int)model.getClock() / 30; // Dividde time into one fo the discrete buckets
-        nxtInterArr = model.getClock()+interArrDist.nextDouble(1.0/MEAN[timeBucket]);
+	    int timeBucket = (int)model.getClock() / 30; // Divide time into one of the discrete buckets
         if(model.getClock() > model.closingTime){
         	return -1.0;
         }else{
-        	return nxtInterArr;
+        	return model.getClock()+interArrDist.nextDouble(1.0/MEAN[timeBucket]);
         }
 	}
 	
