@@ -92,7 +92,7 @@ class UDPs
 		
 		if (model.rEmployeesInfo.halfHourNumServed != 0) {
 			
-			model.output.halfHourPercentDissatisfied[(int) (model.getClock()/30) -1] = (model.rEmployeesInfo.halfHourNumDissatisfied / model.rEmployeesInfo.halfHourNumServed);
+			model.output.halfHourPercentDissatisfied[(int) (model.getClock()/30) -1] = ( (double) model.rEmployeesInfo.halfHourNumDissatisfied / (double) model.rEmployeesInfo.halfHourNumServed);
 			// reset the halfHourNumServed and halfHourNumDissatisfied values
 			model.rEmployeesInfo.resetHalfHourStats();
 		}
