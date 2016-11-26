@@ -12,7 +12,7 @@ class Experiment
 {
    public static void main(String[] args)
    {
-       int i, NUMRUNS = 30; 
+       int i, NUMRUNS = 20; 
        double startTime=0.0, endTime=540.0;
        Seeds[] sds = new Seeds[NUMRUNS];
        SMMarket smMarket = null;  // Simulation object
@@ -82,7 +82,7 @@ class Experiment
     	  int empStartTime = maxIndex*30;
     	  int empShiftLength = 30;
     	  double index = 1, midle = maxIndex;
-    	  while(empShiftLength <= 6*60){
+    	  while(empShiftLength < 6*60){
     		  if(midle - index > 0 && empStartTime >= 0){
     			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
     				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1 || empShiftLength < 3*60){
@@ -124,7 +124,7 @@ class Experiment
     	  System.out.println("\nONE LOOP ENDED \n\n");
     	   
     	  numExperiments++;
-       }while(overallDissatisfactionAvg > 0.8);
+       }while(overallDissatisfactionAvg > 0.1);
        
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
        
