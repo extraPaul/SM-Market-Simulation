@@ -128,5 +128,11 @@ class Experiment
        
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
        
+       //print schedule
+       for (int x = 0; x< schedule.size(); x++) {
+    	   System.out.println("start time: " + schedule.get(x).get(0));
+    	   System.out.println("duration: " + schedule.get(x).get(1));
+       }
+       
    }
 }

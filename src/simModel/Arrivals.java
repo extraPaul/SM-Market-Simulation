@@ -37,6 +37,7 @@ class Arrivals extends ScheduledAction {
 			model.output.numDissatisfied++;
 			model.rEmployeesInfo.halfHourNumDissatisfied++;
 			model.output.numServed++;
+			model.rEmployeesInfo.halfHourNumServed++;
 		}
 		else {
 			// Add the arrived customer to the appropriate line
