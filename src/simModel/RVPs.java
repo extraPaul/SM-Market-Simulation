@@ -39,8 +39,12 @@ class RVPs
 	{
 	    double nxtInterArr;
 	    int timeBucket = (int)model.getClock() / 30; // Dividde time into one fo the discrete buckets
-        nxtInterArr = interArrDist.nextDouble(1.0/MEAN[timeBucket]);
-	    return(nxtInterArr+model.getClock());
+        nxtInterArr = model.getClock()+interArrDist.nextDouble(1.0/MEAN[timeBucket]);
+        if(model.getClock() > model.closingTime){
+        	return -1.0;
+        }else{
+        	return nxtInterArr;
+        }
 	}
 	
 	private final double[] PROPD = {0,0.30,0.58,0.46,0.33,0.22,0}; // Probability of deli customer based on time block

@@ -27,6 +27,9 @@ public class SMMarket extends AOSimulationModel
 	protected RVPs rvp;  // Reference to rvp object - object created in constructor
 	protected DVPs dvp = new DVPs(this);  // Reference to dvp object
 	protected UDPs udp = new UDPs(this);
+	
+	// Add our closing time
+	double closingTime = 480;
 
 	// Output object
 	protected Output output = new Output(this);
