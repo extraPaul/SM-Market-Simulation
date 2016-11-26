@@ -30,7 +30,8 @@ class Experiment
        // Case 1
        System.out.println(" Case 1");
 
-       int overallDissatisfactionAvg;
+       double numExperiments = 0;
+       double overallDissatisfactionAvg;
        do{
     	   overallDissatisfactionAvg = 0;
     	   int[] halfHourDissatisfactionAvg = new int[18];
@@ -59,8 +60,14 @@ class Experiment
     	   }
     	   
     	   overallDissatisfactionAvg /= NUMRUNS;
-    	   for(int j = 0; j < 18; j++)
+    	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
+    	   System.out.print("Average halfour dissatisfation for " + NUMRUNS + " runs: ");
+    	   for(int j = 0; j < 18; j++){
     		   halfHourDissatisfactionAvg[j] /= NUMRUNS;
+    		   System.out.print(halfHourDissatisfactionAvg[j] + "; ");
+    	   }
+    	   System.out.println();
+    		   
     	   
     	   
     	  double max = 0;
@@ -116,8 +123,10 @@ class Experiment
     	  //TEST
     	  System.out.println("\nONE LOOP ENDED \n\n");
     	   
-
-       }while(overallDissatisfactionAvg > 0.1);
+    	  numExperiments++;
+       }while(overallDissatisfactionAvg > 0.5);
+       
+       System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
        
    }
 }
