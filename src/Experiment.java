@@ -30,11 +30,11 @@ class Experiment
        // Case 1
        System.out.println(" Case 1");
 
-       double numExperiments = 0;
+       int numExperiments = 0;
        double overallDissatisfactionAvg;
        do{
     	   overallDissatisfactionAvg = 0;
-    	   int[] halfHourDissatisfactionAvg = new int[18];
+    	   double[] halfHourDissatisfactionAvg = new double[18];
 
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i]);
@@ -124,7 +124,7 @@ class Experiment
     	  System.out.println("\nONE LOOP ENDED \n\n");
     	   
     	  numExperiments++;
-       }while(overallDissatisfactionAvg > 0.5);
+       }while(overallDissatisfactionAvg > 0.8);
        
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
        
