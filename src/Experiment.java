@@ -106,7 +106,7 @@ class Experiment
     					  break;
     			  }
     		  } else {
-    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1){
+    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1 || empShiftLength < 3*60){
     				  empShiftLength += 30;
     				  midle += 0.5;
 					  index += 0.5;
