@@ -38,10 +38,11 @@ class RVPs
 	protected double duC()  // for getting next value of duC
 	{
 	    int timeBucket = (int)model.getClock() / 30; // Divide time into one of the discrete buckets
-        if(model.getClock() > model.closingTime){
+	    double nextArrival = model.getClock()+interArrDist.nextDouble(1.0/MEAN[timeBucket]);
+        if(nextArrival > model.closingTime){
         	return -1.0;
         }else{
-        	return model.getClock()+interArrDist.nextDouble(1.0/MEAN[timeBucket]);
+        	return nextArrival;
         }
 	}
 	
