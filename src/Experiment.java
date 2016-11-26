@@ -85,7 +85,7 @@ class Experiment
     	  while(empShiftLength <= 6*60){
     		  if(midle - index > 0 && empStartTime >= 0){
     			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
-    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1){
+    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1 || empShiftLength < 3*60){
     					  empShiftLength += 30;
     					  midle += 0.5;
     					  index += 0.5;
@@ -93,7 +93,7 @@ class Experiment
     				  else
     					  break;
     			  } else {
-    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > 0.1){
+    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > 0.1 || empShiftLength < 3*60){
     					  empShiftLength += 30;
     					  empStartTime -= 30;
     					  if(midle - index - 1 > 0)
