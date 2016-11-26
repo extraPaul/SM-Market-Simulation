@@ -29,12 +29,16 @@ class Experiment
        // Loop for NUMRUN simulation runs for each case
        // Case 1
        System.out.println(" Case 1");
-       do{
+//       do{
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i]);
         	  smMarket.runSimulation();
               // See examples for hints on collecting output
               // and developping code for analysis
+        	  
+        	  //TEST
+        	  System.out.println("numDissatisfied: " + smMarket.getNumDissatisfied());
+        	  System.out.println("numServed: " + smMarket.getNumServed());
         	  System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
         	  System.out.print("Halfhour dissatisfaction: ");
         	  for(int j = 0; j < 17; j++)
@@ -95,7 +99,7 @@ class Experiment
     	  //TEST
     	  System.out.println("\nONE LOOP ENDED \n\n");
     	   
-       }while(smMarket.getOverallPercentDissatisfied() > 0.1);
+//       }while(smMarket.getOverallPercentDissatisfied() > 0.1);
        
    }
 }

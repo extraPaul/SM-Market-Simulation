@@ -13,7 +13,7 @@ public class SMMarket extends AOSimulationModel
 	/* Parameter */
     
 	// rEmployeesInfo.schedule holds a 2D Array storing start time and duration of shifts
-	EmployeesInfo rEmployeesInfo;
+	protected EmployeesInfo rEmployeesInfo;
 
 	/*-------------Entity Data Structures-------------------*/
 	// Array lists containing the two counters
@@ -72,11 +72,19 @@ public class SMMarket extends AOSimulationModel
 	}
 	
 	public double getOverallPercentDissatisfied(){
-		return output.overallPercentDissatisfied;
+		return output.getOverallPercentageDissatisfied();
 	}
 	
 	public double getHalfHourPercentDissatisfied(int i){
 		return output.halfHourPercentDissatisfied[i];
+	}
+	
+	public double getNumDissatisfied(){
+		return output.numDissatisfied;
+	}
+	
+	public double getNumServed(){
+		return output.numServed;
 	}
 
 	/************  Implementation of Data Modules***********/	
