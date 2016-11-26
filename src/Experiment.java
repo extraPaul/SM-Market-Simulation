@@ -29,28 +29,45 @@ class Experiment
        // Loop for NUMRUN simulation runs for each case
        // Case 1
        System.out.println(" Case 1");
-//       do{
+
+       int overallDissatisfactionAvg;
+       do{
+    	   overallDissatisfactionAvg = 0;
+    	   int[] halfHourDissatisfactionAvg = new int[18];
+
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i]);
         	  smMarket.runSimulation();
               // See examples for hints on collecting output
               // and developping code for analysis
+
         	  
         	  //TEST
         	  System.out.println("numDissatisfied: " + smMarket.getNumDissatisfied());
         	  System.out.println("numServed: " + smMarket.getNumServed());
+
+        	  overallDissatisfactionAvg += smMarket.getOverallPercentDissatisfied();
+
         	  System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
         	  System.out.print("Halfhour dissatisfaction: ");
-        	  for(int j = 0; j < 17; j++)
+        	  for(int j = 0; j < 17; j++){
         		  System.out.print(smMarket.getHalfHourPercentDissatisfied(j) + "; ");
+        		  halfHourDissatisfactionAvg[j] += smMarket.getHalfHourPercentDissatisfied(j);
+        	  }
         	  System.out.println(smMarket.getHalfHourPercentDissatisfied(17));
+        	  halfHourDissatisfactionAvg[17] += smMarket.getHalfHourPercentDissatisfied(17);
     	   }
+    	   
+    	   overallDissatisfactionAvg /= NUMRUNS;
+    	   for(int j = 0; j < 18; j++)
+    		   halfHourDissatisfactionAvg[j] /= NUMRUNS;
+    	   
     	   
     	  double max = 0;
     	  int maxIndex = 0;
     	  for(int j = 0; j < 18; j++){
-    		  if(smMarket.getHalfHourPercentDissatisfied(j) > max){
-    			  max = smMarket.getHalfHourPercentDissatisfied(j);
+    		  if(halfHourDissatisfactionAvg[j] > max){
+    			  max = halfHourDissatisfactionAvg[j];
     			  maxIndex = j;
     		  }
     	  }
@@ -99,7 +116,8 @@ class Experiment
     	  //TEST
     	  System.out.println("\nONE LOOP ENDED \n\n");
     	   
-//       }while(smMarket.getOverallPercentDissatisfied() > 0.1);
+
+       }while(overallDissatisfactionAvg > 0.1);
        
    }
 }
