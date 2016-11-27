@@ -16,9 +16,6 @@ class UDPs
 				this.model.rEmployeesInfo.uTotalEmployees[i] = 4;
 			else
 				this.model.rEmployeesInfo.uTotalEmployees[i] = 2;
-			
-			if(i < 7)
-				this.model.rEmployeesInfo.uTotalEmployees[i]+=3;
 		}
 				
 		for (int i = 0; i < this.model.rEmployeesInfo.schedule.size(); i++) {
@@ -31,7 +28,7 @@ class UDPs
 			while (durationOfShift > 0) {
 				this.model.rEmployeesInfo.uTotalEmployees[(startTime/30) + tempCounter]++;
 				tempCounter++;
-						durationOfShift -= 30;
+				durationOfShift -= 30;
 			}
 		}
 	}

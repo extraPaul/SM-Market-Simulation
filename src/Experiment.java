@@ -25,15 +25,15 @@ class Experiment
        
        //TODO: make a legit schedule
        //schedule param
-       ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>(2);
+       ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>();
        
        //Add initial part time employees, for prep work.
-       /*for(int j = 0; j < 3; j++){
-    	   ArrayList<Integer> newShift = new ArrayList<Integer>();
-           newShift.add(0);
-           newShift.add(180);
-           schedule.add(newShift);
-       }*/
+       for(int j = 0; j < 3; j++){
+    	   ArrayList<Integer> shift = new ArrayList<Integer>();
+           shift.add(0);
+           shift.add(180);
+           schedule.add(shift);
+       }
        ArrayList<Integer> shift = new ArrayList<Integer>();
        shift.add(270);
        shift.add(180);
@@ -90,12 +90,8 @@ class Experiment
     	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   overallDissatisfactionAvg /= NUMRUNS;
     	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
-    	   System.out.print("Average half hour dissatisfation for " + NUMRUNS + " runs: ");
-    	   for(int j = 0; j < 18; j++){
-    		   halfHourDissatisfactionAvg[j] /= NUMRUNS;
-    		   System.out.print(halfHourDissatisfactionAvg[j] + "; ");
-    	   }
-    	   System.out.println();
+
+    	   System.out.println("Average halfour dissatisfation for " + NUMRUNS + " runs: " + Arrays.toString(halfHourDissatisfactionAvg));
     		   
     	   numMnFCustomersAvg /= NUMRUNS;
     	   numDeliCustomersAvg /= NUMRUNS;
@@ -107,6 +103,7 @@ class Experiment
     	   System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
     	   System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
     	   System.out.println("uTotalEmp: " + Arrays.toString(smMarket.rEmployeesInfo.uTotalEmployees));
+    	   System.out.println("Schedule: " + Arrays.deepToString(schedule.toArray()));
     	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   System.out.println();
     	   
@@ -164,7 +161,7 @@ class Experiment
     	  System.out.println("LOOP " + numExperiments + " ENDED");
     	   
     	  numExperiments++;
-       }while(overallDissatisfactionAvg > 0.20);
+       }while(overallDissatisfactionAvg > 0.2);
        
        System.out.println();
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
@@ -175,7 +172,12 @@ class Experiment
     	   System.out.println("start time: " + schedule.get(x).get(0));
     	   System.out.println("duration: " + schedule.get(x).get(1));
        }
+       
        System.out.println();
        System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));
+
+       
+       System.out.println(Arrays.deepToString(schedule.toArray()));
+
    }
 }
