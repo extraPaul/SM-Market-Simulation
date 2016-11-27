@@ -91,6 +91,10 @@ public class SMMarket extends AOSimulationModel
 	public Output getOutputs(){
 		return output;
 	}
+	
+	public double getSechduleCost(){
+		return output.getScheduleCost();
+	}
 
 	/************  Implementation of Data Modules***********/	
 	/*

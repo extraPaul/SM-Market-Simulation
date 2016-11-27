@@ -1,6 +1,7 @@
 // File: Experiment.java
 // Description:
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -89,7 +90,7 @@ class Experiment
     	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   overallDissatisfactionAvg /= NUMRUNS;
     	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
-    	   System.out.print("Average halfour dissatisfation for " + NUMRUNS + " runs: ");
+    	   System.out.print("Average half hour dissatisfation for " + NUMRUNS + " runs: ");
     	   for(int j = 0; j < 18; j++){
     		   halfHourDissatisfactionAvg[j] /= NUMRUNS;
     		   System.out.print(halfHourDissatisfactionAvg[j] + "; ");
@@ -174,6 +175,7 @@ class Experiment
     	   System.out.println("start time: " + schedule.get(x).get(0));
     	   System.out.println("duration: " + schedule.get(x).get(1));
        }
-       
+       System.out.println();
+       System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));
    }
 }

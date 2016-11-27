@@ -13,6 +13,7 @@ public class Output
 	public int numDeliCustomers;
 	public int numBothCustomers;
 	public int numBalking; //Represents people who come in and walk out right away.
+	protected double scheduleCost;
 	
 	// constructor
 	protected Output(SMMarket md) { 
@@ -34,6 +35,23 @@ public class Output
 	protected double getOverallPercentageDissatisfied() {
 		calculateOverallPercentageDissatisfied();
 		return overallPercentDissatisfied;
+	}
+	
+	protected void calculateScheduleCost()
+	{
+		for (int i = 0; i < model.rEmployeesInfo.schedule.size(); i ++)
+		{
+			int shiftDuration = model.rEmployeesInfo.schedule.get(i).get(1);
+			double paySlip = shiftDuration * Constants.PTIMERATE;
+			scheduleCost += paySlip;
+		}
+		//Total pay for full time employees for one day's work
+		scheduleCost +=  (6.5 * Constants.FTIMERATE) * 4;
+	}
+	
+	protected double getScheduleCost(){
+		calculateScheduleCost();
+		return scheduleCost;
 	}
 	
 }
