@@ -6,7 +6,8 @@ public class EmployeesInfo {
 
 	// Attributes
 	protected ArrayList<ArrayList<Integer>> schedule;
-	protected int[] uTotalEmployees;
+	//Public for testing
+	public int[] uTotalEmployees;
 	
 	protected int numEmpCleaning;
 	protected int halfHourNumServed;

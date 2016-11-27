@@ -11,13 +11,14 @@ class UDPs
 		// derive halfHourSchedule from schedule
 				
 		for(int i = 0; i < this.model.rEmployeesInfo.uTotalEmployees.length; i++){
+			//Add full time employees
 			if(5 <= i && i <= 12)
 				this.model.rEmployeesInfo.uTotalEmployees[i] = 4;
 			else
 				this.model.rEmployeesInfo.uTotalEmployees[i] = 2;
 			
-			if(i < 6)
-				this.model.rEmployeesInfo.uTotalEmployees[i] += 3;
+			if(i < 7)
+				this.model.rEmployeesInfo.uTotalEmployees[i]+=3;
 		}
 				
 		for (int i = 0; i < this.model.rEmployeesInfo.schedule.size(); i++) {

@@ -2,6 +2,7 @@
 // Description:
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import simModel.*;
 import cern.jet.random.engine.*;
@@ -25,6 +26,18 @@ class Experiment
        //schedule param
        ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>(2);
        
+       //Add initial part time employees, for prep work.
+       /*for(int j = 0; j < 3; j++){
+    	   ArrayList<Integer> newShift = new ArrayList<Integer>();
+           newShift.add(0);
+           newShift.add(180);
+           schedule.add(newShift);
+       }*/
+       ArrayList<Integer> shift = new ArrayList<Integer>();
+       shift.add(270);
+       shift.add(180);
+       schedule.add(shift);
+       
        
        // Loop for NUMRUN simulation runs for each case
        // Case 1
@@ -32,9 +45,17 @@ class Experiment
 
        int numExperiments = 0;
        double overallDissatisfactionAvg;
+       double numMnFCustomersAvg;
+       double numDeliCustomersAvg;
+       double numBothCustomersAvg;
+       double numBalkingAvg;
        do{
     	   overallDissatisfactionAvg = 0;
     	   double[] halfHourDissatisfactionAvg = new double[18];
+    	   numMnFCustomersAvg = 0;
+           numDeliCustomersAvg = 0;
+           numBothCustomersAvg = 0;
+           numBalkingAvg = 0;
 
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i]);
@@ -44,21 +65,28 @@ class Experiment
 
         	  
         	  //TEST
-        	  System.out.println("numDissatisfied: " + smMarket.getNumDissatisfied());
-        	  System.out.println("numServed: " + smMarket.getNumServed());
+        	  //System.out.println("numDissatisfied: " + smMarket.getNumDissatisfied());
+        	  //System.out.println("numServed: " + smMarket.getNumServed());
 
         	  overallDissatisfactionAvg += smMarket.getOverallPercentDissatisfied();
 
-        	  System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
-        	  System.out.print("Halfhour dissatisfaction: ");
+        	  //System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
+        	  //System.out.print("Halfhour dissatisfaction: ");
         	  for(int j = 0; j < 17; j++){
-        		  System.out.print(smMarket.getHalfHourPercentDissatisfied(j) + "; ");
+        		  //System.out.print(smMarket.getHalfHourPercentDissatisfied(j) + "; ");
         		  halfHourDissatisfactionAvg[j] += smMarket.getHalfHourPercentDissatisfied(j);
         	  }
-        	  System.out.println(smMarket.getHalfHourPercentDissatisfied(17));
+        	  //System.out.println(smMarket.getHalfHourPercentDissatisfied(17));
         	  halfHourDissatisfactionAvg[17] += smMarket.getHalfHourPercentDissatisfied(17);
+        	  
+        	  numMnFCustomersAvg += smMarket.getOutputs().numMnFCustomers;
+        	  numDeliCustomersAvg += smMarket.getOutputs().numDeliCustomers;
+        	  numBothCustomersAvg += smMarket.getOutputs().numBothCustomers;
+        	  numBalkingAvg += smMarket.getOutputs().numBalking;
     	   }
     	   
+    	   System.out.println();
+    	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   overallDissatisfactionAvg /= NUMRUNS;
     	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
     	   System.out.print("Average halfour dissatisfation for " + NUMRUNS + " runs: ");
@@ -68,7 +96,18 @@ class Experiment
     	   }
     	   System.out.println();
     		   
+    	   numMnFCustomersAvg /= NUMRUNS;
+    	   numDeliCustomersAvg /= NUMRUNS;
+    	   numBothCustomersAvg /= NUMRUNS;
+    	   numBalkingAvg /= NUMRUNS;
     	   
+    	   System.out.println("The average number of meat and fish customers was : " + numMnFCustomersAvg);
+    	   System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
+    	   System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
+    	   System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
+    	   System.out.println("uTotalEmp: " + Arrays.toString(smMarket.rEmployeesInfo.uTotalEmployees));
+    	   System.out.println("----------------------------------------------------------------------------------------------------");
+    	   System.out.println();
     	   
     	  double max = 0;
     	  int maxIndex = 0;
@@ -85,7 +124,7 @@ class Experiment
     	  while(empShiftLength < 6*60){
     		  if(midle - index > 0 && empStartTime >= 0){
     			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
-    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1 || empShiftLength < 3*60){
+    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.15 || empShiftLength < 3*60){
     					  empShiftLength += 30;
     					  midle += 0.5;
     					  index += 0.5;
@@ -93,7 +132,7 @@ class Experiment
     				  else
     					  break;
     			  } else {
-    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > 0.1 || empShiftLength < 3*60){
+    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > 0.15 || empShiftLength < 3*60){
     					  empShiftLength += 30;
     					  empStartTime -= 30;
     					  if(midle - index - 1 > 0)
@@ -106,7 +145,7 @@ class Experiment
     					  break;
     			  }
     		  } else {
-    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.1 || empShiftLength < 3*60){
+    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.15 || empShiftLength < 3*60){
     				  empShiftLength += 30;
     				  midle += 0.5;
 					  index += 0.5;
@@ -121,12 +160,14 @@ class Experiment
     	  newShift.add(empShiftLength);
     	  schedule.add(newShift);
     	  //TEST
-    	  System.out.println("\nONE LOOP ENDED \n\n");
+    	  System.out.println("LOOP " + numExperiments + " ENDED");
     	   
     	  numExperiments++;
-       }while(overallDissatisfactionAvg > 0.1);
+       }while(overallDissatisfactionAvg > 0.20);
        
+       System.out.println();
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
+       
        
        //print schedule
        for (int x = 0; x< schedule.size(); x++) {

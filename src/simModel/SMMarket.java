@@ -13,7 +13,8 @@ public class SMMarket extends AOSimulationModel
 	/* Parameter */
     
 	// rEmployeesInfo.schedule holds a 2D Array storing start time and duration of shifts
-	protected EmployeesInfo rEmployeesInfo;
+	//Public for testing purposes
+	public EmployeesInfo rEmployeesInfo;
 
 	/*-------------Entity Data Structures-------------------*/
 	// Array lists containing the two counters
@@ -86,6 +87,10 @@ public class SMMarket extends AOSimulationModel
 	public double getNumServed(){
 		return output.numServed;
 	}
+	
+	public Output getOutputs(){
+		return output;
+	}
 
 	/************  Implementation of Data Modules***********/	
 	/*
@@ -108,13 +113,13 @@ public class SMMarket extends AOSimulationModel
 	public void eventOccured()
 	{
 //		this.showSBL();
-		System.out.println("Clock: "+getClock()+
+		/*System.out.println("Clock: "+getClock()+
                 ", CustomerLineMNF.n: "+qCustomerLines.get(Constants.MNF).size()+
                 ", CustomerLineDEli.n: "+qCustomerLines.get(Constants.DELI).size()+
                 ", CounterMNF.n: "+rgCounters.get(Constants.MNF).getN()+ ", CounterMNF numEmp: " + rgCounters.get(Constants.MNF).uNumEmp +
                 ", CounterDELI.n: "+rgCounters.get(Constants.DELI).getN() + ", CounterDELI numEmp: " + rgCounters.get(Constants.DELI).uNumEmp);
 		System.out.println("Number of cleaning emp: " + rEmployeesInfo.numEmpCleaning);
-		System.out.println();
+		System.out.println();*/
 		
 	}
 

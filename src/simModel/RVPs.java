@@ -77,10 +77,13 @@ class RVPs
 		double randNum = randGen.nextDouble();
 		
 		if(randNum < PROPD[timeBucket]){
+			model.output.numDeliCustomers++;
 			return Customer.Type.D;
 		}else if(randNum < (PROPD[timeBucket]+PROPM[timeBucket])){
+			model.output.numMnFCustomers++;
 			return Customer.Type.M;
 		}else{
+			model.output.numBothCustomers++;
 			return Customer.Type.MD;
 		}
 	}
