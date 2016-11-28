@@ -1,4 +1,4 @@
-package simModel;
+package smmSimModel;
 
 public class Output 
 {

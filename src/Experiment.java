@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import simModel.*;
+import smmSimModel.*;
 import cern.jet.random.engine.*;
 
 // Main Method: Experiments
@@ -23,7 +23,7 @@ class Experiment
        RandomSeedGenerator rsg = new RandomSeedGenerator();
        for(i=0 ; i<NUMRUNS ; i++) sds[i] = new Seeds(rsg);
        
-       //TODO: make a legit schedule
+       
        //schedule param
        ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>();
        
@@ -42,7 +42,7 @@ class Experiment
        
        // Loop for NUMRUN simulation runs for each case
        // Case 1
-       System.out.println(" Case 1");
+       System.out.println("Case 1");
 
        int numExperiments = 0;
        double overallDissatisfactionAvg;
@@ -59,7 +59,7 @@ class Experiment
            numBalkingAvg = 0;
 
     	   for(i=0 ; i < NUMRUNS ; i++){
-        	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i]);
+        	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i], false);
         	  smMarket.runSimulation();
               // See examples for hints on collecting output
               // and developping code for analysis
@@ -86,7 +86,9 @@ class Experiment
         	  numBalkingAvg += smMarket.getOutputs().numBalking;
     	   }
     	   
-    	   System.out.println();
+    	   
+    	   numExperiments++;
+    	   System.out.println("LOOP " + numExperiments + " ENDED");
     	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   overallDissatisfactionAvg /= NUMRUNS;
     	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
@@ -157,10 +159,6 @@ class Experiment
     	  newShift.add(empStartTime);
     	  newShift.add(empShiftLength);
     	  schedule.add(newShift);
-    	  //TEST
-    	  System.out.println("LOOP " + numExperiments + " ENDED");
-    	   
-    	  numExperiments++;
        }while(overallDissatisfactionAvg > 0.2);
        
        System.out.println();
@@ -168,16 +166,16 @@ class Experiment
        
        
        //print schedule
-       for (int x = 0; x< schedule.size(); x++) {
+       /*for (int x = 0; x< schedule.size(); x++) {
     	   System.out.println("start time: " + schedule.get(x).get(0));
     	   System.out.println("duration: " + schedule.get(x).get(1));
-       }
+       }*/
        
        System.out.println();
        System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));
 
        
-       System.out.println(Arrays.deepToString(schedule.toArray()));
+       System.out.println("Schedule [Start time, duration]: " + Arrays.deepToString(schedule.toArray()));
 
    }
 }

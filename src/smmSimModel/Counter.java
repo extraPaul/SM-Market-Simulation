@@ -1,4 +1,4 @@
-package simModel;
+package smmSimModel;
 
 import java.util.HashSet;
 

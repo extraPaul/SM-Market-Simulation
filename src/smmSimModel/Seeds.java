@@ -1,4 +1,4 @@
-package simModel;
+package smmSimModel;
 
 import cern.jet.random.engine.RandomSeedGenerator;
 

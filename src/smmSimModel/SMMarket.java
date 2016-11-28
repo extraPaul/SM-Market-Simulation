@@ -1,4 +1,4 @@
-package simModel;
+package smmSimModel;
 
 import java.util.ArrayList;
 
@@ -31,18 +31,51 @@ public class SMMarket extends AOSimulationModel
 	
 	// Add our closing time
 	double closingTime = 480;
+	
+	//For trace logging
+	protected boolean printLog;
 
 	// Output object
 	protected Output output = new Output(this);
 	
+	
 	// Output values - define the public methods that return values
 	// required for experimentation.
+	public double getOverallPercentDissatisfied(){
+		return output.getOverallPercentageDissatisfied();
+	}
+	
+	public double getHalfHourPercentDissatisfied(int i){
+		return output.halfHourPercentDissatisfied[i];
+	}
+	
+	public double[] getHalfHourPercentDissatisfied(){
+		return output.halfHourPercentDissatisfied;
+	}
+	
+	public double getNumDissatisfied(){
+		return output.numDissatisfied;
+	}
+	
+	public double getNumServed(){
+		return output.numServed;
+	}
+	
+	public Output getOutputs(){
+		return output;
+	}
+	
+	public double getSechduleCost(){
+		return output.getScheduleCost();
+	}
 
 
 	// Constructor
-	public SMMarket(double t0time, double tftime, ArrayList<ArrayList<Integer>> schedule, /*define other args,*/ Seeds sd)
+	public SMMarket(double t0time, double tftime, ArrayList<ArrayList<Integer>> schedule,Seeds sd, boolean print)
 	{
 		// Initialize parameters here
+		printLog = print;
+		
 		// Initialize EmployeesInfo with the input parameter schedule
 		rEmployeesInfo = new EmployeesInfo(schedule, this);
 		udp.initializeUTotalEmp();
@@ -72,29 +105,7 @@ public class SMMarket extends AOSimulationModel
 		scheduleAction(arrival);
 	}
 	
-	public double getOverallPercentDissatisfied(){
-		return output.getOverallPercentageDissatisfied();
-	}
 	
-	public double getHalfHourPercentDissatisfied(int i){
-		return output.halfHourPercentDissatisfied[i];
-	}
-	
-	public double getNumDissatisfied(){
-		return output.numDissatisfied;
-	}
-	
-	public double getNumServed(){
-		return output.numServed;
-	}
-	
-	public Output getOutputs(){
-		return output;
-	}
-	
-	public double getSechduleCost(){
-		return output.getScheduleCost();
-	}
 
 	/************  Implementation of Data Modules***********/	
 	/*
@@ -117,14 +128,15 @@ public class SMMarket extends AOSimulationModel
 	public void eventOccured()
 	{
 //		this.showSBL();
-		/*System.out.println("Clock: "+getClock()+
-                ", CustomerLineMNF.n: "+qCustomerLines.get(Constants.MNF).size()+
-                ", CustomerLineDEli.n: "+qCustomerLines.get(Constants.DELI).size()+
-                ", CounterMNF.n: "+rgCounters.get(Constants.MNF).getN()+ ", CounterMNF numEmp: " + rgCounters.get(Constants.MNF).uNumEmp +
-                ", CounterDELI.n: "+rgCounters.get(Constants.DELI).getN() + ", CounterDELI numEmp: " + rgCounters.get(Constants.DELI).uNumEmp);
-		System.out.println("Number of cleaning emp: " + rEmployeesInfo.numEmpCleaning);
-		System.out.println();*/
-		
+		if(printLog){
+			System.out.println("Clock: "+getClock()+
+	                ", CustomerLineMNF.n: "+qCustomerLines.get(Constants.MNF).size()+
+	                ", CustomerLineDEli.n: "+qCustomerLines.get(Constants.DELI).size()+
+	                ", CounterMNF.n: "+rgCounters.get(Constants.MNF).getN()+ ", CounterMNF numEmp: " + rgCounters.get(Constants.MNF).uNumEmp +
+	                ", CounterDELI.n: "+rgCounters.get(Constants.DELI).getN() + ", CounterDELI numEmp: " + rgCounters.get(Constants.DELI).uNumEmp);
+			System.out.println("Number of cleaning emp: " + rEmployeesInfo.numEmpCleaning);
+			System.out.println();
+		}
 	}
 
 	// Standard Procedure to start Sequel Activities with no parameters
