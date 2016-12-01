@@ -122,7 +122,7 @@ class Experiment
     	  int empShiftLength = 30;
     	  double index = 1, midle = maxIndex;
     	  while(empShiftLength < 6*60){
-    		  if(midle - index > 0 && empStartTime >= 0){
+    		  if(midle - index > 0 && empStartTime > 0){
     			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
     				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.15 || empShiftLength < 3*60){
     					  empShiftLength += 30;

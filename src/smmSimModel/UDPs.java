@@ -1,5 +1,7 @@
 package smmSimModel;
 
+import java.util.Arrays;
+
 class UDPs 
 {
 	SMMarket model;  // for accessing the clock
@@ -22,9 +24,7 @@ class UDPs
 			int startTime = this.model.rEmployeesInfo.schedule.get(i).get(0);
 			int durationOfShift = this.model.rEmployeesInfo.schedule.get(i).get(1);
 					
-			this.model.rEmployeesInfo.uTotalEmployees[startTime/30]++;
-					
-			int tempCounter = 1;
+			int tempCounter = 0;
 			while (durationOfShift > 0) {
 				this.model.rEmployeesInfo.uTotalEmployees[(startTime/30) + tempCounter]++;
 				tempCounter++;
