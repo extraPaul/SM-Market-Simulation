@@ -93,7 +93,7 @@ class Experiment
     	   overallDissatisfactionAvg /= NUMRUNS;
     	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
 
-    	   System.out.println("Average halfour dissatisfation for " + NUMRUNS + " runs: " + Arrays.toString(halfHourDissatisfactionAvg));
+    	   System.out.println("Average half-hour dissatisfation for " + NUMRUNS + " runs: " + Arrays.toString(halfHourDissatisfactionAvg));
     		   
     	   numMnFCustomersAvg /= NUMRUNS;
     	   numDeliCustomersAvg /= NUMRUNS;
