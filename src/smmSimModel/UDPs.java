@@ -122,7 +122,7 @@ class UDPs
 			if(mnfRatio > deliRatio){
 				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
 				
-				if(testDiff < ratioDiff && model.rgCounters.get(Constants.MNF).uNumEmp - 1 >= model.rgCounters.get(Constants.MNF).getN()){
+				if((testDiff < ratioDiff && model.rgCounters.get(Constants.MNF).uNumEmp - 1 >= model.rgCounters.get(Constants.MNF).getN() || model.rgCounters.get(Constants.DELI).uNumEmp == 0) && model.rgCounters.get(Constants.MNF).uNumEmp - 1 > 0){
 					model.rgCounters.get(Constants.MNF).uNumEmp--;
 					model.rgCounters.get(Constants.DELI).uNumEmp++;
 				} else
@@ -130,7 +130,7 @@ class UDPs
 			} else {
 				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
 				
-				if(testDiff < ratioDiff && model.rgCounters.get(Constants.DELI).uNumEmp - 1 >= model.rgCounters.get(Constants.DELI).getN()){
+				if((testDiff < ratioDiff && model.rgCounters.get(Constants.DELI).uNumEmp - 1 >= model.rgCounters.get(Constants.DELI).getN() || model.rgCounters.get(Constants.MNF).uNumEmp == 0) && model.rgCounters.get(Constants.DELI).uNumEmp - 1 > 0){
 					model.rgCounters.get(Constants.MNF).uNumEmp++;
 					model.rgCounters.get(Constants.DELI).uNumEmp--;
 				} else
