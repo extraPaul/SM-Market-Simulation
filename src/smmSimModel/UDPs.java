@@ -1,7 +1,5 @@
 package smmSimModel;
 
-import java.util.Arrays;
-
 class UDPs 
 {
 	SMMarket model;  // for accessing the clock

@@ -12,6 +12,7 @@ import cern.jet.random.engine.*;
 // 
 class Experiment
 {
+	
    public static void main(String[] args)
    {
        int i, NUMRUNS = 20; 
@@ -19,6 +20,9 @@ class Experiment
        Seeds[] sds = new Seeds[NUMRUNS];
        SMMarket smMarket = null;  // Simulation object
 
+       // Custom Comparator used to sort the schedule by start time
+       ScheduleComparator c = new ScheduleComparator();
+       
        // Lets get a set of uncorrelated seeds
        RandomSeedGenerator rsg = new RandomSeedGenerator();
        for(i=0 ; i<NUMRUNS ; i++) sds[i] = new Seeds(rsg);
@@ -99,6 +103,8 @@ class Experiment
     	   numDeliCustomersAvg /= NUMRUNS;
     	   numBothCustomersAvg /= NUMRUNS;
     	   numBalkingAvg /= NUMRUNS;
+    	   // sort the schedule by start time
+           // schedule.sort(c);
     	   
     	   double max = 0;
      	  int maxIndex = 0;
@@ -160,6 +166,9 @@ class Experiment
     	  newShift.add(empStartTime);
     	  newShift.add(empShiftLength);
     	  schedule.add(newShift);
+    	  
+    	  // sort the schedule
+    	  schedule.sort(c);
        }while(overallDissatisfactionAvg > 0.2);
        
        System.out.println();
@@ -173,10 +182,12 @@ class Experiment
        }*/
        
        System.out.println();
-       System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));
-
+       System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));       
        
        System.out.println("Schedule [Start time, duration]: " + Arrays.deepToString(schedule.toArray()));
 
    }
+   
+
 }
+
