@@ -22,10 +22,7 @@ class Arrivals extends ScheduledAction {
 	
 	public void actionEvent() {
 		//WArrival Action Sequence SCS
-		Customer icCustomer = new Customer();
-		icCustomer.uType = model.rvp.uCustomerType();
-		icCustomer.startWaitTime = model.getClock();
-		icCustomer.dissatisfactionThreshold = model.rvp.uDissatisfactionTime(icCustomer.uType);
+		Customer icCustomer = new Customer(model);
 		
 		if (icCustomer.uType == Customer.Type.MD)
 			icCustomer.canLeave = false;

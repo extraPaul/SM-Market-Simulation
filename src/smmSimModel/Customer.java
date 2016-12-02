@@ -18,4 +18,10 @@ class Customer {
 	boolean canLeave = true;
 	// The wait time at which the customer will be dissatisfied
 	double dissatisfactionThreshold;
+	
+	public Customer(SMMarket model){
+		uType = model.rvp.uCustomerType();
+		startWaitTime = model.getClock();
+		dissatisfactionThreshold = model.rvp.uDissatisfactionTime(uType);
+	}
 }

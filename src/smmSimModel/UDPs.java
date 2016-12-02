@@ -95,8 +95,11 @@ class UDPs
 	
 	protected void updateOutputOnHalfHour() {
 		
-		// updates the halfHourPercentDissatisfied array
+		//Keeping track of history for testing
+		model.rgCounters.get(Constants.DELI).dailyNumEmp[(int) (model.getClock()/30)] = model.rgCounters.get(Constants.DELI).uNumEmp;
+		model.rgCounters.get(Constants.MNF).dailyNumEmp[(int) (model.getClock()/30)] = model.rgCounters.get(Constants.MNF).uNumEmp;
 		
+		// updates the halfHourPercentDissatisfied array
 		if (model.rEmployeesInfo.halfHourNumServed != 0) {
 			
 			model.output.halfHourPercentDissatisfied[(int) (model.getClock()/30) -1] = ( (double) model.rEmployeesInfo.halfHourNumDissatisfied / (double) model.rEmployeesInfo.halfHourNumServed);

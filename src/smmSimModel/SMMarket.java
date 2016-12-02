@@ -68,6 +68,10 @@ public class SMMarket extends AOSimulationModel
 	public double getSechduleCost(){
 		return output.getScheduleCost();
 	}
+	
+	public Counter getCounter(int i){
+		return this.rgCounters.get(i);
+	}
 
 
 	// Constructor

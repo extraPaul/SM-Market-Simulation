@@ -1,6 +1,6 @@
 package smmSimModel;
 
-class Constants 
+public class Constants 
 {
 	/* Constants */
 	// Define constants as static
