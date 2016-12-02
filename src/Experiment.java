@@ -100,6 +100,16 @@ class Experiment
     	   numBothCustomersAvg /= NUMRUNS;
     	   numBalkingAvg /= NUMRUNS;
     	   
+    	   double max = 0;
+     	  int maxIndex = 0;
+     	  for(int j = 0; j < 18; j++){
+     		  halfHourDissatisfactionAvg[j] /= NUMRUNS;
+     		  if(halfHourDissatisfactionAvg[j] > max){
+     			  max = halfHourDissatisfactionAvg[j];
+     			  maxIndex = j;
+     		  }
+     	  }
+    	   
     	   System.out.println("The average number of meat and fish customers was : " + numMnFCustomersAvg);
     	   System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
     	   System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
@@ -108,15 +118,6 @@ class Experiment
     	   System.out.println("Schedule: " + Arrays.deepToString(schedule.toArray()));
     	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   System.out.println();
-    	   
-    	  double max = 0;
-    	  int maxIndex = 0;
-    	  for(int j = 0; j < 18; j++){
-    		  if(halfHourDissatisfactionAvg[j] > max){
-    			  max = halfHourDissatisfactionAvg[j];
-    			  maxIndex = j;
-    		  }
-    	  }
     	  
     	  int empStartTime = maxIndex*30;
     	  int empShiftLength = 30;
