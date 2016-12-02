@@ -77,12 +77,9 @@ class Experiment
 
         	  //System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
         	  //System.out.print("Halfhour dissatisfaction: ");
-        	  for(int j = 0; j < 17; j++){
-        		  //System.out.print(smMarket.getHalfHourPercentDissatisfied(j) + "; ");
+        	  for(int j = 0; j < 18; j++){
         		  halfHourDissatisfactionAvg[j] += smMarket.getHalfHourPercentDissatisfied(j);
         	  }
-        	  //System.out.println(smMarket.getHalfHourPercentDissatisfied(17));
-        	  halfHourDissatisfactionAvg[17] += smMarket.getHalfHourPercentDissatisfied(17);
         	  
         	  numMnFCustomersAvg += smMarket.getOutputs().numMnFCustomers;
         	  numDeliCustomersAvg += smMarket.getOutputs().numDeliCustomers;
@@ -96,8 +93,6 @@ class Experiment
     	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   overallDissatisfactionAvg /= NUMRUNS;
     	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
-
-    	   System.out.println("Average half-hour dissatisfation for " + NUMRUNS + " runs: " + Arrays.toString(halfHourDissatisfactionAvg));
     		   
     	   numMnFCustomersAvg /= NUMRUNS;
     	   numDeliCustomersAvg /= NUMRUNS;
@@ -106,7 +101,7 @@ class Experiment
     	   // sort the schedule by start time
            // schedule.sort(c);
     	   
-    	   double max = 0;
+    	  double max = 0;
      	  int maxIndex = 0;
      	  for(int j = 0; j < 18; j++){
      		  halfHourDissatisfactionAvg[j] /= NUMRUNS;
@@ -115,15 +110,15 @@ class Experiment
      			  maxIndex = j;
      		  }
      	  }
-    	   
-    	   System.out.println("The average number of meat and fish customers was : " + numMnFCustomersAvg);
-    	   System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
-    	   System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
-    	   System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
-    	   System.out.println("uTotalEmp: " + Arrays.toString(smMarket.rEmployeesInfo.uTotalEmployees));
-    	   System.out.println("Schedule: " + Arrays.deepToString(schedule.toArray()));
-    	   System.out.println("----------------------------------------------------------------------------------------------------");
-    	   System.out.println();
+     	  System.out.println("Average half-hour dissatisfation for " + NUMRUNS + " runs: " + Arrays.toString(halfHourDissatisfactionAvg));
+     	  System.out.println("The average number of meat and fish customers was : " + numMnFCustomersAvg);
+			System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
+			System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
+			System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
+			System.out.println("uTotalEmp: " + Arrays.toString(smMarket.rEmployeesInfo.uTotalEmployees));
+			System.out.println("Schedule: " + Arrays.deepToString(schedule.toArray()));
+			System.out.println("----------------------------------------------------------------------------------------------------");
+			System.out.println();
     	  
     	  int empStartTime = maxIndex*30;
     	  int empShiftLength = 30;
