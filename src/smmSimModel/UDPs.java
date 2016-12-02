@@ -1,5 +1,7 @@
 package smmSimModel;
 
+import jdk.nashorn.internal.codegen.CompilerConstants;
+
 class UDPs 
 {
 	SMMarket model;  // for accessing the clock
@@ -75,6 +77,15 @@ class UDPs
 		if ( (model.getClock() - icCustomer.startWaitTime) > icCustomer.dissatisfactionThreshold) {
 			model.output.numDissatisfied++;
 			model.rEmployeesInfo.halfHourNumDissatisfied++;
+		}
+		
+		//TEST
+		if (icCustomer.uType == Customer.Type.D){
+			model.output.deliWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
+		} else if (icCustomer.uType == Customer.Type.M) {
+			model.output.mnfWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
+		} else {
+			model.output.bothWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
 		}
 				
 		// increment the number of customers served

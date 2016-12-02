@@ -1,5 +1,7 @@
 package smmSimModel;
 
+import java.util.ArrayList;
+
 public class Output 
 {
 	SMMarket model;
@@ -15,6 +17,11 @@ public class Output
 	public int numBalking; //Represents people who come in and walk out right away.
 	protected double scheduleCost;
 	
+	//TEST
+	public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
+	public ArrayList<Double> deliWaitTimes = new ArrayList<Double>();
+	public ArrayList<Double> bothWaitTimes = new ArrayList<Double>();
+	
 	// constructor
 	protected Output(SMMarket md) { 
 		model = md; 
@@ -25,6 +32,7 @@ public class Output
 		numDeliCustomers = 0;
 		numBothCustomers = 0;
 		numBalking = 0;
+		
 	}
 	
 	/* Helper methods */
