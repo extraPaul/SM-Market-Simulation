@@ -109,6 +109,7 @@ public class SMMarket extends AOSimulationModel
 		scheduleAction(arrival);
 	}
 	
+	private  Behaviour activity ;
 	
 
 	/************  Implementation of Data Modules***********/	
@@ -117,12 +118,14 @@ public class SMMarket extends AOSimulationModel
 	 */
 	protected void testPreconditions(Behaviour behObj)
 	{
+		activity = behObj;
 		// reschedule scheduled actions
 		reschedule (behObj);
 		// Check preconditions of Conditional Activities
 
 		// Check preconditions of Interruptions in Extended Activities
-		if (Serving.precondition(this) == true) {
+		if (Serving.precondition(this) == true) 
+		{
 			Serving act = new Serving(this);
 			act.startingEvent();
 			scheduleActivity(act);
@@ -131,8 +134,10 @@ public class SMMarket extends AOSimulationModel
 	
 	public void eventOccured()
 	{
-//		this.showSBL();
+		this.showSBL();
+		
 		if(printLog){
+			System.out.println(activity.name);
 			System.out.println("Clock: "+getClock()+
 	                ", CustomerLineMNF.n: "+qCustomerLines.get(Constants.MNF).size()+
 	                ", CustomerLineDEli.n: "+qCustomerLines.get(Constants.DELI).size()+

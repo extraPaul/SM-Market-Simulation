@@ -14,6 +14,7 @@ class Arrivals extends ScheduledAction {
 	// Constructor
 	public Arrivals(SMMarket model) {
 		this.model = model;
+		name = "Arrival";
 	}
 	
 	public double timeSequence() {

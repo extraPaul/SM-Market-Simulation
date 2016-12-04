@@ -11,6 +11,7 @@ public class Serving extends ConditionalActivity{
 	// Constructor
 	public Serving(SMMarket model) {
 		this.model = model;
+		name= "Serving";
 	}
 	
 	protected static boolean precondition(SMMarket simModel) {
