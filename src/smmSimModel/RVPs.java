@@ -1,7 +1,6 @@
 package smmSimModel;
 
 import cern.jet.random.Exponential;
-import cern.jet.random.Uniform;
 import cern.jet.random.Normal;
 import cern.jet.random.engine.MersenneTwister;
 import dataModelling.TriangularVariate;
