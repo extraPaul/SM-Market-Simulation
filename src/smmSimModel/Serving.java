@@ -55,6 +55,20 @@ public class Serving extends ConditionalActivity{
 		// remove customer from line
 		if (model.rgCounters.get(id).removeList(icCustomer)){
 			
+			//Check if an employee needs to switch counters
+			if(model.rgCounters.get(id).scheduledEmpChange > 0){
+				if (id == Constants.MNF) {
+					//Move employee from MnF to Deli
+					model.rgCounters.get(Constants.MNF).uNumEmp--;
+					model.rgCounters.get(Constants.DELI).uNumEmp++;
+				} else {
+					//Move employee from Deli to MnF
+					model.rgCounters.get(Constants.MNF).uNumEmp++;
+					model.rgCounters.get(Constants.DELI).uNumEmp--;
+				}
+				model.rgCounters.get(id).scheduledEmpChange--;
+			}
+			
 			// check if customer needs to enter another line
 			if (!icCustomer.canLeave) {
 				

@@ -115,24 +115,38 @@ class UDPs
 	protected void rebalanceEmployees() {
 		boolean swtch = true;
 		double mnfRatio, deliRatio, ratioDiff, testDiff;
+		int tempMnFNumEmp = model.rgCounters.get(Constants.MNF).uNumEmp;
+		int tempDeliNumEmp = model.rgCounters.get(Constants.DELI).uNumEmp;
 		while(swtch){
-			mnfRatio = (double)model.rgCounters.get(Constants.MNF).uNumEmp/(double)model.qCustomerLines.get(Constants.MNF).size();
-			deliRatio = (double)model.rgCounters.get(Constants.DELI).uNumEmp/(double)model.qCustomerLines.get(Constants.DELI).size();
+			mnfRatio = (double)model.qCustomerLines.get(Constants.MNF).size()/(double)tempMnFNumEmp;
+			deliRatio = (double)model.qCustomerLines.get(Constants.DELI).size()/(double)tempDeliNumEmp;
 			ratioDiff = Math.abs(mnfRatio - deliRatio);
-			if(mnfRatio > deliRatio){
-				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
+			if(mnfRatio < deliRatio){
+				testDiff = Math.abs(((double)model.qCustomerLines.get(Constants.MNF).size()/(double)(tempMnFNumEmp-1)) - ((double)model.qCustomerLines.get(Constants.DELI).size())/(double)(tempDeliNumEmp+1));
 				
-				if((testDiff < ratioDiff && model.rgCounters.get(Constants.MNF).uNumEmp - 1 >= model.rgCounters.get(Constants.MNF).getN() || model.rgCounters.get(Constants.DELI).uNumEmp == 0) && model.rgCounters.get(Constants.MNF).uNumEmp - 1 > 0){
+				if((testDiff < ratioDiff && model.rgCounters.get(Constants.MNF).uNumEmp - 1 >= model.rgCounters.get(Constants.MNF).getN() || model.rgCounters.get(Constants.DELI).uNumEmp == 0) && tempMnFNumEmp - 1 > 0){
 					model.rgCounters.get(Constants.MNF).uNumEmp--;
+					tempMnFNumEmp--;
 					model.rgCounters.get(Constants.DELI).uNumEmp++;
+					tempDeliNumEmp++;
+				} else if(testDiff < ratioDiff && tempMnFNumEmp - 1 > 0){
+					tempMnFNumEmp--;
+					tempDeliNumEmp++;
+					model.rgCounters.get(Constants.MNF).scheduledEmpChange++;
 				} else
 					swtch = false;
 			} else {
-				testDiff = Math.abs(((double)(model.rgCounters.get(Constants.MNF).uNumEmp+1)/(double)model.qCustomerLines.get(Constants.MNF).size()) - ((double)(model.rgCounters.get(Constants.DELI).uNumEmp-1)/(double)model.qCustomerLines.get(Constants.DELI).size()));
+				testDiff = Math.abs(((double)model.qCustomerLines.get(Constants.MNF).size()/(double)(tempMnFNumEmp+1)) - ((double)model.qCustomerLines.get(Constants.DELI).size()/(double)(tempDeliNumEmp-1)));
 				
-				if((testDiff < ratioDiff && model.rgCounters.get(Constants.DELI).uNumEmp - 1 >= model.rgCounters.get(Constants.DELI).getN() || model.rgCounters.get(Constants.MNF).uNumEmp == 0) && model.rgCounters.get(Constants.DELI).uNumEmp - 1 > 0){
+				if((testDiff < ratioDiff && model.rgCounters.get(Constants.DELI).uNumEmp - 1 >= model.rgCounters.get(Constants.DELI).getN() || model.rgCounters.get(Constants.MNF).uNumEmp == 0) && tempDeliNumEmp - 1 > 0){
 					model.rgCounters.get(Constants.MNF).uNumEmp++;
+					tempMnFNumEmp++;
 					model.rgCounters.get(Constants.DELI).uNumEmp--;
+					tempDeliNumEmp--;
+				} else if(testDiff < ratioDiff && tempDeliNumEmp - 1 > 0){
+					tempMnFNumEmp++;
+					tempDeliNumEmp--;
+					model.rgCounters.get(Constants.DELI).scheduledEmpChange++;
 				} else
 					swtch = false;
 			}

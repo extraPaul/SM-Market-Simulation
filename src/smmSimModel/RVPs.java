@@ -32,7 +32,9 @@ class RVPs
 	private Exponential interArrDist;  // Exponential distribution for interarrival times
 	//MEAN num of minutes between customer arrival for each 30 min block of day
 	//NOTE: in the Case study, rates are given in customers/hour for each half hour block.
+
 	private final double[] MEAN = {6, 2.4, 2, 2, 1.2, 0.572, 0.5, 0.667, 0.857, 1.5, 1.714, 1.714, 1.5, 1.333, 1.2, 1, 0, 0};
+
 	protected double duC()  // for getting next value of duC
 	{
 	    int timeBucket = (int)model.getClock() / 30; // Divide time into one of the discrete buckets
