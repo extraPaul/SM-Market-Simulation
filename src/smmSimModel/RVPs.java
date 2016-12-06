@@ -25,7 +25,6 @@ class RVPs
 		
 		randGen = new MersenneTwister(sd.type); //Init the general purpose RNG
 		deliSrvTm = new TriangularVariate(STDMIN,STDAVG,STDMAX,new MersenneTwister(sd.deliSd)); // Build RNG distribution for deli srv time
-		mChooser = new Uniform(0,1,new MersenneTwister(sd.mChooserSd)); // Init the choose for which of the multimodal distributions to go from
 		mDist1 = new Normal(STM1MEAN, STM1DEV, new MersenneTwister(sd.mDist1)); // lower meat distribution
 		mDist2 = new Normal(STM2MEAN, STM2DEV, new MersenneTwister(sd.mDist2)); // upper meat distribution
 	}
@@ -89,7 +88,6 @@ class RVPs
 		}
 	}
 	
-	private Uniform mChooser; // Uniform distribution for choosing which standard dist to pick from
 	private final double PROBM1 = 0.804; // Prob of choosing from dist 1 of MNF
 	private final double STM1MEAN = 3.463; // Mean of dist 1
 	private final double STM1DEV = 1.091; // Std. Deviation of dist 1
@@ -102,11 +100,7 @@ class RVPs
 	 */
 	private double mnfSrvTm(){
 		double srvTm = 0;
-		if(mChooser.nextDouble() <= PROBM1){
-			srvTm = mDist1.nextDouble();
-		}else{
-			srvTm = mDist2.nextDouble();
-		}
+		srvTm = (PROBM1*mDist1.nextDouble()) + (1.0 - PROBM1)*mDist2.nextDouble();
 		return srvTm;
 	}
 	
