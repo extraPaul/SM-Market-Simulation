@@ -32,12 +32,8 @@ class ValidationExperiment2
            shift.add(0);
            shift.add(180);
            schedule.add(shift);
-           shift = new ArrayList<Integer>();
-           shift.add(180);
-           shift.add(330);
-           schedule.add(shift);
        }
-       for(int j = 0; j < 4; j++){
+       for(int j = 0; j < 2; j++){
     	   ArrayList<Integer> shift = new ArrayList<Integer>();
            shift.add(150);
            shift.add(360);
@@ -47,7 +43,18 @@ class ValidationExperiment2
        shift.add(270);
        shift.add(180);
        schedule.add(shift);
-       
+       shift = new ArrayList<Integer>();
+       shift.add(90);
+       shift.add(240);
+       schedule.add(shift);
+       shift = new ArrayList<Integer>();
+       shift.add(90);
+       shift.add(210);
+       schedule.add(shift);
+       shift = new ArrayList<Integer>();
+       shift.add(330);
+       shift.add(180);
+       schedule.add(shift);
        
        smMarket = new SMMarket(startTime,endTime, schedule, sds[0], true);
        smMarket.runSimulation();
