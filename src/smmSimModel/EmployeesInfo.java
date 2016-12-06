@@ -20,7 +20,7 @@ public class EmployeesInfo {
 		this.numEmpCleaning = 0;
 		this.halfHourNumServed = 0;
 		this.halfHourNumDissatisfied = 0;
-		this.uTotalEmployees = new int[18];
+		this.uTotalEmployees = new int[Constants.NUM_HALF_HOUR];
 		
 	}
 	

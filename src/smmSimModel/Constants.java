@@ -9,6 +9,7 @@ public class Constants
 	public static final int MNF = 0;
 	public static final int DELI = 1;
 	public static final int NONE = -1;
+	public static final int NUM_HALF_HOUR = 18;
 	public static final int PTIMERATE = 8;
 	public static final int FTIMERATE =13;
 
