@@ -72,6 +72,10 @@ public class SMMarket extends AOSimulationModel
 	public Counter getCounter(int i){
 		return this.rgCounters.get(i);
 	}
+	
+	public double getSumOfSrvTime() {
+		return output.getSumOfSrvTime();
+	}
 
 
 	// Constructor

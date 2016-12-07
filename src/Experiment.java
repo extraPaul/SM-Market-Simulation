@@ -228,7 +228,8 @@ class Experiment
        }*/
        
        System.out.println();
-       System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));       
+       System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));
+       System.out.println("Total number of minutes that employees have been serving customers: " + smMarket.getSumOfSrvTime());
        System.out.println("Average dissatisfation for the last " + NUMRUNS + " runs: " + Math.round(overallDissatisfactionAvg*10000)/100.0 +"%");
        System.out.println("Schedule:");
        printSchedule(schedule);

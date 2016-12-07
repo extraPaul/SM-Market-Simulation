@@ -16,6 +16,7 @@ public class Output
 	public int numBothCustomers;
 	public int numBalking; //Represents people who come in and walk out right away.
 	protected double scheduleCost;
+	public double sumOfSrvTime = 0;
 	
 	//TEST
 	public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
@@ -63,4 +64,11 @@ public class Output
 		return scheduleCost;
 	}
 	
+	protected void addToSumOfSrvTime(double value) {
+		sumOfSrvTime += value;
+	}
+	
+	protected double getSumOfSrvTime() {
+		return sumOfSrvTime;
+	}
 }

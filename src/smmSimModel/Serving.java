@@ -27,11 +27,18 @@ public class Serving extends ConditionalActivity{
 	
 	@Override
 	protected double duration() {
+		// Get serving time
+		double returnValue = model.rvp.uSrvTime(id);
+
+		// Output object
+		Output output = new Output(model);
+		// Add the serving time to sumOfSrvTime
+		output.addToSumOfSrvTime(returnValue);
 		
-		// returns serving time
-		return model.rvp.uSrvTime(id);
-		
+		// Return the serving time
+		return returnValue;
 	}
+
 
 	@Override
 	public void startingEvent() {
