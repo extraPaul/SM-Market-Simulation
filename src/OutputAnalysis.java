@@ -47,7 +47,7 @@ class OutputAnalysis
     	   results.add(new ArrayList<Double>());
        }
        // Loop Costs
-       ArrayList<Double> costs = new ArrayList();
+       ArrayList<Double> costs = new ArrayList<Double>();
        
        //Add initial part time employees, for prep work.
        for(int j = 0; j < 3; j++){
