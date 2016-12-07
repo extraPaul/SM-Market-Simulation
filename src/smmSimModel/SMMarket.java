@@ -73,10 +73,7 @@ public class SMMarket extends AOSimulationModel
 		return this.rgCounters.get(i);
 	}
 	
-	public double getSumOfSrvTime() {
-		return output.getSumOfSrvTime();
-	}
-
+	
 
 	// Constructor
 	public SMMarket(double t0time, double tftime, ArrayList<ArrayList<Integer>> schedule,Seeds sd, boolean print)

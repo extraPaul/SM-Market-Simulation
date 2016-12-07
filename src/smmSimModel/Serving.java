@@ -8,6 +8,7 @@ public class Serving extends ConditionalActivity{
 	private Customer icCustomer;
 	int id; //identifier for RG.Counters and Q.CustomerLines
 	
+	
 	// Constructor
 	public Serving(SMMarket model) {
 		this.model = model;
@@ -30,10 +31,8 @@ public class Serving extends ConditionalActivity{
 		// Get serving time
 		double returnValue = model.rvp.uSrvTime(id);
 
-		// Output object
-		Output output = new Output(model);
 		// Add the serving time to sumOfSrvTime
-		output.addToSumOfSrvTime(returnValue);
+		model.output.addToSumOfSrvTime(returnValue);
 		
 		// Return the serving time
 		return returnValue;

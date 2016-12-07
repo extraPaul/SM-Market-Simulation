@@ -62,6 +62,7 @@ class Experiment
        double numDeliCustomersAvg;
        double numBothCustomersAvg;
        double numBalkingAvg;
+       double sumOfSrvTimeAvg;
        do{
     	   overallDissatisfactionAvg = 0;
     	   double[] halfHourDissatisfactionAvg = new double[18];
@@ -71,6 +72,7 @@ class Experiment
            numDeliCustomersAvg = 0;
            numBothCustomersAvg = 0;
            numBalkingAvg = 0;
+           sumOfSrvTimeAvg = 0;
 
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i], false);
@@ -97,6 +99,7 @@ class Experiment
         	  numDeliCustomersAvg += smMarket.getOutputs().numDeliCustomers;
         	  numBothCustomersAvg += smMarket.getOutputs().numBothCustomers;
         	  numBalkingAvg += smMarket.getOutputs().numBalking;
+        	  sumOfSrvTimeAvg += smMarket.getOutputs().sumOfSrvTime;
     	   }
     	   
     	   
@@ -110,6 +113,7 @@ class Experiment
     	   numDeliCustomersAvg /= NUMRUNS;
     	   numBothCustomersAvg /= NUMRUNS;
     	   numBalkingAvg /= NUMRUNS;
+    	   sumOfSrvTimeAvg /= NUMRUNS;
     	   // sort the schedule by start time
            // schedule.sort(c);
     	   
@@ -229,7 +233,6 @@ class Experiment
        
        System.out.println();
        System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));
-       System.out.println("Total number of minutes that employees have been serving customers: " + smMarket.getSumOfSrvTime());
        System.out.println("Average dissatisfation for the last " + NUMRUNS + " runs: " + Math.round(overallDissatisfactionAvg*10000)/100.0 +"%");
        System.out.println("Schedule:");
        printSchedule(schedule);
