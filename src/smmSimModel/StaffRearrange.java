@@ -24,8 +24,8 @@ public class StaffRearrange extends ScheduledAction {
  	   //System.out.println("\nSTAFF REARRANGE STARTED \n\n");
 		
 		if(model.getClock() == 0){
-			int numEmp = model.rEmployeesInfo.uTotalEmployees[0] - 3;
 			model.rEmployeesInfo.numEmpCleaning += 3;
+			int numEmp = model.rEmployeesInfo.uTotalEmployees[0] - 3;
 			model.rgCounters.get(Constants.DELI).uNumEmp = numEmp/2;
 			model.rgCounters.get(Constants.MNF).uNumEmp = numEmp - numEmp/2;
 		} else {

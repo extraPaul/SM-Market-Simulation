@@ -156,8 +156,6 @@ class Experiment
      	  String tableString = board.setInitialBlock(table.tableToBlocks()).build().getPreview();
      	  System.out.println(tableString);
      	  
-     	  System.out.println("----------------------------------------------------------------------------------------------------");
-     	  System.out.println();
     	  
     	  int empStartTime = maxIndex*30;
     	  int empShiftLength = 30;
@@ -200,6 +198,19 @@ class Experiment
     	  newShift.add(empStartTime);
     	  newShift.add(empShiftLength);
     	  schedule.add(newShift);
+    	  
+    	  String time;
+  		  int start = empStartTime/30;
+  		  if(start < 6)
+  			  time = (start/2 + 9) + ":" + 3*(start%2) + "0 am";
+  		  else if(start < 8)
+  			  time = "12:" + 3*(start%2) + "0 pm";
+  		  else
+  			  time = (start/2 - 3) + ":" + 3*(start%2) + "0 pm";
+  		  
+    	  System.out.println("Added shift [" + time + ", " + empShiftLength + "].");
+    	  System.out.println("----------------------------------------------------------------------------------------------------");
+     	  System.out.println();
     	  
     	  // sort the schedule
     	  schedule.sort(c);

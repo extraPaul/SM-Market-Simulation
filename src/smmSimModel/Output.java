@@ -47,10 +47,11 @@ public class Output
 	
 	protected void calculateScheduleCost()
 	{
+		scheduleCost = 0;
 		for (int i = 0; i < model.rEmployeesInfo.schedule.size(); i ++)
 		{
 			int shiftDuration = model.rEmployeesInfo.schedule.get(i).get(1);
-			double paySlip = shiftDuration * Constants.PTIMERATE;
+			double paySlip = ((double)shiftDuration/60.0) * Constants.PTIMERATE;
 			scheduleCost += paySlip;
 		}
 		//Total pay for full time employees for one day's work
