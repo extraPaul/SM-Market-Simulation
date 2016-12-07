@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import smmSimModel.*;
+import outputAnalysis.ConfidenceInterval;
 import cern.jet.random.engine.*;
 import wagu.Block;
 import wagu.Board;
@@ -16,6 +17,8 @@ import wagu.Table;
 // 
 class OutputAnalysis
 {
+	// For output analysis
+	static final double CONF_LEVEL = 0.95;
 	
    public static void main(String[] args)
    {	   
@@ -274,18 +277,94 @@ class OutputAnalysis
    }
    
    public static void analysis(ArrayList<ArrayList<Double>> results, ArrayList<Double> costs){
-	   System.out.println("\n***** Data Analysis *****\n");
+	   
+	   // Flip Array
+	   double[][] transformed = new double[results.get(0).size()][results.size()];
+	   for(int i=0; i<transformed.length; i++){
+		   for(int j=0; j<transformed[0].length; j++){
+			   transformed[i][j] = results.get(j).get(i);
+		   }
+	   }
+	   
+	   // Build Confidence Intervals
+	   ConfidenceInterval[] avgPercentDissatisfied = new ConfidenceInterval[transformed.length];
+	   for(int i=0; i<transformed.length; i++){
+		   avgPercentDissatisfied[i] = new ConfidenceInterval(transformed[i], CONF_LEVEL);
+	   }
+	   
+	   System.out.println("\n******** Data Analysis ********\n");
+	   
+	   // Title Bar
+	   System.out.print("   Run |");
+	   for(int j=0; j<results.get(0).size(); j++){
+		   System.out.printf("  Loop %d |",j+1);
+	   }
+	   
+	   // Separating line
+	   System.out.print("\n-------+");
+	   for(int j=0; j<results.get(0).size(); j++){
+		   System.out.print("---------+");
+	   }
+	   
+	   // Print data rows
+	   System.out.println();
 	   for(int i=0; i<results.size(); i++){
-		   System.out.printf("%3d ", i+1);
+		   System.out.printf("%6d |", i+1);
 		   for(int j=0; j<results.get(i).size(); j++){
-			   System.out.printf("%.2f ",results.get(i).get(j));
+			   System.out.printf("   %.2f  |",results.get(i).get(j));
 		   }
 		   System.out.print("\n");
 	   }
-	   System.out.printf("\n    ");
-	   for(int i=0; i<costs.size(); i++){
-		   System.out.printf("$%.2f ", costs.get(i));
+	   
+	   // Separating line
+	   System.out.print("-------+");
+	   for(int j=0; j<results.get(0).size(); j++){
+		   System.out.print("---------+");
 	   }
+
+	   // Print PE
+	   System.out.print("\n    PE |");
+	   for(int i=0; i<costs.size(); i++){
+		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getPointEstimate());
+	   }
+	   
+	   // Print S(n)
+	   System.out.print("\n  S(n) |");
+	   for(int i=0; i<costs.size(); i++){
+		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getStdDev());
+	   }
+	   
+	   // Print zeta
+	   System.out.print("\n  zeta |");
+	   for(int i=0; i<costs.size(); i++){
+		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getZeta());
+	   }
+	   
+	   // Print CI Min
+	   System.out.print("\nCI Min |");
+	   for(int i=0; i<costs.size(); i++){
+		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getCfMin());
+	   }
+	   
+	   // Print CI Max
+	   System.out.print("\nCI Max |");
+	   for(int i=0; i<costs.size(); i++){
+		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getCfMax());
+	   }
+	   
+	   // Separating line
+	   System.out.print("\n-------+");
+	   for(int j=0; j<results.get(0).size(); j++){
+		   System.out.print("---------+");
+	   }
+	   
+	   // Print Cost
+	   System.out.print("\n  Cost |");
+	   for(int i=0; i<costs.size(); i++){
+		   System.out.printf(" $%.2f |", costs.get(i));
+	   }
+	   
+	   System.out.println();
    }
 }
 
