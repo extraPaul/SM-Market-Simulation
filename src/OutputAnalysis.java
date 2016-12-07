@@ -1,4 +1,4 @@
-// File: Experiment.java
+// File: OutputAnalysis.java
 // Description:
 
 import java.text.DecimalFormat;
@@ -43,6 +43,8 @@ class OutputAnalysis
        for(int k = 0; k<NUMRUNS; k++){
     	   results.add(new ArrayList<Double>());
        }
+       // Loop Costs
+       ArrayList<Double> costs = new ArrayList();
        
        //Add initial part time employees, for prep work.
        for(int j = 0; j < 3; j++){
@@ -225,6 +227,7 @@ class OutputAnalysis
     	  
     	  // sort the schedule
     	  schedule.sort(c);
+    	  costs.add(smMarket.getSechduleCost());
        }while(overallDissatisfactionAvg > DISATISFACTION_THRESHOLD);
        
        System.out.println();
@@ -242,7 +245,7 @@ class OutputAnalysis
        System.out.println("Average dissatisfation for the last " + NUMRUNS + " runs: " + Math.round(overallDissatisfactionAvg*10000)/100.0 +"%");
        System.out.println("Schedule:");
        printSchedule(schedule);
-       analysis(results);
+       analysis(results,costs);
    }
    
    public static void printSchedule(ArrayList<ArrayList<Integer>> schedule){
@@ -270,7 +273,7 @@ class OutputAnalysis
  	  System.out.println(tableString);
    }
    
-   public static void analysis(ArrayList<ArrayList<Double>> results){
+   public static void analysis(ArrayList<ArrayList<Double>> results, ArrayList<Double> costs){
 	   System.out.println("\n***** Data Analysis *****\n");
 	   for(int i=0; i<results.size(); i++){
 		   System.out.printf("%3d ", i+1);
@@ -278,6 +281,10 @@ class OutputAnalysis
 			   System.out.printf("%.2f ",results.get(i).get(j));
 		   }
 		   System.out.print("\n");
+	   }
+	   System.out.printf("\n    ");
+	   for(int i=0; i<costs.size(); i++){
+		   System.out.printf("$%.2f ", costs.get(i));
 	   }
    }
 }
