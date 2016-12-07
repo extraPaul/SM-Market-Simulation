@@ -6,8 +6,7 @@ class DVPs
 	
 	// Constructor
 	protected DVPs(SMMarket model) { this.model = model; }
-	private double[] staffRearangeTimeSeq = {0,30,60,90,120,150,180,210,240,270,300,330,360,390,420,450,480,510,540,-1};
-	private int sctIx = 0;
+	private int nxtTime = 0;
 
 	// Translate deterministic value procedures into methods
         /* -------------------------------------------------
@@ -25,9 +24,15 @@ class DVPs
 	------------------------------------------------------------*/
 	
 	protected double RuTotalEmployees(){
-		double nxtTime = staffRearangeTimeSeq[sctIx];
+		/*double nxtTime = staffRearangeTimeSeq[sctIx];
 		sctIx++;
-		return(nxtTime);
+		return(nxtTime);*/
+		
+		double time = nxtTime;
+		nxtTime += 30;
+		if(time > 540)
+			time = -1;
+		return(time);
 	}
 	
 }

@@ -134,8 +134,8 @@ class Experiment
      		  rowList.get(j).add(time);
      		  rowList.get(j).add(Double.toString(Math.round(halfHourDissatisfactionAvg[j]*10000)/100.0)+"%");
      		  rowList.get(j).add(String.valueOf(smMarket.rEmployeesInfo.uTotalEmployees[j]));
-     		  rowList.get(j).add(Double.toString(halfHourMnFEmpAvg[j]));
-     		  rowList.get(j).add(Double.toString(halfHourDeliEmpAvg[j]));
+     		  rowList.get(j).add(Double.toString(Math.round(halfHourMnFEmpAvg[j]*100)/100.0));
+     		  rowList.get(j).add(Double.toString(Math.round(halfHourDeliEmpAvg[j]*100)/100.0));
      		  
      		  if(halfHourDissatisfactionAvg[j] > max){
      			  max = halfHourDissatisfactionAvg[j];
