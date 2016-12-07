@@ -24,10 +24,6 @@ class DVPs
 	------------------------------------------------------------*/
 	
 	protected double RuTotalEmployees(){
-		/*double nxtTime = staffRearangeTimeSeq[sctIx];
-		sctIx++;
-		return(nxtTime);*/
-		
 		double time = nxtTime;
 		nxtTime += 30;
 		if(time > 540)

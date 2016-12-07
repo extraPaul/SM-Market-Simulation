@@ -162,59 +162,61 @@ class Experiment
      	  String tableString = board.setInitialBlock(table.tableToBlocks()).build().getPreview();
      	  System.out.println(tableString);
      	  
-    	  
-    	  int empStartTime = maxIndex*30;
-    	  int empShiftLength = 30;
-    	  double index = 1, midle = maxIndex;
-    	  while(empShiftLength < 6*60){
-    		  if(midle - index > 0 && empStartTime > 0){
-    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
-    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
-    					  empShiftLength += 30;
-    					  midle += 0.5;
-    					  index += 0.5;
-    				  }
-    				  else
-    					  break;
-    			  } else {
-    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
-    					  empShiftLength += 30;
-    					  empStartTime -= 30;
-    					  if(midle - index - 1 > 0)
-    						  midle -= 0.5;
-    					  else
-    						  midle += 0.5;
-    					  index += 0.5;
-    					  
-    				  } else
-    					  break;
-    			  }
-    		  } else {
-    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
-    				  empShiftLength += 30;
-    				  midle += 0.5;
-					  index += 0.5;
-    			  }
-				  else
-					  break;
-    		  }
+    	  if(overallDissatisfactionAvg > DISATISFACTION_THRESHOLD){
+	    	  int empStartTime = maxIndex*30;
+	    	  int empShiftLength = 30;
+	    	  double index = 1, midle = maxIndex;
+	    	  while(empShiftLength < 6*60){
+	    		  if(midle - index > 0 && empStartTime > 0){
+	    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
+	    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
+	    					  empShiftLength += 30;
+	    					  midle += 0.5;
+	    					  index += 0.5;
+	    				  }
+	    				  else
+	    					  break;
+	    			  } else {
+	    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
+	    					  empShiftLength += 30;
+	    					  empStartTime -= 30;
+	    					  if(midle - index - 1 > 0)
+	    						  midle -= 0.5;
+	    					  else
+	    						  midle += 0.5;
+	    					  index += 0.5;
+	    					  
+	    				  } else
+	    					  break;
+	    			  }
+	    		  } else {
+	    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
+	    				  empShiftLength += 30;
+	    				  midle += 0.5;
+						  index += 0.5;
+	    			  }
+					  else
+						  break;
+	    		  }
+	    	  }
+	    	   
+	    	  ArrayList<Integer> newShift = new ArrayList<Integer>();
+	    	  newShift.add(empStartTime);
+	    	  newShift.add(empShiftLength);
+	    	  schedule.add(newShift);
+	    	  
+	    	  String time;
+	  		  int start = empStartTime/30;
+	  		  if(start < 6)
+	  			  time = (start/2 + 9) + ":" + 3*(start%2) + "0 am";
+	  		  else if(start < 8)
+	  			  time = "12:" + 3*(start%2) + "0 pm";
+	  		  else
+	  			  time = (start/2 - 3) + ":" + 3*(start%2) + "0 pm";
+	  		  
+	    	  System.out.println("Added shift [" + time + ", " + empShiftLength + "].");
     	  }
-    	   
-    	  ArrayList<Integer> newShift = new ArrayList<Integer>();
-    	  newShift.add(empStartTime);
-    	  newShift.add(empShiftLength);
-    	  schedule.add(newShift);
     	  
-    	  String time;
-  		  int start = empStartTime/30;
-  		  if(start < 6)
-  			  time = (start/2 + 9) + ":" + 3*(start%2) + "0 am";
-  		  else if(start < 8)
-  			  time = "12:" + 3*(start%2) + "0 pm";
-  		  else
-  			  time = (start/2 - 3) + ":" + 3*(start%2) + "0 pm";
-  		  
-    	  System.out.println("Added shift [" + time + ", " + empShiftLength + "].");
     	  System.out.println("----------------------------------------------------------------------------------------------------");
      	  System.out.println();
     	  
