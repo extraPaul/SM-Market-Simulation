@@ -104,7 +104,7 @@ class Experiment
     	   System.out.println("LOOP " + numExperiments + " ENDED");
     	   System.out.println("----------------------------------------------------------------------------------------------------");
     	   overallDissatisfactionAvg /= NUMRUNS;
-    	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + overallDissatisfactionAvg);
+    	   System.out.println("Average dissatisfation for " + NUMRUNS + " runs: " + Math.round(overallDissatisfactionAvg*10000)/100.0 +"%");
     		   
     	   numMnFCustomersAvg /= NUMRUNS;
     	   numDeliCustomersAvg /= NUMRUNS;
@@ -229,7 +229,7 @@ class Experiment
        
        System.out.println();
        System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));       
-       
+       System.out.println("Average dissatisfation for the last " + NUMRUNS + " runs: " + Math.round(overallDissatisfactionAvg*10000)/100.0 +"%");
        System.out.println("Schedule:");
        printSchedule(schedule);
    }
