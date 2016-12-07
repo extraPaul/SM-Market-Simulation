@@ -150,6 +150,7 @@ class Experiment
      	  System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
      	  System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
      	  System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
+     	  System.out.println("The average total number of minutes the employees have spent serving customers: " + (int)(sumOfSrvTimeAvg*100)/100.0);
      	  System.out.println("Schedule: ");
      	  printSchedule(schedule);
      	  
