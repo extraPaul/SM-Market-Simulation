@@ -16,6 +16,7 @@ class Experiment2
    public static void main(String[] args)
    {
        int i, NUMRUNS = 20; 
+       double DISATISFACTION_THRESHOLD = 0.20;
        double startTime=0.0, endTime=540.0;
        Seeds[] sds = new Seeds[NUMRUNS];
        SMMarket smMarket = null;  // Simulation object
@@ -134,7 +135,7 @@ class Experiment2
     	  while(empShiftLength < 6*60){
     		  if(midle - index > 0 && empStartTime > 0){
     			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > halfHourDissatisfactionAvg[(int)(midle-index)]){
-    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.15 || empShiftLength < 3*60){
+    				  if(halfHourDissatisfactionAvg[(int)(midle+index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
     					  empShiftLength += 30;
     					  midle += 0.5;
     					  index += 0.5;
@@ -142,7 +143,7 @@ class Experiment2
     				  else
     					  break;
     			  } else {
-    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > 0.2 || empShiftLength < 3*60){
+    				  if(halfHourDissatisfactionAvg[(int)(midle-index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
     					  empShiftLength += 30;
     					  empStartTime -= 30;
     					  if(midle - index - 1 > 0)
@@ -155,7 +156,7 @@ class Experiment2
     					  break;
     			  }
     		  } else {
-    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > 0.2 || empShiftLength < 3*60){
+    			  if(halfHourDissatisfactionAvg[(int)(midle+index)] > DISATISFACTION_THRESHOLD || empShiftLength < 3*60){
     				  empShiftLength += 30;
     				  midle += 0.5;
 					  index += 0.5;
@@ -172,7 +173,7 @@ class Experiment2
     	  
     	  // sort the schedule
     	  schedule.sort(c);
-       }while(overallDissatisfactionAvg > 0.2);
+       }while(overallDissatisfactionAvg > DISATISFACTION_THRESHOLD);
        
        System.out.println();
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
