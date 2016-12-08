@@ -47,8 +47,6 @@ class RVPs
 	}
 	
 	private final double[] PROPD = {0,0.30,0.58,0.46,0.33,0.22,0}; // Probability of deli customer based on time block
-	private final double[] PROPM = {0.50,0.35,0.21,0.27,0.33,0.39,0.50}; // Probability of a meat customer based on time block
-	//PROPMD is not needed as it will be inferred
 	MersenneTwister randGen;
 	/*
 	 * Gives customer type based upon the time of day
@@ -74,12 +72,13 @@ class RVPs
 			timeBucket = 6;
 		}
 		
-		double randNum = randGen.nextDouble();
+		double randNum1 = randGen.nextDouble();
+		double randNum2 = randGen.nextDouble();
 		
-		if(randNum < PROPD[timeBucket]){
+		if(randNum1 < PROPD[timeBucket]){
 			model.output.numDeliCustomers++;
 			return Customer.Type.D;
-		}else if(randNum < (PROPD[timeBucket]+PROPM[timeBucket])){
+		}else if(randNum2 < 0.5){
 			model.output.numMnFCustomers++;
 			return Customer.Type.M;
 		}else{
