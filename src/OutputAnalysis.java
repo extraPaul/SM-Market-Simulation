@@ -24,7 +24,7 @@ class OutputAnalysis
    {	   
 	   
        int i, NUMRUNS = 30;
-       double DISATISFACTION_THRESHOLD = 0.20;
+       double DISATISFACTION_THRESHOLD = 0.15;
        double startTime=0.0, endTime=540.0;
        Seeds[] sds = new Seeds[NUMRUNS];
        SMMarket smMarket = null;  // Simulation object
@@ -295,85 +295,85 @@ class OutputAnalysis
 	   System.out.println("\n******** Data Analysis ********\n");
 	   
 	   // Separating line
-	   System.out.print("+-------+");
+	   System.out.print("+------+");
 	   for(int j=0; j<results.get(0).size(); j++){
-		   System.out.print("---------+");
+		   System.out.print("-------+");
 	   }
 	   
 	   // Title Bar
-	   System.out.print("\n|   Run |");
+	   System.out.print("\n|  Run |");
 	   for(int j=0; j<results.get(0).size(); j++){
-		   System.out.printf("  Loop %d |",j+1);
+		   System.out.printf(" Loop %d|",j+1);
 	   }
 	   
 	   // Separating line
-	   System.out.print("\n+-------+");
+	   System.out.print("\n+------+");
 	   for(int j=0; j<results.get(0).size(); j++){
-		   System.out.print("---------+");
+		   System.out.print("-------+");
 	   }
 	   
 	   // Print data rows
 	   System.out.println();
 	   for(int i=0; i<results.size(); i++){
-		   System.out.printf("|%6d |", i+1);
+		   System.out.printf("|%5d |", i+1);
 		   for(int j=0; j<results.get(i).size(); j++){
-			   System.out.printf("   %.2f  |",results.get(i).get(j));
+			   System.out.printf("  %.2f |",results.get(i).get(j));
 		   }
 		   System.out.print("\n");
 	   }
 	   
 	   // Separating line
-	   System.out.print("+-------+");
+	   System.out.print("+------+");
 	   for(int j=0; j<results.get(0).size(); j++){
-		   System.out.print("---------+");
+		   System.out.print("-------+");
 	   }
 
 	   // Print PE
-	   System.out.print("\n|    PE |");
+	   System.out.print("\n|   PE |");
 	   for(int i=0; i<costs.size(); i++){
-		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getPointEstimate());
+		   System.out.printf("  %.2f |", avgPercentDissatisfied[i].getPointEstimate());
 	   }
 	   
 	   // Print S(n)
-	   System.out.print("\n|  S(n) |");
+	   System.out.print("\n| S(n) |");
 	   for(int i=0; i<costs.size(); i++){
-		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getStdDev());
+		   System.out.printf("  %.2f |", avgPercentDissatisfied[i].getStdDev());
 	   }
 	   
 	   // Print zeta
-	   System.out.print("\n|  zeta |");
+	   System.out.print("\n| zeta |");
 	   for(int i=0; i<costs.size(); i++){
-		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getZeta());
+		   System.out.printf("  %.2f |", avgPercentDissatisfied[i].getZeta());
 	   }
 	   
 	   // Print CI Min
-	   System.out.print("\n|CI Min |");
+	   System.out.print("\n|CI Min|");
 	   for(int i=0; i<costs.size(); i++){
-		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getCfMin());
+		   System.out.printf("  %.2f |", avgPercentDissatisfied[i].getCfMin());
 	   }
 	   
 	   // Print CI Max
-	   System.out.print("\n|CI Max |");
+	   System.out.print("\n|CI Max|");
 	   for(int i=0; i<costs.size(); i++){
-		   System.out.printf("   %.2f  |", avgPercentDissatisfied[i].getCfMax());
+		   System.out.printf("  %.2f |", avgPercentDissatisfied[i].getCfMax());
 	   }
 	   
 	   // Separating line
-	   System.out.print("\n+-------+");
+	   System.out.print("\n+------+");
 	   for(int j=0; j<results.get(0).size(); j++){
-		   System.out.print("---------+");
+		   System.out.print("-------+");
 	   }
 	   
 	   // Print Cost
-	   System.out.print("\n|  Cost |");
+	   System.out.print("\n| Cost |");
 	   for(int i=0; i<costs.size(); i++){
-		   System.out.printf(" $%.2f |", costs.get(i));
+		   System.out.printf("$%.2f|", costs.get(i));
 	   }
 	   
 	   // Separating line
-	   System.out.print("\n+-------+");
+	   System.out.print("\n+------+");
 	   for(int j=0; j<results.get(0).size(); j++){
-		   System.out.print("---------+");
+		   System.out.print("-------+");
 	   }
    }
 }
