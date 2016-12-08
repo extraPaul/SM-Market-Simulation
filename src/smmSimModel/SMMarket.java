@@ -139,7 +139,6 @@ public class SMMarket extends AOSimulationModel
 		
 		if(printLog){
 			this.showSBL();
-			System.out.println(activity.name);
 			System.out.println("Clock: "+getClock()+
 	                ", CustomerLineMNF.n: "+qCustomerLines.get(Constants.MNF).size()+
 	                ", CustomerLineDEli.n: "+qCustomerLines.get(Constants.DELI).size()+
