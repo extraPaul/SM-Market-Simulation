@@ -83,7 +83,6 @@ public class SMMarket extends AOSimulationModel
 		
 		// Initialize EmployeesInfo with the input parameter schedule
 		rEmployeesInfo = new EmployeesInfo(schedule, this);
-		udp.initializeUTotalEmp();
 		
 		// Create RVP object with given seed
 		rvp = new RVPs(this,sd);

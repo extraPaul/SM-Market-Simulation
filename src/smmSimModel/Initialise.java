@@ -27,6 +27,7 @@ class Initialise extends ScheduledAction
 		// Initialize the output variables
 		model.output.numServed = 0;
 		model.output.numDissatisfied = 0;
+		model.udp.initializeUTotalEmp();
 		
 	}
 
