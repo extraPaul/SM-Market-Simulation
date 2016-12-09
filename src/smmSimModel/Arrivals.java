@@ -24,9 +24,6 @@ class Arrivals extends ScheduledAction {
 		//WArrival Action Sequence SCS
 		Customer icCustomer = new Customer(model);
 		
-		if (icCustomer.uType == Customer.Type.MD)
-			icCustomer.canLeave = false;
-		
 		// If the store is full (more than 30 customers in the store - including the lines and at the counters), the arrived customer will just leave. Else, he will stand in line.
 		int totalNumCustomersInStore = model.qCustomerLines.get(Constants.MNF).size() + model.qCustomerLines.get(Constants.DELI).size() + model.rgCounters.get(Constants.MNF).getN() + model.rgCounters.get(Constants.DELI).getN();
 		if (totalNumCustomersInStore > 30) {

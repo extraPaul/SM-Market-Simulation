@@ -39,31 +39,8 @@ public class StaffRearrange extends ScheduledAction {
 			}
 		}
 		
-		//This might need to be changed depending on how
-		//time is incremented.
-		//Using t >= 120 won't work because then this will
-		//be repeated multiple times.
-		if(model.getClock() == 120){
-			//put prep employees back to counters
-			model.rEmployeesInfo.numEmpCleaning = 0;
-			model.rgCounters.get(Constants.MNF).uNumEmp++;
-			model.rgCounters.get(Constants.DELI).uNumEmp += 2;
-		}
-		
-		if(model.getClock() == 270){
-			//put remove employee from counter for restocking.
-			if(model.rgCounters.get(Constants.DELI).uNumEmp > 0)
-				model.rgCounters.get(Constants.DELI).uNumEmp--;
-			else
-				model.rgCounters.get(Constants.MNF).uNumEmp--;
-			model.rEmployeesInfo.incrementNumEmpCleaning();
-		}
-		
-		if(model.getClock() == 450){
-			//put prep employee back to counter
-			model.rEmployeesInfo.numEmpCleaning = 0;
-			model.rgCounters.get(Constants.MNF).uNumEmp++;
-		}
+		//Take away employees for cleaning/prep work/restocking, or put them back on counters.
+		model.udp.assignCleaningDuty();
 		
 		// Rebalance the employees between two counters, based on the length of the lines
 		model.udp.rebalanceEmployees();

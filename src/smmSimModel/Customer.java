@@ -23,5 +23,7 @@ class Customer {
 		uType = model.rvp.uCustomerType();
 		startWaitTime = model.getClock();
 		dissatisfactionThreshold = model.rvp.uDissatisfactionTime(uType);
+		if (uType == Customer.Type.MD)
+			canLeave = false;
 	}
 }

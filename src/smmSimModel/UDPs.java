@@ -80,13 +80,13 @@ class UDPs
 		}
 		
 		//TEST
-		if (icCustomer.uType == Customer.Type.D){
+		/*if (icCustomer.uType == Customer.Type.D){
 			model.output.deliWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
 		} else if (icCustomer.uType == Customer.Type.M) {
 			model.output.mnfWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
 		} else {
 			model.output.bothWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
-		}
+		}*/
 				
 		// increment the number of customers served
 		model.output.numServed++;
@@ -151,5 +151,31 @@ class UDPs
 					swtch = false;
 			}
 		}
+	}
+	
+	//Adds or removes employees to/from counters, when they start or stop cleaning/prep work.
+	protected void assignCleaningDuty(){
+		if(model.getClock() == 120){
+			//put prep employees back to counters
+			model.rEmployeesInfo.numEmpCleaning = 0;
+			model.rgCounters.get(Constants.MNF).uNumEmp++;
+			model.rgCounters.get(Constants.DELI).uNumEmp += 2;
+		}
+		
+		if(model.getClock() == 270){
+			//put remove employee from counter for restocking.
+			if(model.rgCounters.get(Constants.DELI).uNumEmp > 0)
+				model.rgCounters.get(Constants.DELI).uNumEmp--;
+			else
+				model.rgCounters.get(Constants.MNF).uNumEmp--;
+			model.rEmployeesInfo.incrementNumEmpCleaning();
+		}
+		
+		if(model.getClock() == 450){
+			//put prep employee back to counter
+			model.rEmployeesInfo.numEmpCleaning = 0;
+			model.rgCounters.get(Constants.MNF).uNumEmp++;
+		}
+		
 	}
 }

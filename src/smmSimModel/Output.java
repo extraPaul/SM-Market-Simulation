@@ -9,7 +9,7 @@ public class Output
 	/* SSOVs */
 	protected double numServed;
 	protected double numDissatisfied;
-	protected double[] halfHourPercentDissatisfied = new double[18];
+	protected double[] halfHourPercentDissatisfied = new double[Constants.NUM_HALF_HOUR];
 	protected double overallPercentDissatisfied;
 	public int numMnFCustomers;
 	public int numDeliCustomers;
@@ -20,9 +20,9 @@ public class Output
 	public double sumOfSrvAndCleaningTime;
 	
 	//TEST
-	public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
-	public ArrayList<Double> deliWaitTimes = new ArrayList<Double>();
-	public ArrayList<Double> bothWaitTimes = new ArrayList<Double>();
+	//public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
+	//public ArrayList<Double> deliWaitTimes = new ArrayList<Double>();
+	//public ArrayList<Double> bothWaitTimes = new ArrayList<Double>();
 	
 	// constructor
 	protected Output(SMMarket md) { 

@@ -91,9 +91,9 @@ class Experiment2
         	  numBalkingAvg += smMarket.getOutputs().numBalking;
         	  
         	  // TEST
-        	  deliWaitTimes.add(smMarket.getOutputs().deliWaitTimes);
-        	  mnfWaitTimes.add(smMarket.getOutputs().mnfWaitTimes);
-        	  bothWaitTimes.add(smMarket.getOutputs().bothWaitTimes);
+//        	  deliWaitTimes.add(smMarket.getOutputs().deliWaitTimes);
+//        	  mnfWaitTimes.add(smMarket.getOutputs().mnfWaitTimes);
+//        	  bothWaitTimes.add(smMarket.getOutputs().bothWaitTimes);
     	   }
     	   
     	   
