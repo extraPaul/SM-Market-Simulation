@@ -16,8 +16,9 @@ public class Output
 	public int numBothCustomers;
 	public int numBalking; //Represents people who come in and walk out right away.
 	protected double totalDurationOfShifts;
+	protected double sumOfSrvAndCleaningTime;
+	public double employeesIdleTimeRatio;
 	protected double scheduleCost;
-	public double sumOfSrvAndCleaningTime;
 	
 	//TEST
 	//public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
@@ -56,6 +57,11 @@ public class Output
 		}
 	}
 	
+	protected void calculateEmployeesIdleTimeRatio() {
+		calculateTotalDurationOfShifts();
+		employeesIdleTimeRatio = 1 - sumOfSrvAndCleaningTime / totalDurationOfShifts;
+	}
+	
 	protected void calculateScheduleCost()
 	{
 		scheduleCost = 0;
@@ -72,6 +78,11 @@ public class Output
 	public double getTotalDurationOfShifts() {
 		calculateTotalDurationOfShifts();
 		return totalDurationOfShifts;
+	}
+	
+	public double getEmployeesIdleTimeRatio() {
+		calculateEmployeesIdleTimeRatio();
+		return employeesIdleTimeRatio;
 	}
 	
 	protected double getScheduleCost(){

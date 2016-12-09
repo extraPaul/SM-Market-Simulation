@@ -62,7 +62,7 @@ class Experiment
        double numDeliCustomersAvg;
        double numBothCustomersAvg;
        double numBalkingAvg;
-       double sumOfSrvAndCleaningTimeAvg;
+       double employeesIdleTimeRatioAvg;
        do{
     	   overallDissatisfactionAvg = 0;
     	   double[] halfHourDissatisfactionAvg = new double[Constants.NUM_HALF_HOUR];
@@ -72,7 +72,7 @@ class Experiment
            numDeliCustomersAvg = 0;
            numBothCustomersAvg = 0;
            numBalkingAvg = 0;
-           sumOfSrvAndCleaningTimeAvg = 0;
+           employeesIdleTimeRatioAvg = 0;
 
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i], false);
@@ -99,7 +99,7 @@ class Experiment
         	  numDeliCustomersAvg += smMarket.getOutputs().numDeliCustomers;
         	  numBothCustomersAvg += smMarket.getOutputs().numBothCustomers;
         	  numBalkingAvg += smMarket.getOutputs().numBalking;
-        	  sumOfSrvAndCleaningTimeAvg += smMarket.getOutputs().sumOfSrvAndCleaningTime;
+        	  employeesIdleTimeRatioAvg += smMarket.getOutputs().getEmployeesIdleTimeRatio();
     	   }
     	   
     	   
@@ -113,7 +113,7 @@ class Experiment
     	   numDeliCustomersAvg /= NUMRUNS;
     	   numBothCustomersAvg /= NUMRUNS;
     	   numBalkingAvg /= NUMRUNS;
-    	   sumOfSrvAndCleaningTimeAvg /= NUMRUNS;
+    	   employeesIdleTimeRatioAvg /= NUMRUNS;
     	   // sort the schedule by start time
            // schedule.sort(c);
     	   
@@ -150,8 +150,7 @@ class Experiment
      	  System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
      	  System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
      	  System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
-     	  // System.out.println("The average total number of minutes the employees have spent serving customers: " + (int)(sumOfSrvAndCleaningTimeAvg*100)/100.0);
-     	  System.out.println("The average idle ratio of employees: " + (1- sumOfSrvAndCleaningTimeAvg / smMarket.getOutputs().getTotalDurationOfShifts()));
+     	  System.out.println("The average idle ratio of employees: " + employeesIdleTimeRatioAvg);
      	  System.out.println("Schedule: ");
      	  printSchedule(schedule);
      	  
