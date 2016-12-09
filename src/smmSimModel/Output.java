@@ -15,8 +15,9 @@ public class Output
 	public int numDeliCustomers;
 	public int numBothCustomers;
 	public int numBalking; //Represents people who come in and walk out right away.
+	protected double totalDurationOfShifts;
 	protected double scheduleCost;
-	public double sumOfSrvTime;
+	public double sumOfSrvAndCleaningTime;
 	
 	//TEST
 	public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
@@ -33,7 +34,7 @@ public class Output
 		numDeliCustomers = 0;
 		numBothCustomers = 0;
 		numBalking = 0;
-		sumOfSrvTime = 0;
+		sumOfSrvAndCleaningTime = 9 * 60; // There is 9 hours of cleaning and prep work in total. We add it to the sum right here.
 		
 	}
 	
@@ -45,6 +46,14 @@ public class Output
 	protected double getOverallPercentageDissatisfied() {
 		calculateOverallPercentageDissatisfied();
 		return overallPercentDissatisfied;
+	}
+	
+	protected void calculateTotalDurationOfShifts() {
+		totalDurationOfShifts = 4 * 6.5 * 60; // total duration of shifts for 4 full-time employees
+		for (int i = 0; i < model.rEmployeesInfo.schedule.size(); i++) {
+			int shiftDuration = model.rEmployeesInfo.schedule.get(i).get(1);
+			totalDurationOfShifts += shiftDuration;
+		}
 	}
 	
 	protected void calculateScheduleCost()
@@ -60,13 +69,18 @@ public class Output
 		scheduleCost +=  (6.5 * Constants.FTIMERATE) * 4;
 	}
 	
+	public double getTotalDurationOfShifts() {
+		calculateTotalDurationOfShifts();
+		return totalDurationOfShifts;
+	}
+	
 	protected double getScheduleCost(){
 		calculateScheduleCost();
 		return scheduleCost;
 	}
 	
-	protected void addToSumOfSrvTime(double value) {
-		sumOfSrvTime += value;
+	protected void addToSumOfSrvAndCleaningTime(double value) {
+		sumOfSrvAndCleaningTime += value;
 	}
 
 }

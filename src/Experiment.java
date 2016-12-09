@@ -20,7 +20,7 @@ class Experiment
    public static void main(String[] args)
    {	   
 	   
-       int i, NUMRUNS = 20;
+       int i, NUMRUNS = 30;
        double DISATISFACTION_THRESHOLD = 0.20;
        double startTime=0.0, endTime=540.0;
        Seeds[] sds = new Seeds[NUMRUNS];
@@ -62,17 +62,17 @@ class Experiment
        double numDeliCustomersAvg;
        double numBothCustomersAvg;
        double numBalkingAvg;
-       double sumOfSrvTimeAvg;
+       double sumOfSrvAndCleaningTimeAvg;
        do{
     	   overallDissatisfactionAvg = 0;
-    	   double[] halfHourDissatisfactionAvg = new double[18];
-    	   double[] halfHourDeliEmpAvg = new double[18];
-    	   double[] halfHourMnFEmpAvg = new double[18];
+    	   double[] halfHourDissatisfactionAvg = new double[Constants.NUM_HALF_HOUR];
+    	   double[] halfHourDeliEmpAvg = new double[Constants.NUM_HALF_HOUR];
+    	   double[] halfHourMnFEmpAvg = new double[Constants.NUM_HALF_HOUR];
     	   numMnFCustomersAvg = 0;
            numDeliCustomersAvg = 0;
            numBothCustomersAvg = 0;
            numBalkingAvg = 0;
-           sumOfSrvTimeAvg = 0;
+           sumOfSrvAndCleaningTimeAvg = 0;
 
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i], false);
@@ -89,7 +89,7 @@ class Experiment
 
         	  //System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
         	  //System.out.print("Halfhour dissatisfaction: ");
-        	  for(int j = 0; j < 18; j++){
+        	  for(int j = 0; j < Constants.NUM_HALF_HOUR; j++){
         		  halfHourDissatisfactionAvg[j] += smMarket.getHalfHourPercentDissatisfied(j);
         		  halfHourDeliEmpAvg[j] += smMarket.getCounter(Constants.DELI).dailyNumEmp[j];
         		  halfHourMnFEmpAvg[j] += smMarket.getCounter(Constants.MNF).dailyNumEmp[j];
@@ -99,7 +99,7 @@ class Experiment
         	  numDeliCustomersAvg += smMarket.getOutputs().numDeliCustomers;
         	  numBothCustomersAvg += smMarket.getOutputs().numBothCustomers;
         	  numBalkingAvg += smMarket.getOutputs().numBalking;
-        	  sumOfSrvTimeAvg += smMarket.getOutputs().sumOfSrvTime;
+        	  sumOfSrvAndCleaningTimeAvg += smMarket.getOutputs().sumOfSrvAndCleaningTime;
     	   }
     	   
     	   
@@ -113,7 +113,7 @@ class Experiment
     	   numDeliCustomersAvg /= NUMRUNS;
     	   numBothCustomersAvg /= NUMRUNS;
     	   numBalkingAvg /= NUMRUNS;
-    	   sumOfSrvTimeAvg /= NUMRUNS;
+    	   sumOfSrvAndCleaningTimeAvg /= NUMRUNS;
     	   // sort the schedule by start time
            // schedule.sort(c);
     	   
@@ -122,7 +122,7 @@ class Experiment
     	   
     	  double max = 0;
      	  int maxIndex = 0;
-     	  for(int j = 0; j < 18; j++){
+     	  for(int j = 0; j < Constants.NUM_HALF_HOUR; j++){
      		  halfHourDissatisfactionAvg[j] /= NUMRUNS;
      		  halfHourDeliEmpAvg[j] /= NUMRUNS;
      		  halfHourMnFEmpAvg[j] /= NUMRUNS;
@@ -150,7 +150,8 @@ class Experiment
      	  System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
      	  System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
      	  System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
-     	  System.out.println("The average total number of minutes the employees have spent serving customers: " + (int)(sumOfSrvTimeAvg*100)/100.0);
+     	  // System.out.println("The average total number of minutes the employees have spent serving customers: " + (int)(sumOfSrvAndCleaningTimeAvg*100)/100.0);
+     	  System.out.println("The average idle ratio of employees: " + (1- sumOfSrvAndCleaningTimeAvg / smMarket.getOutputs().getTotalDurationOfShifts()));
      	  System.out.println("Schedule: ");
      	  printSchedule(schedule);
      	  

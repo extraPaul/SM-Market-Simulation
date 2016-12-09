@@ -31,7 +31,7 @@ public class Serving extends ConditionalActivity{
 		double returnValue = model.rvp.uSrvTime(id);
 
 		// Add the serving time to sumOfSrvTime
-		model.output.addToSumOfSrvTime(returnValue);
+		model.output.addToSumOfSrvAndCleaningTime(returnValue);
 		
 		// Return the serving time
 		return returnValue;
