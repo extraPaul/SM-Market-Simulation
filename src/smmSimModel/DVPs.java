@@ -26,7 +26,7 @@ class DVPs
 	protected double RuTotalEmployees(){
 		double time = nxtTime;
 		nxtTime += 30;
-		if(time >= 540)
+		if(time >= 540 || model.implicitStopCondition())
 			time = -1;
 		return(time);
 	}
