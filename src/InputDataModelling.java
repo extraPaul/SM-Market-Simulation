@@ -107,21 +107,24 @@ public class InputDataModelling
 		{
 			outFileStream = new PrintStream("data.csv");
 			outFileStream.printf("Arrival Time, Inter Arrival Time\n");
-			int cnt, i = 0;
+			int cnt, numInterArrivals = 0, i = 0;
 			for(cnt = 0; cnt < arrivals.size(); cnt++)
 			{
+				numInterArrivals++;
 				nxtArrival = arrivals.get(cnt);
-				if(nxtArrival - arrival > 0){
+				if(nxtArrival - arrival > 0 && cnt != arrivals.size() - 1){
 					outFileStream.printf("%f,%f\n", nxtArrival, nxtArrival - arrival);
 					sumInterArrivals += nxtArrival - arrival;
 				} else {
 					outFileStream.printf("%f,%f\n", nxtArrival, nxtArrival);
-					avgInterArrival[i] = sumInterArrivals/(cnt/(i+1));
-					System.out.printf("Interarrival mean = %f, number of interarrival times = %d\n\n", avgInterArrival[i++], cnt);
+					avgInterArrival[i] = (double)sumInterArrivals/numInterArrivals;
+					System.out.printf("Interarrival mean = %f, number of interarrival times = %d\n\n", avgInterArrival[i++], numInterArrivals);
 					sumInterArrivals = 0;
+					numInterArrivals = 0;
 				}
 				arrival = nxtArrival;
 			}
+			System.out.println("Total number of interarrival times = " + cnt);
 			
 			outFileStream.close();
 		} catch (FileNotFoundException e) {
