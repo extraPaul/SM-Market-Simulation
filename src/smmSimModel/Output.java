@@ -1,6 +1,17 @@
-package smmSimModel;
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
 
-import java.util.ArrayList;
+package smmSimModel;
 
 public class Output 
 {
@@ -23,11 +34,6 @@ public class Output
 	
 	protected int halfHourNumServed;
 	protected int halfHourNumDissatisfied;
-	
-	//TEST
-	//public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
-	//public ArrayList<Double> deliWaitTimes = new ArrayList<Double>();
-	//public ArrayList<Double> bothWaitTimes = new ArrayList<Double>();
 	
 	// constructor
 	protected Output(SMMarket md) { 

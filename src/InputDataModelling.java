@@ -1,5 +1,16 @@
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -10,7 +21,6 @@ import wagu.Table;
 import cern.jet.random.Exponential;
 import cern.jet.random.engine.MersenneTwister;
 import cern.jet.random.engine.RandomSeedGenerator;
-
 
 public class InputDataModelling 
 {
@@ -158,36 +168,7 @@ public class InputDataModelling
 			arrival = nxtArrival;
 		}
 		System.out.println("Total number of interarrival times = " + cnt);
-		
-/*
-		String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
-		List<List<String>> sTats = new ArrayList<List<String>>();
-		for (int i = 0; i< 16; i++)
-		{
-			ArrayList<String> s = new ArrayList<String>();
-			s.add(timeOfDay[i]);
-			s.add(String.valueOf(Math.round(prcNorm[i]*10000)/100.0));
-			s.add(String.valueOf(Math.round(prcNormSingle[i]*10000)/100.0));
-			s.add(String.valueOf(Math.round(prcNormBoth[i]*10000)/100.0));
-			s.add(String.valueOf(Math.round(prcDeli[i]*10000)/100.0));
-			//s.add(String.valueOf(total[i]));
-			s.add(String.valueOf(Math.round(avgInterArrival[i]*100)/100.0));
-			sTats.add(s);
-		}
-		
-		
-		Board boards = new Board(100);
-		List<String> columnHeaders = Arrays.asList("Time frame", "Normal Customers(%)", "Normal Singe Counter(%)", "Normal Both Counter(%)", "Deli Customers (%)", "Average InterArrival Time");
-		List<Integer> alignment = Arrays.asList(Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE, Block.DATA_BOTTOM_MIDDLE, Block.DATA_BOTTOM_MIDDLE);
-		Table tbl = new Table(boards, 100, columnHeaders, sTats);
-		tbl.setColAlignsList(alignment);
-		String tblString = boards.setInitialBlock(tbl.tableToBlocks()).build().getPreview();
-		System.out.println("The average percentage of normal customers is given below ");
-		System.out.println(tblString);*/
 
-
-		//String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
-		
 		List<List<Double>> sTats = new ArrayList<List<Double>>();
 		for (int j = 0; j< 16; j++)
 		{

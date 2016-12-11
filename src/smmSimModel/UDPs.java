@@ -1,6 +1,17 @@
-package smmSimModel;
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
 
-import jdk.nashorn.internal.codegen.CompilerConstants;
+package smmSimModel;
 
 class UDPs 
 {
@@ -49,11 +60,8 @@ class UDPs
 		
 	}
 	
-	/**
-	 * Add the arrived customer to the appropriate line
-	 * @author Saman
-	 */
 	protected void addArrivedCustomerToLine(Customer icCustomer) {
+		
 		if (icCustomer.uType == Customer.Type.M)
 			model.qCustomerLines.get(Constants.MNF).add(icCustomer);
 		else if (icCustomer.uType == Customer.Type.D)
@@ -73,21 +81,12 @@ class UDPs
 	 * Updates the output with numServed and numDissatisfied 
 	 */
 	protected void updateOutput(Customer icCustomer) {
+		
 		//check if the customer was dissatisfied by comparing their wait time with their dissatisfaction threshold
 		if ( (model.getClock() - icCustomer.startWaitTime) > icCustomer.dissatisfactionThreshold) {
 			model.output.numDissatisfied++;
 			model.output.halfHourNumDissatisfied++;
-		}
-		
-		//TEST
-		/*if (icCustomer.uType == Customer.Type.D){
-			model.output.deliWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
-		} else if (icCustomer.uType == Customer.Type.M) {
-			model.output.mnfWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
-		} else {
-			model.output.bothWaitTimes.add(model.getClock() - icCustomer.startWaitTime);
-		}*/
-				
+		}	
 		// increment the number of customers served
 		model.output.numServed++;
 		model.output.halfHourNumServed++;
@@ -113,65 +112,71 @@ class UDPs
 	 * based on the length of the lines
 	 */
 	protected void rebalanceEmployees() {
+		
 		boolean swtch = true;
 		double mnfRatio, deliRatio, ratioDiff, testDiff;
 		int tempMnFNumEmp = model.rgCounters.get(Constants.MNF).uNumEmp;
 		int tempDeliNumEmp = model.rgCounters.get(Constants.DELI).uNumEmp;
-		while(swtch){
+		
+		while (swtch) {
 			mnfRatio = (double)model.qCustomerLines.get(Constants.MNF).size()/(double)tempMnFNumEmp;
 			deliRatio = (double)model.qCustomerLines.get(Constants.DELI).size()/(double)tempDeliNumEmp;
 			ratioDiff = Math.abs(mnfRatio - deliRatio);
-			if(mnfRatio < deliRatio){
+			
+			if (mnfRatio < deliRatio) {
 				testDiff = Math.abs(((double)model.qCustomerLines.get(Constants.MNF).size()/(double)(tempMnFNumEmp-1)) - ((double)model.qCustomerLines.get(Constants.DELI).size())/(double)(tempDeliNumEmp+1));
 				
-				if((testDiff < ratioDiff && model.rgCounters.get(Constants.MNF).uNumEmp - 1 >= model.rgCounters.get(Constants.MNF).getN() || model.rgCounters.get(Constants.DELI).uNumEmp == 0) && tempMnFNumEmp - 1 > 0){
+				if ((testDiff < ratioDiff && model.rgCounters.get(Constants.MNF).uNumEmp - 1 >= model.rgCounters.get(Constants.MNF).getN() || model.rgCounters.get(Constants.DELI).uNumEmp == 0) && tempMnFNumEmp - 1 > 0) {
 					model.rgCounters.get(Constants.MNF).uNumEmp--;
 					tempMnFNumEmp--;
 					model.rgCounters.get(Constants.DELI).uNumEmp++;
 					tempDeliNumEmp++;
-				} else if(testDiff < ratioDiff && tempMnFNumEmp - 1 > 0){
+				} else if (testDiff < ratioDiff && tempMnFNumEmp - 1 > 0) {
 					tempMnFNumEmp--;
 					tempDeliNumEmp++;
 					model.rgCounters.get(Constants.MNF).scheduledEmpChange++;
-				} else
+				} else {
 					swtch = false;
+				}
 			} else {
 				testDiff = Math.abs(((double)model.qCustomerLines.get(Constants.MNF).size()/(double)(tempMnFNumEmp+1)) - ((double)model.qCustomerLines.get(Constants.DELI).size()/(double)(tempDeliNumEmp-1)));
 				
-				if((testDiff < ratioDiff && model.rgCounters.get(Constants.DELI).uNumEmp - 1 >= model.rgCounters.get(Constants.DELI).getN() || model.rgCounters.get(Constants.MNF).uNumEmp == 0) && tempDeliNumEmp - 1 > 0){
+				if ((testDiff < ratioDiff && model.rgCounters.get(Constants.DELI).uNumEmp - 1 >= model.rgCounters.get(Constants.DELI).getN() || model.rgCounters.get(Constants.MNF).uNumEmp == 0) && tempDeliNumEmp - 1 > 0) {
 					model.rgCounters.get(Constants.MNF).uNumEmp++;
 					tempMnFNumEmp++;
 					model.rgCounters.get(Constants.DELI).uNumEmp--;
 					tempDeliNumEmp--;
-				} else if(testDiff < ratioDiff && tempDeliNumEmp - 1 > 0){
+				} else if (testDiff < ratioDiff && tempDeliNumEmp - 1 > 0){
 					tempMnFNumEmp++;
 					tempDeliNumEmp--;
 					model.rgCounters.get(Constants.DELI).scheduledEmpChange++;
-				} else
+				} else {
 					swtch = false;
+				}
 			}
 		}
 	}
 	
 	//Adds or removes employees to/from counters, when they start or stop cleaning/prep work.
-	protected void assignCleaningDuty(){
-		if(model.getClock() == 120){
+	protected void assignCleaningDuty() {
+		
+		if (model.getClock() == 120) {
 			//put prep employees back to counters
 			model.rEmployeesInfo.numEmpCleaning = 0;
 			model.rgCounters.get(Constants.MNF).uNumEmp++;
 			model.rgCounters.get(Constants.DELI).uNumEmp += 2;
 		}
 		
-		if(model.getClock() == 270){
+		if (model.getClock() == 270) {
 			//put remove employee from counter for restocking.
-			if(model.rgCounters.get(Constants.DELI).uNumEmp > 0)
+			if (model.rgCounters.get(Constants.DELI).uNumEmp > 0)
 				model.rgCounters.get(Constants.DELI).uNumEmp--;
 			else
 				model.rgCounters.get(Constants.MNF).uNumEmp--;
 			model.rEmployeesInfo.incrementNumEmpCleaning();
 		}
 		
-		if(model.getClock() == 450){
+		if (model.getClock() == 450) {
 			//put prep employee back to counter
 			model.rEmployeesInfo.numEmpCleaning = 0;
 			model.rgCounters.get(Constants.MNF).uNumEmp++;

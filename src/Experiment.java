@@ -1,5 +1,15 @@
-// File: Experiment.java
-// Description:
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -12,8 +22,6 @@ import wagu.Block;
 import wagu.Board;
 import wagu.Table;
 
-// Main Method: Experiments
-// 
 class Experiment
 {
 	
@@ -38,7 +46,7 @@ class Experiment
        ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>();
        
        //Add initial part time employees, for prep work.
-       for(int j = 0; j < 3; j++){
+       for (int j = 0; j < 3; j++) {
     	   ArrayList<Integer> shift = new ArrayList<Integer>();
            shift.add(0);
            shift.add(180);
@@ -64,7 +72,8 @@ class Experiment
        double numBalkingAvg;
        double employeesIdleTimeRatioAvg;
        double avgFinalEndTime;
-       do{
+       
+       do {
     	   overallDissatisfactionAvg = 0;
     	   double[] halfHourDissatisfactionAvg = new double[Constants.NUM_HALF_HOUR];
     	   double[] halfHourDeliEmpAvg = new double[Constants.NUM_HALF_HOUR];
@@ -79,18 +88,9 @@ class Experiment
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i], false);
         	  smMarket.runSimulation();
-              // See examples for hints on collecting output
-              // and developping code for analysis
-
-        	  
-        	  //TEST
-        	  //System.out.println("numDissatisfied: " + smMarket.getNumDissatisfied());
-        	  //System.out.println("numServed: " + smMarket.getNumServed());
 
         	  overallDissatisfactionAvg += smMarket.getOverallPercentDissatisfied();
 
-        	  //System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
-        	  //System.out.print("Halfhour dissatisfaction: ");
         	  for(int j = 0; j < Constants.NUM_HALF_HOUR; j++){
         		  halfHourDissatisfactionAvg[j] += smMarket.getHalfHourPercentDissatisfied(j);
         		  halfHourDeliEmpAvg[j] += smMarket.getCounter(Constants.DELI).dailyNumEmp[j];
@@ -105,7 +105,6 @@ class Experiment
         	  avgFinalEndTime += smMarket.getOutputs().finalEndTime;
     	   }
     	   
-    	   
     	   numExperiments++;
     	   System.out.println("LOOP " + numExperiments + " ENDED");
     	   System.out.println("----------------------------------------------------------------------------------------------------");
@@ -118,8 +117,6 @@ class Experiment
     	   numBalkingAvg /= NUMRUNS;
     	   employeesIdleTimeRatioAvg /= NUMRUNS;
     	   avgFinalEndTime /= NUMRUNS;
-    	   // sort the schedule by start time
-           // schedule.sort(c);
     	   
     	   //For printing
     	   List<List<String>> rowList = new ArrayList<List<String>>();
@@ -150,6 +147,7 @@ class Experiment
      			  maxIndex = j;
      		  }
      	  }
+     	  
      	  System.out.println("The average number of meat and fish customers was : " + numMnFCustomersAvg);
      	  System.out.println("The average number of deli customers was : " + numDeliCustomersAvg);
      	  System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
@@ -222,22 +220,17 @@ class Experiment
 	    	  System.out.println("Added shift [" + time + ", " + empShiftLength + "].");
     	  }
     	  
+    	  
     	  System.out.println("----------------------------------------------------------------------------------------------------");
      	  System.out.println();
     	  
     	  // sort the schedule
     	  schedule.sort(c);
-       }while(overallDissatisfactionAvg > DISATISFACTION_THRESHOLD);
+    	  
+       } while (overallDissatisfactionAvg > DISATISFACTION_THRESHOLD);
        
        System.out.println();
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
-       
-       
-       //print schedule
-       /*for (int x = 0; x< schedule.size(); x++) {
-    	   System.out.println("start time: " + schedule.get(x).get(0));
-    	   System.out.println("duration: " + schedule.get(x).get(1));
-       }*/
        
        System.out.println();
        System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));
@@ -247,28 +240,34 @@ class Experiment
    }
    
    public static void printSchedule(ArrayList<ArrayList<Integer>> schedule){
+	   
 	  Board boardS = new Board(65);
   	  List<List<String>> stringSchedule = new ArrayList<List<String>>();
-  	  for(int j = 0; j < schedule.size(); j++){
+  	  
+  	  for (int j = 0; j < schedule.size(); j++) {
   		  stringSchedule.add(new ArrayList<String>());
   		  int start = schedule.get(j).get(0);
   		  stringSchedule.get(j).add(String.valueOf(start));
   		  String time;
   		  start /= 30;
+  		  
   		  if(start < 6)
   			  time = (start/2 + 9) + ":" + 3*(start%2) + "0 am";
   		  else if(start < 8)
   			  time = "12:" + 3*(start%2) + "0 pm";
   		  else
   			  time = (start/2 - 3) + ":" + 3*(start%2) + "0 pm";
+  		  
   		  stringSchedule.get(j).add(time);
   		  stringSchedule.get(j).add(String.valueOf(schedule.get(j).get(1)));
   	  }
+  	  
  	  Table tableS = new Table(boardS, 65, Arrays.asList("Start Time (min)", "Start Time", "Duration"), stringSchedule);
  	  List<Integer> colAlignList = Arrays.asList(Block.DATA_CENTER, Block.DATA_CENTER, Block.DATA_CENTER);
  	  tableS.setColAlignsList(colAlignList);
  	  String tableString = boardS.setInitialBlock(tableS.tableToBlocks()).build().getPreview();
  	  System.out.println(tableString);
+ 	  
    }
    
 

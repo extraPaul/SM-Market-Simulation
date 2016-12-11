@@ -1,10 +1,21 @@
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
+
 package smmSimModel;
 
 public class Constants 
 {
 	/* Constants */
-	// Define constants as static
-	// Example: protected final static double realConstant = 8.0;
 	
 	public static final int MNF = 0;
 	public static final int DELI = 1;

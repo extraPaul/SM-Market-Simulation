@@ -1,5 +1,15 @@
-// File: OutputAnalysis.java
-// Description:
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -13,8 +23,6 @@ import wagu.Block;
 import wagu.Board;
 import wagu.Table;
 
-// Main Method: Experiments
-// 
 class OutputAnalysis
 {
 	// For output analysis
@@ -35,7 +43,6 @@ class OutputAnalysis
        // Lets get a set of uncorrelated seeds
        RandomSeedGenerator rsg = new RandomSeedGenerator();
        for(i=0 ; i<NUMRUNS ; i++) sds[i] = new Seeds(rsg);
-       
        
        //schedule param
        ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>();
@@ -87,18 +94,9 @@ class OutputAnalysis
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i], false);
         	  smMarket.runSimulation();
-              // See examples for hints on collecting output
-              // and developping code for analysis
-
-        	  
-        	  //TEST
-        	  //System.out.println("numDissatisfied: " + smMarket.getNumDissatisfied());
-        	  //System.out.println("numServed: " + smMarket.getNumServed());
 
         	  overallDissatisfactionAvg += smMarket.getOverallPercentDissatisfied();
 
-        	  //System.out.println("Overall dissatisfaction: " + smMarket.getOverallPercentDissatisfied());
-        	  //System.out.print("Halfhour dissatisfaction: ");
         	  for(int j = 0; j < 18; j++){
         		  halfHourDissatisfactionAvg[j] += smMarket.getHalfHourPercentDissatisfied(j);
         		  halfHourDeliEmpAvg[j] += smMarket.getCounter(Constants.DELI).dailyNumEmp[j];
@@ -125,9 +123,7 @@ class OutputAnalysis
     	   numDeliCustomersAvg /= NUMRUNS;
     	   numBothCustomersAvg /= NUMRUNS;
     	   numBalkingAvg /= NUMRUNS;
-    	   // sort the schedule by start time
-           // schedule.sort(c);
-    	   
+
     	   //For printing
     	   List<List<String>> rowList = new ArrayList<List<String>>();
     	   
@@ -235,13 +231,6 @@ class OutputAnalysis
        
        System.out.println();
        System.out.println("Satisfaction threshold met after " + numExperiments + " experiments.");
-       
-       
-       //print schedule
-       /*for (int x = 0; x< schedule.size(); x++) {
-    	   System.out.println("start time: " + schedule.get(x).get(0));
-    	   System.out.println("duration: " + schedule.get(x).get(1));
-       }*/
        
        System.out.println();
        System.out.println("Daily labour cost for schedule: " + new DecimalFormat("$ #0.00").format(smMarket.getSechduleCost()));       

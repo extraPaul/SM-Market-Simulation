@@ -1,3 +1,16 @@
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
+
 package smmSimModel;
 
 import cern.jet.random.Exponential;
@@ -9,11 +22,6 @@ import smmSimModel.Customer;
 class RVPs 
 {
 	SMMarket model; // for accessing the clock
-    // Data Models - i.e. random veriate generators for distributions
-	// are created using Colt classes, define 
-	// reference variables here and create the objects in the
-	// constructor with seeds
-
 
 	// Constructor
 	protected RVPs(SMMarket model, Seeds sd) 
@@ -33,7 +41,6 @@ class RVPs
 	//MEAN num of minutes between customer arrival for each 30 min block of day
 	//NOTE: in the Case study, rates are given in customers/hour for each half hour block.
 
-	// OLD private final double[] MEAN = {6, 2.4, 2, 2, 1.2, 0.572, 0.5, 0.667, 0.857, 1.5, 1.714, 1.714, 1.5, 1.333, 1.2, 1, 0, 0};
 	private final double[] MEAN = {5.714,2.37,1.946,1.974,1.188,0.566,0.494,0.672,0.858,1.52,1.678,1.732,1.518,1.314,1.198,0.998};
 
 	protected double duC()  // for getting next value of duC
@@ -47,10 +54,10 @@ class RVPs
         }
 	}
 	
-	//OLD private final double[] PROPD = {0,0.30,0.58,0.46,0.33,0.22,0}; // Probability of deli customer based on time block
 	private final double[] PROPD = {0.0,0.0,0.0,0.0,31.836,56.942,46.344,33.26,21.99,0.0,0.0,0.0,0.0,0.0,0.0,0.0};
 	private final double[] PROPM = {54.214,54.22,46.864,50.794,34.166,22.356,26.322,36.112,39.832,50.814,49.858,50.728,48.296,49.944,50.22,51.446};
 	MersenneTwister randGen;
+	
 	/*
 	 * Gives customer type based upon the time of day
 	 */
@@ -93,6 +100,7 @@ class RVPs
 	private final double STDAVG = 5;
 	private final double STDMAX = 8.05;
 	private TriangularVariate deliSrvTm;
+	
 	/*
 	 * Manager method to assign service time for a customer.
 	 * Will call submethods as needed based on type

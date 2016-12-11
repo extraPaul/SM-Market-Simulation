@@ -1,3 +1,16 @@
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
+
 package smmSimModel;
 
 import java.util.ArrayList;
@@ -6,14 +19,11 @@ import simulationModelling.AOSimulationModel;
 import simulationModelling.Behaviour;
 import simulationModelling.SequelActivity;
 
-//
 // The Simulation model Class
 public class SMMarket extends AOSimulationModel
 {
-	/* Parameter */
     
 	// rEmployeesInfo.schedule holds a 2D Array storing start time and duration of shifts
-	//Public for testing purposes
 	public EmployeesInfo rEmployeesInfo;
 
 	/*-------------Entity Data Structures-------------------*/
@@ -21,8 +31,6 @@ public class SMMarket extends AOSimulationModel
 	ArrayList<Counter> rgCounters = new ArrayList<Counter>(2);
 	ArrayList<ArrayList<Customer>> qCustomerLines = new ArrayList<ArrayList<Customer>>(2);
 	
-	/* Input Variables */
-	// Define any Independent Input Variables here
 	
 	// References to RVP and DVP objects
 	protected RVPs rvp;  // Reference to rvp object - object created in constructor
@@ -110,8 +118,6 @@ public class SMMarket extends AOSimulationModel
 		scheduleAction(arrival);
 	}
 	
-	private  Behaviour activity ;
-	
 
 	/************  Implementation of Data Modules***********/	
 	/*
@@ -119,10 +125,8 @@ public class SMMarket extends AOSimulationModel
 	 */
 	protected void testPreconditions(Behaviour behObj)
 	{
-		activity = behObj;
 		// reschedule scheduled actions
 		reschedule (behObj);
-		// Check preconditions of Conditional Activities
 
 		// Check preconditions of Interruptions in Extended Activities
 		if (Serving.precondition(this) == true) 
@@ -135,8 +139,6 @@ public class SMMarket extends AOSimulationModel
 	
 	public void eventOccured()
 	{
-		
-		
 		if(printLog){
 			this.showSBL();
 			System.out.println("Clock: "+getClock()+
@@ -161,15 +163,11 @@ public class SMMarket extends AOSimulationModel
 	public boolean implicitStopCondition() // termination explicit
 	{
 		boolean retVal = false;
-		//System.out.println("ClosingTime = " + closingTime + "currentTime = "
-		//		+ getClock() + "RG.Counter.n = " + rgCounter.size());
 		if (getClock() >= closingTime && rgCounters.get(Constants.DELI).getN() + rgCounters.get(Constants.MNF).getN() == 0) {
 			retVal = true;
 			// set endTime in output
 			output.finalEndTime = getClock();
 		}
-			
-		//System.out.println("implicit stop condition returns " + retVal);
 
 		return (retVal);
 	}

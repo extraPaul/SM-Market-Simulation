@@ -1,14 +1,27 @@
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
+
 package smmSimModel;
 
 import cern.jet.random.engine.RandomSeedGenerator;
 
 public class Seeds 
 {
-	int interArrivSd;   // comment 1
-	int type;   // comment 1
-	int deliSd;   // comment 2
-	int mChooserSd;   // comment 3
-	int mDist1;   // comment 4
+	int interArrivSd;
+	int type;
+	int deliSd;
+	int mChooserSd;
+	int mDist1;
 	int mDist2;
 
 	public Seeds(RandomSeedGenerator rsg)

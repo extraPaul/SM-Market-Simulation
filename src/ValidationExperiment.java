@@ -1,5 +1,15 @@
-// File: ValidationExperiment.java
-// Description:
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,8 +17,6 @@ import java.util.Arrays;
 import smmSimModel.*;
 import cern.jet.random.engine.*;
 
-// Main Method: Experiments
-// 
 class ValidationExperiment
 {
    public static void main(String[] args)
@@ -21,7 +29,6 @@ class ValidationExperiment
        // Lets get a set of uncorrelated seeds
        RandomSeedGenerator rsg = new RandomSeedGenerator();
        for(i=0 ; i<NUMRUNS ; i++) sds[i] = new Seeds(rsg);
-       
        
        //schedule param
        ArrayList<ArrayList<Integer>> schedule = new ArrayList<ArrayList<Integer>>();

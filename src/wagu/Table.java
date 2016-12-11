@@ -16,8 +16,6 @@ public final class Table {
     
     private Board board;
 
-    private final int tableWidth;
-
     private List<String> headersList;
 
     private List<List<String>> rowsList;
@@ -45,7 +43,6 @@ public final class Table {
         if (tableWidth <= 0) {
             throw new RuntimeException("Board width must be large than zero. " + tableWidth + " given.");
         } else {
-            this.tableWidth = tableWidth;
         }
         if (headersList.size() <= 0) {
             throw new RuntimeException("Header size must be large than zero. " + headersList.size() + " found.");

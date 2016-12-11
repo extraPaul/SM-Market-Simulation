@@ -1,13 +1,23 @@
+/* CSI4124/SYS5110 – Foundations of Modeling and Simulation
+ * SM Market - Simulation Project
+ * Fall 2016
+ * 
+ * Team Members: 
+ * Paul Laplante
+ * Saman Daneshvar
+ * Matthew Gordon Yaraskavitch
+ * Toluwalase Olufowobi
+ * Ekomabasi Ukpong
+ * Qufei Chen
+ */
+
+
 package smmSimModel;
 
 import simulationModelling.ScheduledAction;
 
-/**
- * WArrivals Scheduled Action
- * @author Saman
- *
- */
 class Arrivals extends ScheduledAction {
+	
 	// Reference to model object
 	SMMarket model;
 	
