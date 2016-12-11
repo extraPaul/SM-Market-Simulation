@@ -63,6 +63,7 @@ class Experiment
        double numBothCustomersAvg;
        double numBalkingAvg;
        double employeesIdleTimeRatioAvg;
+       double avgFinalEndTime;
        do{
     	   overallDissatisfactionAvg = 0;
     	   double[] halfHourDissatisfactionAvg = new double[Constants.NUM_HALF_HOUR];
@@ -73,6 +74,7 @@ class Experiment
            numBothCustomersAvg = 0;
            numBalkingAvg = 0;
            employeesIdleTimeRatioAvg = 0;
+           avgFinalEndTime = 0;
 
     	   for(i=0 ; i < NUMRUNS ; i++){
         	  smMarket = new SMMarket(startTime,endTime, schedule, sds[i], false);
@@ -100,6 +102,7 @@ class Experiment
         	  numBothCustomersAvg += smMarket.getOutputs().numBothCustomers;
         	  numBalkingAvg += smMarket.getOutputs().numBalking;
         	  employeesIdleTimeRatioAvg += smMarket.getOutputs().getEmployeesIdleTimeRatio();
+        	  avgFinalEndTime += smMarket.getOutputs().finalEndTime;
     	   }
     	   
     	   
@@ -114,6 +117,7 @@ class Experiment
     	   numBothCustomersAvg /= NUMRUNS;
     	   numBalkingAvg /= NUMRUNS;
     	   employeesIdleTimeRatioAvg /= NUMRUNS;
+    	   avgFinalEndTime /= NUMRUNS;
     	   // sort the schedule by start time
            // schedule.sort(c);
     	   
@@ -151,6 +155,7 @@ class Experiment
      	  System.out.println("The average number of customers who visited both counters was : " + numBothCustomersAvg);
      	  System.out.println("The average number of customers who walked into the store and left immediately was : " + numBalkingAvg);
      	  System.out.println("The average idle ratio of employees: " + employeesIdleTimeRatioAvg);
+     	  System.out.println("The average closing time of the store was: " + avgFinalEndTime);
      	  System.out.println("Schedule: ");
      	  printSchedule(schedule);
      	  

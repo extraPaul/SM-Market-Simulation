@@ -163,9 +163,12 @@ public class SMMarket extends AOSimulationModel
 		boolean retVal = false;
 		//System.out.println("ClosingTime = " + closingTime + "currentTime = "
 		//		+ getClock() + "RG.Counter.n = " + rgCounter.size());
-		if (getClock() >= closingTime && rgCounters.get(Constants.DELI).getN() + rgCounters.get(Constants.MNF).getN() == 0)
+		if (getClock() >= closingTime && rgCounters.get(Constants.DELI).getN() + rgCounters.get(Constants.MNF).getN() == 0) {
 			retVal = true;
-
+			// set endTime in output
+			output.finalEndTime = getClock();
+		}
+			
 		//System.out.println("implicit stop condition returns " + retVal);
 
 		return (retVal);

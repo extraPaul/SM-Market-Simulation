@@ -19,6 +19,7 @@ public class Output
 	protected double sumOfSrvAndCleaningTime;
 	public double employeesIdleTimeRatio;
 	protected double scheduleCost;
+	public double finalEndTime;
 	
 	protected int halfHourNumServed;
 	protected int halfHourNumDissatisfied;
