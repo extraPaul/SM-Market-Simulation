@@ -22,14 +22,54 @@ public class InputDataModelling
 
 	public static void main(String[] args) 
 	{
-		RandomSeedGenerator rsg = new RandomSeedGenerator();		
-		for(int i=0; i<5; i++)
-		{
-			arrivalRun(rsg);
+		RandomSeedGenerator rsg = new RandomSeedGenerator();
+		ArrayList<List<Double>> tmpStats = new ArrayList<List<Double>>(16);
+		
+		for(int i=0; i<16; i++){
+			tmpStats.add(new ArrayList<Double>());
 		}
+		List<List<Double>> tmp = arrivalRun(rsg);
+		for(int j=0; j<16; j++){
+			tmpStats.set(j,tmp.get(j));
+		}
+		for(int i=1; i<5; i++)
+		{
+			tmp = arrivalRun(rsg);
+			for(int j=0; j<16; j++){
+				tmpStats.get(j).set(0, tmp.get(j).get(0) + tmpStats.get(j).get(0));
+				tmpStats.get(j).set(1, tmp.get(j).get(1) + tmpStats.get(j).get(1));
+				tmpStats.get(j).set(2, tmp.get(j).get(2) + tmpStats.get(j).get(2));
+				tmpStats.get(j).set(3, tmp.get(j).get(3) + tmpStats.get(j).get(3));
+				tmpStats.get(j).set(4, tmp.get(j).get(4) + tmpStats.get(j).get(4));
+			}
+		}
+
+		String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
+		List<List<String>> sTats = new ArrayList<List<String>>();
+		for (int i = 0; i< 16; i++)
+		{
+			ArrayList<String> s = new ArrayList<String>();
+			s.add(timeOfDay[i]);
+			s.add(String.valueOf(Math.round(tmpStats.get(i).get(0)*100)/500.00));
+			s.add(String.valueOf(Math.round(tmpStats.get(i).get(1)*100)/500.00));
+			s.add(String.valueOf(Math.round(tmpStats.get(i).get(2)*100)/500.00));
+			s.add(String.valueOf(Math.round(tmpStats.get(i).get(3)*100)/500.00));
+			//s.add(String.valueOf(total[i]));
+			s.add(String.valueOf(Math.round(tmpStats.get(i).get(4)*100)/500.00));
+			sTats.add(s);
+		}
+		
+		Board boards = new Board(100);
+		List<String> columnHeaders = Arrays.asList("Time frame", "Normal Customers(%)", "Normal Singe Counter(%)", "Normal Both Counter(%)", "Deli Customers (%)", "Average InterArrival Time");
+		List<Integer> alignment = Arrays.asList(Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE, Block.DATA_BOTTOM_MIDDLE, Block.DATA_BOTTOM_MIDDLE);
+		Table tbl = new Table(boards, 100, columnHeaders, sTats);
+		tbl.setColAlignsList(alignment);
+		String tblString = boards.setInitialBlock(tbl.tableToBlocks()).build().getPreview();
+		System.out.println("The average percentage of normal customers is given below ");
+		System.out.println(tblString);
 	}
 	
-	public static void arrivalRun(RandomSeedGenerator rsg)
+	public static List<List<Double>> arrivalRun(RandomSeedGenerator rsg)
 	{
 		Exponential[] interArrival_Normal = new Exponential[16];
 		Exponential[] interArrival_Deli = new Exponential[5];
@@ -132,7 +172,7 @@ public class InputDataModelling
 			e.printStackTrace();
 		}
 		
-		
+/*
 		String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
 		List<List<String>> sTats = new ArrayList<List<String>>();
 		for (int i = 0; i< 16; i++)
@@ -148,6 +188,7 @@ public class InputDataModelling
 			sTats.add(s);
 		}
 		
+		
 		Board boards = new Board(100);
 		List<String> columnHeaders = Arrays.asList("Time frame", "Normal Customers(%)", "Normal Singe Counter(%)", "Normal Both Counter(%)", "Deli Customers (%)", "Average InterArrival Time");
 		List<Integer> alignment = Arrays.asList(Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE,Block.DATA_BOTTOM_MIDDLE, Block.DATA_BOTTOM_MIDDLE, Block.DATA_BOTTOM_MIDDLE);
@@ -155,7 +196,24 @@ public class InputDataModelling
 		tbl.setColAlignsList(alignment);
 		String tblString = boards.setInitialBlock(tbl.tableToBlocks()).build().getPreview();
 		System.out.println("The average percentage of normal customers is given below ");
-		System.out.println(tblString);
+		System.out.println(tblString);*/
+
+
+		String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
+		List<List<Double>> sTats = new ArrayList<List<Double>>();
+		for (int i = 0; i< 16; i++)
+		{
+			ArrayList<Double> s = new ArrayList<Double>();
+			s.add(Math.round(prcNorm[i]*10000)/100.0);
+			s.add(Math.round(prcNormSingle[i]*10000)/100.0);
+			s.add(Math.round(prcNormBoth[i]*10000)/100.0);
+			s.add(Math.round(prcDeli[i]*10000)/100.0);
+			//s.add(String.valueOf(total[i]));
+			s.add(Math.round(avgInterArrival[i]*100)/100.0);
+			sTats.add(s);
+		}
+		
+		return sTats;
 	}
 
 }
