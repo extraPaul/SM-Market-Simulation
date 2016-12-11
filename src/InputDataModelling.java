@@ -16,7 +16,7 @@ public class InputDataModelling
 {
 	public final static int NUM_OBSERVATIONS = 30;
 	public final static int OBSERVATION_INTERVAL = NUM_OBSERVATIONS * 30;  // observation interval, for each half hour block
-	// Exponential means for interarrival times for components A and B
+	// Exponential means for interarrival times for normal and deli customers.
 	public final static double[] MEAN_INTER_ARRVL_NORM = {6, 2.4, 2, 2, 1.71, 1.33, 0.92, 1, 1.09, 1.5, 1.71, 1.71, 1.5, 1.33, 1.2, 1};  // minutes
 	public final static double[] MEAN_INTER_ARRVL_DELI = {4, 1, 1.09, 2, 4};  // minutes NOTE: Starts at 11:00 and goes till 1:30
 
@@ -74,7 +74,8 @@ public class InputDataModelling
 		Exponential[] interArrival_Normal = new Exponential[16];
 		Exponential[] interArrival_Deli = new Exponential[5];
 		
-		// Generate data for part A components over 5 weeks (5*7*26*60) = 50,400 minutes
+		// Generate data for customers over for each half hour over 30 days.
+		
 		for(int i = 0; i < 16; i++)
 			interArrival_Normal[i] = new Exponential(1/MEAN_INTER_ARRVL_NORM[i], new MersenneTwister(rsg.nextSeed()));
 		for(int i = 0; i < 5; i++)
@@ -83,7 +84,7 @@ public class InputDataModelling
 		
 		ArrayList<Double> arrivals = new ArrayList<Double>();
 		int normalCount, bothCount, deliCount;
-		double normalArrival, deliArrival;  // For arrivals of components
+		double normalArrival, deliArrival;  // For arrivals of customers.
 		MersenneTwister randGen = new MersenneTwister();
 		
 		double[] prcNorm = new double[16];
@@ -109,14 +110,14 @@ public class InputDataModelling
 					if(randGen.nextDouble() < 0.5){
 						bothCount++;
 					}
-					// save aArrival as next arrival and get next value for aArrival
+					// save normalArrival as next arrival and get next value for normalArrival
 					arrivals.add(normalArrival);  // Example of autoboxing - double value in aArrival is automatically converted to a Double object
 					normalArrival = normalArrival + interArrival_Normal[i].nextDouble();
 					normalCount++;
 				}
-				else  // bArrival < aArrival
+				else  // deliArrival < normalArrival
 				{
-					// save bArrival as next arrival and get next value for bArrival
+					// save deliArrival as next arrival and get next value for deliArrival
 					arrivals.add(deliArrival);  // Example of autoboxing - double value in aArrival is automatically converted to a Double object
 					deliArrival = deliArrival + interArrival_Deli[i-4].nextDouble();	
 					deliCount++;
@@ -185,7 +186,8 @@ public class InputDataModelling
 		System.out.println(tblString);*/
 
 
-		String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
+		//String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
+		
 		List<List<Double>> sTats = new ArrayList<List<Double>>();
 		for (int j = 0; j< 16; j++)
 		{
