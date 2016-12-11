@@ -141,36 +141,22 @@ public class InputDataModelling
 		double sumInterArrivals = 0.0;  // for computing the average
 		
 		double[] avgInterArrival = new double[16];
-		// For outputing to a file
-		PrintStream outFileStream;
-		try 
+		int cnt, numInterArrivals = 0, i = 0;
+		for(cnt = 0; cnt < arrivals.size(); cnt++)
 		{
-			outFileStream = new PrintStream("data.csv");
-			outFileStream.printf("Arrival Time, Inter Arrival Time\n");
-			int cnt, numInterArrivals = 0, i = 0;
-			for(cnt = 0; cnt < arrivals.size(); cnt++)
-			{
-				numInterArrivals++;
-				nxtArrival = arrivals.get(cnt);
-				if(nxtArrival - arrival > 0 && cnt != arrivals.size() - 1){
-					outFileStream.printf("%f,%f\n", nxtArrival, nxtArrival - arrival);
-					sumInterArrivals += nxtArrival - arrival;
-				} else {
-					outFileStream.printf("%f,%f\n", nxtArrival, nxtArrival);
-					avgInterArrival[i] = (double)sumInterArrivals/numInterArrivals;
-					System.out.printf("Interarrival mean = %f, number of interarrival times = %d\n\n", avgInterArrival[i++], numInterArrivals);
-					sumInterArrivals = 0;
-					numInterArrivals = 0;
-				}
-				arrival = nxtArrival;
+			numInterArrivals++;
+			nxtArrival = arrivals.get(cnt);
+			if(nxtArrival - arrival > 0 && cnt != arrivals.size() - 1){
+				sumInterArrivals += nxtArrival - arrival;
+			} else {
+				avgInterArrival[i] = (double)sumInterArrivals/numInterArrivals;
+				System.out.printf("Interarrival mean = %f, number of interarrival times = %d\n\n", avgInterArrival[i++], numInterArrivals);
+				sumInterArrivals = 0;
+				numInterArrivals = 0;
 			}
-			System.out.println("Total number of interarrival times = " + cnt);
-			
-			outFileStream.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			arrival = nxtArrival;
 		}
+		System.out.println("Total number of interarrival times = " + cnt);
 		
 /*
 		String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
@@ -201,15 +187,14 @@ public class InputDataModelling
 
 		String[] timeOfDay = {"9-9:30", "9:30-10", "10-10:30","10:30-11","11-11:30","11:30-12","12-12:30","12:30-1","1-1:30","1:30-2","2-2:30","2:30-3","3-3:30","3:30-4", "4-4:30","4:30-5"};
 		List<List<Double>> sTats = new ArrayList<List<Double>>();
-		for (int i = 0; i< 16; i++)
+		for (int j = 0; j< 16; j++)
 		{
 			ArrayList<Double> s = new ArrayList<Double>();
-			s.add(Math.round(prcNorm[i]*10000)/100.0);
-			s.add(Math.round(prcNormSingle[i]*10000)/100.0);
-			s.add(Math.round(prcNormBoth[i]*10000)/100.0);
-			s.add(Math.round(prcDeli[i]*10000)/100.0);
-			//s.add(String.valueOf(total[i]));
-			s.add(Math.round(avgInterArrival[i]*100)/100.0);
+			s.add(Math.round(prcNorm[j]*10000)/100.0);
+			s.add(Math.round(prcNormSingle[j]*10000)/100.0);
+			s.add(Math.round(prcNormBoth[j]*10000)/100.0);
+			s.add(Math.round(prcDeli[j]*10000)/100.0);
+			s.add(Math.round(avgInterArrival[j]*100)/100.0);
 			sTats.add(s);
 		}
 		
