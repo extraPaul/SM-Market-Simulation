@@ -30,7 +30,7 @@ public class SMMarket extends AOSimulationModel
 	protected UDPs udp = new UDPs(this);
 	
 	// Add our closing time
-	double closingTime = 480;
+	double closingTime;
 	
 	//For trace logging
 	protected boolean printLog;
@@ -96,7 +96,8 @@ public class SMMarket extends AOSimulationModel
 		qCustomerLines.add(Constants.DELI, new ArrayList<Customer>()); // Deli line
 		
 		// Initialize the simulation model
-		initAOSimulModel(t0time,tftime);   
+		initAOSimulModel(t0time,tftime + 120);
+		closingTime = tftime;
 		
 		// Schedule the first arrivals and employee scheduling
 		Initialise init = new Initialise(this);
@@ -155,6 +156,20 @@ public class SMMarket extends AOSimulationModel
 		scheduleActivity(seqAct);
 		
 	}	
+	
+	//Implicit stop condition
+	public boolean implicitStopCondition() // termination explicit
+	{
+		boolean retVal = false;
+		//System.out.println("ClosingTime = " + closingTime + "currentTime = "
+		//		+ getClock() + "RG.Counter.n = " + rgCounter.size());
+		if (getClock() >= closingTime && rgCounters.get(Constants.DELI).getN() + rgCounters.get(Constants.MNF).getN() == 0)
+			retVal = true;
+
+		//System.out.println("implicit stop condition returns " + retVal);
+
+		return (retVal);
+	}
 
 }
 

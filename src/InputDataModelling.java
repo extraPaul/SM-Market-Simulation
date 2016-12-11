@@ -42,7 +42,7 @@ public class InputDataModelling
 		// Use ArrayLists to record the data:
 		
 		ArrayList<Double> arrivals = new ArrayList<Double>();
-		int normalCount=0, bothCount = 0, deliCount=0; // count number of A and B components
+		int normalCount, bothCount, deliCount;
 		double normalArrival, deliArrival;  // For arrivals of components
 		MersenneTwister randGen = new MersenneTwister();
 		
@@ -51,6 +51,9 @@ public class InputDataModelling
 		double[] prcNormSingle = new double[16];
 		double[] prcDeli = new double[16];
 		for(int i = 0; i < 16; i++){
+			normalCount = 0;
+			bothCount = 0;
+			deliCount = 0;
 			// First arrival is from t = 0
 			normalArrival = interArrival_Normal[i].nextDouble();
 			if(4 <= i && i <= 8)
