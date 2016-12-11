@@ -25,7 +25,7 @@ class OutputAnalysis
 	   
        int i, NUMRUNS = 30;
        double DISATISFACTION_THRESHOLD = 0.15;
-       double startTime=0.0, endTime=540.0;
+       double startTime=0.0, endTime=480.0;
        Seeds[] sds = new Seeds[NUMRUNS];
        SMMarket smMarket = null;  // Simulation object
 

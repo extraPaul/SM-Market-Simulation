@@ -17,7 +17,7 @@ class Experiment2
    {
        int i, NUMRUNS = 20; 
        double DISATISFACTION_THRESHOLD = 0.20;
-       double startTime=0.0, endTime=540.0;
+       double startTime=0.0, endTime=480.0;
        Seeds[] sds = new Seeds[NUMRUNS];
        SMMarket smMarket = null;  // Simulation object
 
