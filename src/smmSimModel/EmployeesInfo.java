@@ -10,16 +10,12 @@ public class EmployeesInfo {
 	public int[] uTotalEmployees;
 	
 	protected int numEmpCleaning;
-	protected int halfHourNumServed;
-	protected int halfHourNumDissatisfied;
 	
 	// Constructor
 	public EmployeesInfo(ArrayList<ArrayList<Integer>> schedule, SMMarket model) {
 		
 		this.schedule = schedule;
 		this.numEmpCleaning = 0;
-		this.halfHourNumServed = 0;
-		this.halfHourNumDissatisfied = 0;
 		this.uTotalEmployees = new int[Constants.NUM_HALF_HOUR];
 		
 	}
@@ -30,17 +26,6 @@ public class EmployeesInfo {
 	}
 	protected void decrementNumEmpCleaning() {
 		numEmpCleaning --;
-	}
-	protected void incrementHalfHourNumServed() {
-		halfHourNumServed ++;
-	}
-	protected void incrementHalfHourNumDissatisfied() {
-		halfHourNumDissatisfied ++;
-	}
-	
-	protected void resetHalfHourStats() {
-		halfHourNumServed = 0;
-		halfHourNumDissatisfied = 0;
 	}
 	
 	

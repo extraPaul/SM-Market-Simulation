@@ -20,6 +20,9 @@ public class Output
 	public double employeesIdleTimeRatio;
 	protected double scheduleCost;
 	
+	protected int halfHourNumServed;
+	protected int halfHourNumDissatisfied;
+	
 	//TEST
 	//public ArrayList<Double> mnfWaitTimes = new ArrayList<Double>();
 	//public ArrayList<Double> deliWaitTimes = new ArrayList<Double>();
@@ -35,6 +38,8 @@ public class Output
 		numDeliCustomers = 0;
 		numBothCustomers = 0;
 		numBalking = 0;
+		halfHourNumServed = 0;
+		halfHourNumDissatisfied = 0;
 		sumOfSrvAndCleaningTime = 9 * 60; // There is 9 hours of cleaning and prep work in total. We add it to the sum right here.
 		
 	}
@@ -92,6 +97,18 @@ public class Output
 	
 	protected void addToSumOfSrvAndCleaningTime(double value) {
 		sumOfSrvAndCleaningTime += value;
+	}
+	
+	protected void incrementHalfHourNumServed() {
+		halfHourNumServed ++;
+	}
+	protected void incrementHalfHourNumDissatisfied() {
+		halfHourNumDissatisfied ++;
+	}
+	
+	protected void resetHalfHourStats() {
+		halfHourNumServed = 0;
+		halfHourNumDissatisfied = 0;
 	}
 
 }

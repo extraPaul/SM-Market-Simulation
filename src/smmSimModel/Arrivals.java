@@ -25,13 +25,13 @@ class Arrivals extends ScheduledAction {
 		Customer icCustomer = new Customer(model);
 		
 		// If the store is full (more than 30 customers in the store - including the lines and at the counters), the arrived customer will just leave. Else, he will stand in line.
-		int totalNumCustomersInStore = model.qCustomerLines.get(Constants.MNF).size() + model.qCustomerLines.get(Constants.DELI).size() + model.rgCounters.get(Constants.MNF).getN() + model.rgCounters.get(Constants.DELI).getN();
+		int totalNumCustomersInStore = model.qCustomerLines.get(Constants.MNF).size() + model.qCustomerLines.get(Constants.DELI).size();
 		if (totalNumCustomersInStore > 30) {
 			// Leave as a dissatisfied customer
 			model.output.numDissatisfied++;
-			model.rEmployeesInfo.halfHourNumDissatisfied++;
+			model.output.incrementHalfHourNumDissatisfied();
 			model.output.numServed++;
-			model.rEmployeesInfo.halfHourNumServed++;
+			model.output.incrementHalfHourNumServed();
 			model.output.numBalking++;
 		}
 		else {

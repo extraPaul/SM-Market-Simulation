@@ -76,7 +76,7 @@ class UDPs
 		//check if the customer was dissatisfied by comparing their wait time with their dissatisfaction threshold
 		if ( (model.getClock() - icCustomer.startWaitTime) > icCustomer.dissatisfactionThreshold) {
 			model.output.numDissatisfied++;
-			model.rEmployeesInfo.halfHourNumDissatisfied++;
+			model.output.halfHourNumDissatisfied++;
 		}
 		
 		//TEST
@@ -90,7 +90,7 @@ class UDPs
 				
 		// increment the number of customers served
 		model.output.numServed++;
-		model.rEmployeesInfo.halfHourNumServed++;
+		model.output.halfHourNumServed++;
 	}
 	
 	protected void updateOutputOnHalfHour() {
@@ -100,11 +100,11 @@ class UDPs
 		model.rgCounters.get(Constants.MNF).dailyNumEmp[(int) (model.getClock()/30)] = model.rgCounters.get(Constants.MNF).uNumEmp;
 		
 		// updates the halfHourPercentDissatisfied array
-		if (model.rEmployeesInfo.halfHourNumServed != 0) {
+		if (model.output.halfHourNumServed != 0) {
 			
-			model.output.halfHourPercentDissatisfied[(int) (model.getClock()/30) -1] = ( (double) model.rEmployeesInfo.halfHourNumDissatisfied / (double) model.rEmployeesInfo.halfHourNumServed);
+			model.output.halfHourPercentDissatisfied[(int) (model.getClock()/30) -1] = ( (double) model.output.halfHourNumDissatisfied / (double) model.output.halfHourNumServed);
 			// reset the halfHourNumServed and halfHourNumDissatisfied values
-			model.rEmployeesInfo.resetHalfHourStats();
+			model.output.resetHalfHourStats();
 		}
 		
 	}
