@@ -96,7 +96,7 @@ public class SMMarket extends AOSimulationModel
 		qCustomerLines.add(Constants.DELI, new ArrayList<Customer>()); // Deli line
 		
 		// Initialize the simulation model
-		initAOSimulModel(t0time,tftime + 120);
+		initAOSimulModel(t0time);
 		closingTime = tftime;
 		
 		// Schedule the first arrivals and employee scheduling
